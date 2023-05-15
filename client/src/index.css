@@ -1,0 +1,271 @@
+.nav-color {
+  background: rgb(13,23,32);
+background: linear-gradient(-110deg, rgb(12, 45, 74) 58%, rgb(10, 31, 38) 100%);
+
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
+
+.span-material{
+  background-color:rgb(135, 193, 255);
+  background-image:
+  radial-gradient(at 63% 8%, rgb(80, 80, 190) 0px, transparent 50%),
+  radial-gradient(at 2% 0%, rgb(110, 119, 250) 0px, transparent 50%),
+  radial-gradient(at 53% 65%, hsla(222,86%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 22% 40%, hsla(217,100%,68%,1) 0px, transparent 50%),
+  radial-gradient(at 80% 7%, hsla(219,100%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 68% 13%, rgb(24, 166, 248) 0px, transparent 50%),
+  radial-gradient(at 95% 0%, rgb(245, 245, 245) 0px, transparent 50%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
+.top-border-material {
+  background-color:rgb(135, 193, 255);
+  background-image:
+  radial-gradient(at 63% 8%, rgb(80, 80, 190) 0px, transparent 50%),
+  radial-gradient(at 2% 0%, rgb(110, 119, 250) 0px, transparent 50%),
+  radial-gradient(at 53% 65%, hsla(222,86%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 22% 40%, hsla(217,100%,68%,1) 0px, transparent 50%),
+  radial-gradient(at 80% 7%, hsla(219,100%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 68% 13%, rgb(24, 166, 248) 0px, transparent 50%),
+  radial-gradient(at 95% 0%, rgb(245, 245, 245) 0px, transparent 50%);
+}
+
+.text-glow {
+  text-shadow: 0px 0px 3px #B5EEFF;
+}
+
+.HeadCard-bg {
+  background: rgba(6, 96, 148, 0.55);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 3px );
+  -webkit-backdrop-filter: blur( 3px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+/* FIRST CARD IN HOME PAGE */
+.homePageCard{
+  background-image: url(https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 300px;
+  background-size: cover;
+  background-position: left 50% ;
+ 
+}
+
+.homePageCard-filter {
+  background: rgb(0, 0, 0);
+background: linear-gradient(86deg, rgba(0, 0, 0, 1) 20%, rgba(0,92,130,0.4) 100%);
+}
+
+/* SECOND CARD IN HOME PAGE */
+.homePageCardSecond{
+  background-image: url(https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 300px;
+  background-size: cover;
+  background-position: left 50% ;
+ 
+}
+
+.homePageCardSecond-filter {
+  background: rgb(0, 0, 0);
+background: linear-gradient(86deg, rgba(0, 0, 0, 1) 20%, rgba(0,92,130,0.4) 100%);
+}
+
+.homePageCardSecond-filtertwo {
+  background: rgb(0, 0, 0);
+background: linear-gradient(50deg, rgb(6, 20, 32) 30%, rgb(5, 80, 112) 100%);
+}
+
+.CoinContainer-bg {
+  background: rgba(15, 25, 31, 0.55);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 3px );
+  -webkit-backdrop-filter: blur( 3px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.cryptocard-grad {
+  background: rgb(13,23,32);
+  background: linear-gradient(-100deg, rgb(12, 45, 74) 75%, rgb(10, 31, 38) 100%);
+}
+
+.newsCardHeader{
+  background-image: url(https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 300px;
+  background-size: cover;
+  background-position: right 50% ;
+ 
+}
+
+.viewCardHeader {
+  background-image: url(https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 500px;
+  background-size: cover;
+  background-position: right 30% ;
+}
+
+.AppsHeader{
+  background-image: url(https://images.pexels.com/photos/11361902/pexels-photo-11361902.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 500px;
+  background-size: cover;
+  background-position: left 10% bottom 90%;
+ 
+}
+
+.headCard-filter {
+  background: rgb(0,0,0);
+background: linear-gradient(86deg, rgba(0, 0, 0, 1) 20%, rgba(0,92,130,0.4) 100%);
+}
+
+.newscard-filter {
+  background: rgb(0,0,0);
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 10%, rgba(0,92,130,0.5) 80%);
+}
+
+.viewcard-filter {
+  background: rgb(0,0,0);
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 30%, rgb(0, 91, 130) 100%);
+}
+
+.select-currency {
+  vertical-align: top;
+}
+
+.pagination button.active {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #B5EEFF;
+  color:rgb(19, 99, 119);
+}
+
+
+/* index meter */
+
+.meter {
+  border-radius:  12rem 12rem 0 0;
+  border: 11px solid transparent;
+  background: linear-gradient(45deg,rgb(255, 0, 0), rgb(255, 153, 1), rgb(230, 255, 1),
+  rgb(168, 255, 5), rgb(0, 255, 0)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  border-bottom: transparent;
+}
+
+.meter-bg {
+  border-radius:  12rem 12rem 0 0;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg,rgb(255, 0, 0), rgb(255, 153, 1), rgb(230, 255, 1),
+  rgb(168, 255, 5), rgb(0, 255, 0)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  border-bottom: transparent;
+}
+
+.meter-bgMain {
+  border-radius:  12rem 12rem 0 0;
+  border:  2px #73deff solid ;
+  border-bottom: transparent;
+  background: rgb(0,0,0);
+  background: linear-gradient( rgba(0, 0, 0, 0.356) 1%, rgba(0, 91, 130, 0) 80%);
+  box-shadow: 3px 3px 16px 2px rgba(0,224,255,0.76) inset;
+  -webkit-box-shadow: 3px 3px 16px 2px rgba(0,224,255,0.76) inset;
+  -moz-box-shadow: 3px 3px 16px 2px rgba(0,224,255,0.76) inset;
+}
+
+.dial {
+  clip-path: polygon(50% 0%, 40% 100%, 60% 100%);
+}
+
+.my-element[data-rotation-angle="5"] {
+  transform: rotate(5deg);
+}
+
+.my-element {
+  transform: rotate(attr(data-rotation-angle, 0deg));
+}
+
+
+.line {
+  background-color: #1a1a1a;
+}
+
+/* Chart */
+
+.chart {
+  background: rgb(0,0,0);
+  background: linear-gradient(360deg, rgba(0,0,0,0.5) 0%, rgb(10, 30, 39) 100%);
+}
+
+/* glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.082);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.055);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  /* border: 1px solid rgba(255, 255, 255, 0.048);
+  border: 1px solid rgb(196, 196, 196);
+  border: transparent */
+}
+
+/* PriceBar */
+
+.slideshow-container {
+  overflow: hidden;
+  /* border: 1px solid #ddd; */
+}
+
+.slideshow {
+
+  animation: slide 300s infinite linear;
+}
+
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-1000%);
+  }
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
