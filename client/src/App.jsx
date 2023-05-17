@@ -24,7 +24,7 @@ function App() {
         <Route path={`/View/:id`} element={<ViewPage />}></Route>
         <Route path="/News" element={<NewsPage />}></Route>
         <Route path="/Apps" element={<AppPage />}></Route>
-        <Route path="/" element={<LoginPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>
         <Route path="/profile/:userId" element={<ProfilePage />}></Route>
       </Routes>
