@@ -1,20 +1,19 @@
-import express from "express";
-import { verifyToken } from "../middleware/auth.js";
+import express from "express"; // backend framework
 import {
-  getUser,
-  getUserFollowers,
-  getUserFollowing,
-  addRemoveFollowing
-} from "../controllers/users.js";
+    getUser, 
+    getUserFriends,
+    addRemoveFriend,
+} from "../controllers/users.js"; // controllers for user handling
+import { verifyToken } from "../middleware/auth.js"; // verify using jwt
 
 const router = express.Router();
 
-// READ
-router.get("/:id", getUser);
-router.get("/:id/followers", verifyToken, getUserFollowers);
-router.get("/:id/following", verifyToken, getUserFollowing);
+//  READ 
+router.get("/:id", verifyToken, getUser);
+router.get("/:id/friends", verifyToken, getUserFriends);
 
 // UPDATE
-router.patch("/:id/:followingId", verifyToken, addRemoveFollowing);
+router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
 
 export default router;
+

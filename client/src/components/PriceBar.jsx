@@ -20,7 +20,7 @@ const PriceBar = (props) => {
   }
 
   return (
-    <div className="w-full h-[20px] bg-[#172229] sticky bottom-[0px] left-0 z-[50] flex items-center">
+    <div className="w-full h-[20px] bg-[#172229] sticky bottom-[0px] left-0 z-[10] flex items-center">
       <div className="text-white ml-6  w-[150px]">
         {true ? (
           <div className="flex flex-row items-center">

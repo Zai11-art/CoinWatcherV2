@@ -1,113 +1,57 @@
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import bcrypt from "bcrypt";
 
-// REGISTERING THE USER
+/* REGISTER USER */
 export const register = async (req, res) => {
   try {
     const {
-      userName,
+      firstName,
+      lastName,
       email,
       password,
       picturePath,
-      followers,
-      following,
-      viewedProfile,
+      friends,
+      location,
+      occupation,
     } = req.body;
 
     const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt(password, salt);
+    const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      userName,
+      firstName,
+      lastName,
       email,
       password: passwordHash,
       picturePath,
-      followers,
-      following,
-      viewedProfile,
+      friends,
+      location,
+      occupation,
+      viewedProfile: Math.floor(Math.random() * 10000),
+      impressions: Math.floor(Math.random() * 10000),
     });
-
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// LOGGING IN USER
+/* LOGGING IN */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-
-    if (!user) {
-      return res.status(404).json({ msg: "user does not exist." });
-    }
+    if (!user) return res.status(400).json({ msg: "User does not exist. " });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(404).json({ msg: "username or password is wrong" });
-    }
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
     res.status(200).json({ token, user });
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
-// export const registerReplica = async (req, res) => {
-//   try {
-//     const {
-//       userName,
-//       email,
-//       password,
-//       picturePath,
-//       followers,
-//       following,
-//       viewedProfile,
-//     } = req.body;
-
-//     const salt = await bcrypt.genSalt();
-//     const passwordHash = await bcrypt(password, salt);
-
-//     const newUser = new User({
-//       userName,
-//       email,
-//       password: passwordHash,
-//       picturePath,
-//       followers,
-//       following,
-//       viewedProfile,
-//     });
-
-//     const savedUser = await newUser.save();
-//     res.status(201).json(savedUser);
-//   } catch (error) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// export const loginReplica = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({ email: email });
-
-//     if (!user) {
-//       return res.status(400).json({ msg: "user not found." });
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) {
-//       return res.status(400).json({ msg: "Wrong username or password" });
-//     }
-
-//     const token = await jwt.sign({ id: user._id }, process.JWT_SECRET);
-//     delete user.password;
-//     res.status(200).json({ token, user });
-//   } catch (error) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };

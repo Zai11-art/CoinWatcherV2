@@ -7,12 +7,14 @@ import NewsPage from "./Pages/NewsPage";
 import AppPage from "./Pages/Appspage";
 import ViewPage from "./Pages/ViewPage";
 import PriceBar from "./components/PriceBar";
-import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/LoginPage";
 import CommunityPage from "./Pages/CommunityPage";
 import ProfilePage from "./Pages/ProfilePage";
+import LearnPage from "./Pages/LearnPage";
+import LearnPageSection from "./Pages/LearnPageSection";
 
 function App() {
-  const mode = useSelector((state) => state.mode);
+  // const mode = useSelector((state) => state.mode);
   const isAuth = Boolean(useSelector((state) => state.token));
 
   return (
@@ -20,13 +22,15 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/Home" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
         <Route path={`/View/:id`} element={<ViewPage />}></Route>
         <Route path="/News" element={<NewsPage />}></Route>
         <Route path="/Apps" element={<AppPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/community" element={<CommunityPage />}></Route>
-        <Route path="/profile/:userId" element={<ProfilePage />}></Route>
+        <Route path="/login" element={<RegisterPage />}></Route>
+        <Route path="/Learn" element={<LearnPage />}></Route>
+        <Route path="/Learn/:sectionId" element={<LearnPageSection />}></Route>
+        <Route path="/community" element={isAuth ? <CommunityPage /> : <Home />}></Route>
+        <Route path="/profile/:userId" element={isAuth ? <ProfilePage /> : <Home />}></Route>
       </Routes>
       <PriceBar></PriceBar>
       <Footer></Footer>
@@ -35,3 +39,5 @@ function App() {
 }
 
 export default App;
+
+//  <Route path="/documentation/:docsId" component={DocumentationSection} />
