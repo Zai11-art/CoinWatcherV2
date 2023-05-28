@@ -282,6 +282,16 @@ html {
   border: transparent */
 }
 
+.glass-v2 {
+  background: rgba(1, 16, 29, 0.897);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.658);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(1px);
+  /* border: 1px solid rgba(255, 255, 255, 0.048);
+  border: 1px solid rgb(196, 196, 196);
+  border: transparent */
+}
+
 /* PriceBar */
 
 .slideshow-container {
