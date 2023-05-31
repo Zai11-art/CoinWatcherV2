@@ -34,7 +34,7 @@ const CalculatorWidget = () => {
     
     return (
         <div className="z-[2]">
-            <div className="fixed top-[475px] right-[20px] z-[101] duration-150 ease-in-out hover:scale-[1.02] cursor-pointer">
+            <div className="fixed top-[475px] left-[90px] z-[101] duration-150 ease-in-out hover:scale-[1.02] cursor-pointer">
                 <div onClick={()=>setOpen(!open)}
                  className="bg-[#9ccddc] 
                 md:h-[50px] md:w-[50px] 
@@ -43,7 +43,6 @@ const CalculatorWidget = () => {
                 md:right-[19px] md:top-[-355px] 
                 right-[10px] top-[-350px]
                 z-[2] 
-                lg:right-[20p]
                 rounded-full absolute 
                  "></div>
                 <div 
@@ -59,11 +58,11 @@ const CalculatorWidget = () => {
                 </div>
             </div>
 
-            <div className={` fixed right top-[140px] z-[100]
-            ${open ? 'right-[0px] ' : 'right-[-500px] '}  
+            <div className={` fixed left top-[140px] z-[100]
+            ${open ? 'left-[0px] ' : 'left-[-500px] '}  
             duration-300 ease-in-out`}>
                 <div className={`
-                lg:w-[425px] lg:h-[425px]
+                lg:w-[325px] lg:h-[425px]
                 md:w-[400px] md:h-[425px]
                 w-[400px] h-[425px]
                 rounded-lg px-4
@@ -74,37 +73,37 @@ const CalculatorWidget = () => {
             
                 `}>
                     <form >
-                    <h1 className="text-2xl uppercase font-semibold  text-white mt-7 text-center">Profit Calculator</h1>
-                    <div className="flex flex-col items-between mt-4 mb-3 ">
-                        <div className="flex flex-row justify-between my-2">
+                    <h1 className="text-2xl uppercase font-semibold  text-white mt-7 text-center ">Profit Calculator</h1>
+                    <div className="flex flex-col items-between mt-4 mb-3 mx-5">
+                        <div className="flex flex-row justify-between my-2 mx-6">
                             <label htmlFor="" className=" text-white pr-5">Investment: </label>
                             <input min="0" onChange={(e)=>setcurrentInitial(parseFloat(e.target.value))} value={currentInitial}
                             type="number" className="border-[1px] border-[#9ccddc] rounded-sm bg-[#062c43] text-[white]  p-1 " />
                         </div>
-                        <div className="flex flex-row justify-between my-2">
+                        <div className="flex flex-row justify-between my-2 mx-6">
                             <label htmlFor="" className=" text-white pr-5">Price: </label>
                             <input min="0" onChange={(e)=>setcurrentPrice(parseFloat(e.target.value))} value={currentPrice}
                             type="number"  className="border-[1px] border-[#9ccddc] rounded-sm bg-[#062c43] text-[white]  p-1 " />
                         </div>
-                        <div className="flex flex-row justify-between my-2">
+                        <div className="flex flex-row justify-between my-2 mx-6">
                             <label htmlFor="" className=" text-white pr-5">Sell Price: </label>
                             <input min="0" onChange={(e)=>seturrentSell(parseFloat(e.target.value))} value={currentSell}
                             type="number" className="border-[1px] border-[#9ccddc] rounded-sm bg-[#062c43] text-[white]  p-1 " />
                         </div>
-                        <div className="flex flex-row justify-around my-2">
-                            <button onClick={handleSubmit} className="p-2 bg-[#062c43] w-[100px] border-[2px]  border-[#9ccddc] rounded-lg bg-[#062c43] text-[white] ">
+                        <div className="flex flex-row justify-around mt-6 mx-6">
+                            <button onClick={handleSubmit} className="p-1 bg-[#062c43] w-[100px] border-[2px]  border-[#9ccddc] rounded-lg bg-[#062c43] text-[white] ">
                                 Calculate
                             </button>
-                            <button onClick={handleReset} className="p-2 bg-[#062c43] w-[100px] border-[2px]  border-[#9ccddc] rounded-lg bg-[#062c43] text-[white] ">
+                            <button onClick={handleReset} className="p-1 bg-[#062c43] w-[100px] border-[2px]  border-[#9ccddc] rounded-lg bg-[#062c43] text-[white] ">
                                 Reset
                             </button>
                         </div>
-                        <div className=" bg-[#062c43] w-[350px] p-2 flex flex-col rounded-lg mt-5 bg-[#020e14]">
-                            <span className="text-white">Investment Amount: {`$${currentInitial}`}</span>
-                            <span className={`${total > currentInitial? 'text-green-300': total < currentInitial? 'text-[red]': 'text-white' }`}>
+                        <div className=" bg-[#062c43] w-[300px] ml-5 p-2 flex flex-col rounded-lg mt-5 ">
+                            <span className="text-white mx-4">Investment Amount: {`$${currentInitial}`}</span>
+                            <span className={`${total > currentInitial? 'text-green-300': total < currentInitial? 'text-[red]': 'text-white' } mx-4`}>
                                 Profit / Loss Amount: {`$${total.toFixed(2)}`}
                             </span>
-                            <span className={`${total > currentInitial? 'text-green-300': total < currentInitial? 'text-[red]': 'text-white' }`}>
+                            <span className={`${total > currentInitial? 'text-green-300': total < currentInitial? 'text-[red]': 'text-white' } mx-4`}>
                                 Exit Total: {`$${((total+currentInitial).toFixed(2))}`}
                             </span>
                             

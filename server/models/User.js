@@ -1,18 +1,24 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const Userschema = new mongoose.Schema(
   {
-    userName: {
+    firstName: {
       type: String,
-      min: 2,
       required: true,
+      min: 2,
+      max: 50,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      min: 2,
       max: 50,
     },
     email: {
       type: String,
-      min: 2,
       required: true,
       max: 50,
+      unique: true,
     },
     password: {
       type: String,
@@ -23,21 +29,20 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    followers: {
+    friends: {
       type: Array,
       default: [],
     },
-    followings: {
-      type: Array,
-      default: [],
-    },
+    location: String,
+    occupation: String,
     viewedProfile: Number,
+    impressions: Number,
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", Userschema);
 
 export default User;

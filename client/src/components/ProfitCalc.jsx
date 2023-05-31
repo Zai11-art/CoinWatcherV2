@@ -55,7 +55,7 @@ const ProfitCalculator = () => {
         md:w-[700px] md:h-[470px]
         w-[450px] h-[590px]
         rounded-lg p-6
-        border-[#9ccddc] border-[2px] mt-12
+        border-[#9ccddc] border-[2px] 
         bg-[#062c43]
         pb-4 mx-3
         flex  flex-col 

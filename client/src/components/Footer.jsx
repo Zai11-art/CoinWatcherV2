@@ -17,9 +17,9 @@ function Footer() {
 
     const textAnimation = "duration-150 ease-in-out hover:scale-[1.04] hover:text-[#c9f1fe]"
     return ( 
-        <div className="">
+        <div className="absolute z-[50] w-full">
             <div className="w-full h-[2px] bg-[#9ccddc]"></div>
-            <footer className="w-full md:h-[120px] h-[140px] bg-[#041017] flex md:flex-row flex-col 
+            <footer className="w-full md:h-[120px] h-[180px] bg-[#041017] flex md:flex-row flex-col 
             items-center justify-center md:justify-between md:py-3 ">
                 
                     <div className="md:ml-7 md:pb-1 pb-2">

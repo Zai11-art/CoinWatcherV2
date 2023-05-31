@@ -33,14 +33,14 @@ function NewsPage() {
         
     },[])
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en')
-        .then(response => response.json())
-        .then(data => setpriceData([...data]))
-        .catch(error => console.log(error));
+    //     fetch(`https://newsapi.org/v2/everything?q=web3&from=${formattedDateMinus}&sortBy=publishedAt&apiKey=b5daf3d3eadc418380996387610a8218`)
+    //     .then(response => response.json())
+    //     .then(data => setpriceData([...data.articles]))
+    //     .catch(error => console.log(error));
 
-    },[])
+    // },[])
 
     return ( 
         <div className={`w-full lg:h-[3000px] md:h-[3500px] h-[4150px] bg-[#051925] flex flex-col items-center`}>
@@ -50,9 +50,9 @@ function NewsPage() {
 
                 <div className="
                 absolute z-[2]
-                lg:w-[1000px] lg:h-[370px]
-                md:w-[700px] md:h-[475px]
-                w-[450px] h-[590px]
+                lg:w-[1000px] lg:h-[300px]
+                md:w-[700px] md:h-[300px]
+                w-[450px] h-[350px]
                 rounded-lg 
                 mt-12
                 headCard-filter 
@@ -67,27 +67,23 @@ function NewsPage() {
                             latest developments in the rapidly evolving world of digital currencies.
                         </p>
                         <h1 className="text-white text-md font-bold my-2">
-                            Top 3 coins as of 24hrs:
+                            Get the Latest news in the last 24 hrs
                         </h1>
                     </div>
-                    <div className="flex lg:flex-row  lg:flex-nowrap flex-wrap px-6 justify-center lg:mb-2 md:mb-2 mb-0">
+                    {/* <div className="flex lg:flex-row  lg:flex-nowrap flex-wrap px-6 justify-center lg:mb-2 md:mb-2 mb-0">
                     {price.length ? (
-                        price.slice(0,3).map(crypto => (
-                            <article key={crypto.id} className="bg-[#062c43] lg:w-[300px] md:w-[300px] w-full h-[70px] rounded-lg mr-6 my-2
+                        price.slice(0,3).map(data => (
+                            <article key={data.id} className="bg-[#062c43] xl:w-[400px] lg:w-[300px] md:w-[300px] w-full h-[70px] rounded-lg mr-6 my-2
                             flex flex-row items-center justify-around border-[#9ccddc] border-[0.5px]
                             duration-200 ease-in-out hover:scale-[1.02]">
                                 <div>
-                                    <h1 className="text-white text-glow">#{crypto.market_cap_rank}</h1>
-                                </div>
-                                <div>
-                                    
                                     <div className="rounded-xl border-[#9ccddc] border-[0.5px] 
                                     lg:h-[50px] lg:w-[50px] 
                                     md:h-[60px] md:w-[60px] 
                                     h-[50px] w-[50px]
                                     flex 
                                     items-center justify-center">
-                                        <img src={crypto.image} alt="" className="
+                                        <img src={data.urlToImage} alt="" className="
                                         lg:h-[40px] lg:w-[40px]
                                         md:h-[40px] md:w-[40px]
                                         h-[30px] w-[30px]
@@ -95,21 +91,12 @@ function NewsPage() {
                                     </div>
                                     
                                 </div>
-                                <div className=" flex flex-col items-center">
-                                    <h1 className="text-white font-bold">{crypto.name}</h1>
-                                    <h1 className="text-white">${crypto.current_price.toLocaleString()}</h1>
+                                <div>
+                                    <h1 className="text-white text-glow">{data.title.slice(0, 50) + "..."}</h1>
                                 </div>
-                                <div className=" flex flex-col items-center w-[75px]">
-                                <Sparklines data={crypto.sparkline_in_7d.price}>
-                                    { crypto.current_price > crypto.sparkline_in_7d.price[0] ? (
-                                        <SparklinesLine style={{ stroke: "#4dff58", fill: "#4dff58", fillOpacity: "0.2" }} />
-                                    ) : (
-                                        <SparklinesLine style={{ stroke: "#fc3a3a", fill: "#fc3a3a", fillOpacity: "0.2" }} />
-                                    )
-                                    }
-                                    
-                                </Sparklines>
-                                </div>
+                                
+                               
+                            
                             </article>
                         ))
                         ) : (
@@ -118,7 +105,7 @@ function NewsPage() {
                             </div>
                             
                         )}
-                    </div>
+                    </div> */}
                     <div className="
                     mt-1
                     ml-6
@@ -134,15 +121,15 @@ function NewsPage() {
             
            
                 <div className="
-                lg:w-[1000px] lg:h-[370px]
-                md:w-[700px] md:h-[475px]
-                w-[450px] h-[590px]
+                lg:w-[1000px] lg:h-[300px]
+                md:w-[700px] md:h-[300px]
+                w-[450px] h-[350px]
                 rounded-lg 
                 border-[#9ccddc] border-[0.1px] mt-12
                 newsCardHeader
                 pb-4
                 flex  flex-col">
-                    <div className="lg:mt-[350px] lg:mt-[380px] md:mt-[480px] mt-[580px] flex flex-col">
+                    <div className="lg:mt-[30%] md:mt-[45%] mt-[80%] flex flex-col">
                         <div className="flex lg:flex-row md:flex-row flex-col items-center justify-between mb-2 mt-3">
                             <div>
                                 <h1 className="lg:text-[15px] md:text-[15px] text-[15px] text-[#9ccddc] mt-2">

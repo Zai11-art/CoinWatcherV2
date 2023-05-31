@@ -14,7 +14,7 @@ function AppPage(props) {
     }
 
     return ( 
-        <div className=" w-full lg:h-[1000px] md:h-[1200px] h-[1200px] bg-[#051925] flex flex-col items-center">
+        <div className=" w-full lg:h-[100vh] md:h-[100vh] h-[100vh] bg-[#051925] flex flex-col items-center">
 
             <div className="
             absolute z-[2]
