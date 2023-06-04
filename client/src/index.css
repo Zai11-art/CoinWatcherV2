@@ -300,7 +300,7 @@ html {
 }
 
 .slideshow {
-  animation: slide 300s infinite linear;
+  animation: slide 400s infinite linear;
 }
 
 @keyframes slide {
@@ -308,7 +308,7 @@ html {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-1000%);
+    transform: translateX(-800%);
   }
 }
 
@@ -340,12 +340,21 @@ html {
 
 .btc-card-circle-gradient {
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgb(32, 24, 0) 20%,
-    rgb(37, 30, 5) 100%
-  );
+  background: linear-gradient(180deg, rgb(32, 24, 0) 20%, rgb(37, 30, 5) 100%);
 }
+
+/* filter */
+.blueFilter {
+  filter: sepia(100%) hue-rotate(190deg) saturate(400%);
+}
+
+.vignette {
+  box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
+  -webkit-box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
+  -moz-box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
+}
+
+/* glass card og */
 
 @tailwind base;
 @tailwind components;

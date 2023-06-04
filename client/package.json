@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-paginate": "^8.1.5",
+    "react-parallax-tilt": "^1.7.143",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
     "react-select": "^5.7.2",
@@ -43,6 +44,7 @@
     "redux-persist": "^6.0.0",
     "shortid": "^2.2.16",
     "styled-components": "^5.3.9",
+    "vanilla-tilt": "^1.8.0",
     "yup": "^1.1.1"
   },
   "devDependencies": {

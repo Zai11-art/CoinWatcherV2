@@ -22,6 +22,7 @@ function Navbar() {
     { name: "News", link: "/News", id: 2 },
     { name: "Community", link: "/Community", id: 3 },
     { name: "Learn", link: "/Learn", id: 4 },
+    { name: "art", link: "/Art", id: 4 },
   ];
 
   const [open, setOpen] = useState(false);
