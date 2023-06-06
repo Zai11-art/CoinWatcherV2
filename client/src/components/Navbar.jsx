@@ -31,29 +31,30 @@ function Navbar() {
     <nav className="top-0 left-0 shadow-2xl w-full sticky z-[100]">
       <div
         className=" flex md:justify-between justify-center flex-col md:flex-row  z-[10]
-             p-2 md:items-center bg-[#062c43] h-[75px]"
+             p-2 md:items-center bg-[#062c43] h-[60px]"
       >
         <div>
-          <h1 className="text-white ml-4 text-2xl font-bold ">
-            <span className="text-glow">CoinWatch</span>
-            <span className="span-material text-3xl">.Io</span>{" "}
+          <h1 className="text-white ml-4 text-xl font-bold ">
+            <span className="text-glow">CoinWatcher</span>
+            <span className="span-material text-xl">.Io</span>{" "}
           </h1>
         </div>
 
         <div
-          className="absolute right-5 top-6 text-3xl text-[#9ccddc] md:hidden
-            hover:text-[white] duration-150 ease-in-out hover:scale-[1.04] cursor-pointer"
-        >
-          <ion-icon
-            onClick={() => setOpen(!open)}
-            name={open ? "close" : "apps-outline"}
-          ></ion-icon>
-        </div>
+            className="absolute right-5 top-5 text-xl text-[#9ccddc] md:hidden
+              hover:text-[white] duration-150 ease-in-out hover:scale-[1.04] cursor-pointer"
+          >
+            <ion-icon
+              onClick={() => setOpen(!open)}
+              name={open ? "close" : "apps-outline"}
+            ></ion-icon>
+          </div>
+
 
         <div className="md:static md:z-[1] z-[-1] ">
           <ul
             className={`flex md:flex-row flex-col xl:items-center lg:items-center md:items-center mr-4  md:static absolute
-             w-full  md:bg-[transparent] md:mt-6 mt-[30px]  ${
+             w-full  md:bg-[transparent] md:mt-6 mt-[15px]  ${
                open ? "top-[45px]  bg-[#054569] " : "top-[-360px] "
              } 
             duration-500 ease-in-out left-[-0.1px]  pb-[25px]`}
@@ -62,7 +63,7 @@ function Navbar() {
               <Link
                 to={link.link}
                 className="hover:scale-[1.02] transition-all ease-in-out
-                text-white mx-2 font-semibold md:text-[14.5px] text-[15px] md:ml-3 ml-8 md:my-1 my-3"
+                text-white mx-2 font-semibold md:text-[13px] text-[15px] md:ml-2 ml-8 md:my-1 my-3"
                 key={link.id}
               >
                 {link.name}

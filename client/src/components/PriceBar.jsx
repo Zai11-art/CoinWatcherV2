@@ -1,8 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { getServerStatus } from "../utils/utils";
 import { Link } from "react-router-dom";
-import { getCoinDataList } from "../utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -10,6 +7,10 @@ const PriceBar = (props) => {
 
   const {data : price } = useQuery(['coinListData'], () => {
     return axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&locale=en")
+    .then((res) => res.data)
+    })
+  const {data : status } = useQuery(['status'], () => {
+    return axios.get("https://api.coingecko.com/api/v3/ping")
     .then((res) => res.data)
     })
 
@@ -31,7 +32,7 @@ const PriceBar = (props) => {
           <div className="flex flex-row items-center">
             <div className="w-[15px] h-[15px] bg-[#ff4929] rounded-full"></div>{" "}
             <span className="text-[#97ff29] xl:text-sm text-[12px] font-semibold">{`Status: Offline`}</span>
-            Offline
+            {status == "(V3) To the Moon!" ? "Online" : "loading"}
           </div>
         )}
       </div>

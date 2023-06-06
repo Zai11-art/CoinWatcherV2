@@ -16,7 +16,7 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
   return (
     <Menu as="div" className="">
       <div>
-        <Menu.Button className="flex items-center bg-[#051925] transition-all duration-200 hover:bg-blue-500 rounded-lg p-1 pr-3 ml-5">
+        <Menu.Button className="flex items-center  transition-all duration-200 hover:bg-slate-800 rounded-lg p-1 pr-3 ml-2">
           <div className="w-[35px] h-[35px] rounded-full ml-3  flex items-center justify-center">
             <img
               className="w-[30px] h-[30px] rounded-full"
@@ -24,9 +24,7 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
               alt="user"
             />
           </div>
-          <span className="ml-2 text-gray-300 text-sm font-bold">
-            {userName}
-          </span>
+          
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -46,6 +44,20 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
         <Menu.Items className="absolute right-0 z-50 mt-2 w-[8rem] mr-6 origin-top-left rounded-md bg-[#051925] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <form method="POST" action="#">
+              <Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(
+                      active
+                        ? "text-[#ced7e0] transition-all ease-in-out"
+                        : "text-[#ced7e0]",
+                      "block w-full px-4 py-2 text-left text-sm"
+                    )}
+                  >
+                    {userName.toLocaleString()}
+                  </div>
+                )}
+              </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <Link
