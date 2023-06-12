@@ -22,9 +22,9 @@ function Footer() {
             <footer className="w-full md:h-[120px] h-[180px] bg-[#041017] flex md:flex-row flex-col 
             items-center justify-center md:justify-between md:py-3 ">
                 
-                    <div className="md:ml-7 md:pb-1 pb-2">
+                    <div className="md:ml-7 md:pb-1 pboin-2">
                         <h1 className="text-white text-2xl font-bold ">
-                            <span className="text-glow">CoinWatch</span>
+                            <span className="text-glow">CoinWatcher</span>
                         <span className="span-material text-3xl">.Io</span> </h1>
                     </div>
                     <div className="md:ml-[50px] md:pb-1 pb-2">

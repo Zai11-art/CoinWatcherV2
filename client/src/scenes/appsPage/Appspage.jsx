@@ -5,7 +5,7 @@ import ExchangeCalculator from "./ExchangeCalc.jsx";
 
 
 function AppPage(props) {
-    props.funcNav(true)
+
     const fiatData = props.fiatData
 
     const [activeCalc, setActiveCalc] = useState("calc1")

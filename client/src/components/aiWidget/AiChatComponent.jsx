@@ -20,11 +20,6 @@ const AiChatComponent = ({ picturePath, user }) => {
   const [chats, setChats] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  //
-
-  //   useEffect(() => {
-  //     scrollToBottom();
-  //   }, []);
 
   const scrollToBottom = () => {
     if (containerRef.current) {
@@ -32,13 +27,11 @@ const AiChatComponent = ({ picturePath, user }) => {
         containerRef.current.scrollIntoView({
           behavior: "smooth",
         }) + 1000000000;
-      //   console.log(containerRef.current.scrollTop)
+    
     }
   };
 
   const handleMessageSend = () => {
-    // Logic for sending the message
-
     scrollToBottom();
   };
 
@@ -79,7 +72,6 @@ const AiChatComponent = ({ picturePath, user }) => {
       });
   };
 
-  console.log(chats);
 
   return (
     <main className="w-[330px] bg-gray-800 rounded-2xl text-gray-300 h-[500px] flex flex-col justify-between">

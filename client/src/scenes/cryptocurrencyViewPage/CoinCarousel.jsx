@@ -16,41 +16,41 @@ const CoinCarousel = (props) => {
   return (
     <div
       className="
-        xl:w-[100%] xl:h-[500px]
-        lg:w-[100%] lg:h-[500px]
-        md:w-[100%] md:h-[500px]
-        w-[100%] h-[500px] 
-        xl:mt-[80px] lg:mt-[60px] md:mt-[200px] mt-[0px]
-        mb-[100px] 
-        flex justify-center items-center 
+        mb-[100px] mt-[0px]
+        flex h-[500px]
+        w-[100%] items-center
+        justify-center md:mt-[200px] 
+        md:h-[500px] md:w-[100%] lg:mt-[60px] lg:h-[500px]
+        lg:w-[100%] 
+        xl:mt-[80px] xl:h-[500px] xl:w-[100%] 
         
         "
     >
       <div
         className=" 
-            xl:w-[1300px] xl:h-[800px]
-            lg:w-[1000px] lg:h-[700px]
-            md:w-[700px] md:h-[1650px]
-            w-[95%] h-[1650px]
-            mt-5 rounded-lg 
-            text-white z-[1]
-            flex items-center justify-between
-            xl:flex-row lg:flex-row md:flex-col flex-col
+            z-[1] mt-5
+            flex h-[1650px]
+            w-[95%] flex-col
+            items-center justify-between
+            rounded-lg text-white 
+            md:h-[1650px] md:w-[700px]
+            md:flex-col lg:h-[700px] lg:w-[1000px]
+            lg:flex-row xl:h-[800px] xl:w-[1300px] xl:flex-row
             "
       >
         <div
           className="
-                xl:w-[600px] xl:h-[500px]
-                lg:w-[475px] lg:h-[550px]
-                md:w-[700px] md:h-[500px]
-                w-[95%] h-[500px]
-                chart rounded-3xl 
-                xl:mt-[200px] lg:mt-[250px] md:mt-[1800px] mt-[2300px]
-                xl:flex-col lg:flex-col md:flex-col flex-col flex justify-around items-center pb-[20px]
+                chart mt-[2300px]
+                flex h-[500px]
+                w-[95%] flex-col
+                items-center justify-around
+                rounded-3xl pb-[20px] 
+                md:mt-[1800px] md:h-[500px] md:w-[700px] md:flex-col
+                lg:mt-[250px] lg:h-[550px] lg:w-[475px] lg:flex-col xl:mt-[200px] xl:h-[500px] xl:w-[600px] xl:flex-col
                 "
         >
-          <div className="flex flex-col mx-4 xl:mb-[10px] mb-[20px] mt-4 items-center xl:text-[1rem]">
-            <h1 className="text-3xl text-[white] font-bold text-center">
+          <div className="mx-4 mb-[20px] mt-4 flex flex-col items-center xl:mb-[10px] xl:text-[1rem]">
+            <h1 className="text-center text-3xl font-bold text-[white]">
               Top Coins now
             </h1>
           </div>
@@ -61,38 +61,38 @@ const CoinCarousel = (props) => {
                 key={`${id}-${price.name}-${index}`}
                 className=" 
                             cryptocard-grad
-                            xl:w-[500px] xl:h-[60px]
-                            lg:w-[400px] lg:h-[700px]
-                            md:w-[600px] md:h-[70px]
-                            w-[85%] h-[50px]
-                            mt-5 rounded-lg 
-                            text-white z-[1]
-                            flex flex-row items-center justify-between
+                            z-[1] mt-5
+                            flex h-[50px]
+                            w-[85%] flex-row
+                            items-center justify-between
+                            rounded-lg text-white 
+                            md:h-[70px] md:w-[600px]
+                            lg:h-[700px] lg:w-[400px] xl:h-[60px] xl:w-[500px]
                             "
               >
-                <div className="text-center md:w-[75px] w-[50px] md:text-[15px] text-[15px] md:ml-6 ml-2">
+                <div className="ml-2 w-[50px] text-center text-[15px] md:ml-6 md:w-[75px] md:text-[15px]">
                   {data.market_cap_rank}
                 </div>
-                <div className="text-center md:w-[200px] w-[110px] md:text-[14px] text-[15px] flex flex-row items-center ">
+                <div className="flex w-[110px] flex-row items-center text-center text-[15px] md:w-[200px] md:text-[14px] ">
                   <Link
                     rel="noopener noreferrer"
-                    className="flex flex-row items-center hover:scale-[1.1] duration-200 ease-in-out"
+                    className="flex flex-row items-center duration-200 ease-in-out hover:scale-[1.1]"
                     to={`/view/${data.id}`}
                   >
                     <img
                       src={data.image}
                       alt=""
-                      className="md:h-[30px] md:w-[30px] h-[22.5px] w-[22.5px] mr-2 lg:ml-5 md:ml-5 ml-3"
+                      className="ml-3 mr-2 h-[22.5px] w-[22.5px] md:ml-5 md:h-[30px] md:w-[30px] lg:ml-5"
                     />
                     <span className="overflow-hidden">{data.name}</span>
                   </Link>
                 </div>
-                <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[15px] lg:mx-1 mx-2 overflow-hidden">
+                <div className="mx-2 w-[75px] overflow-hidden text-center text-[15px] md:w-[175px] md:text-[15px] lg:mx-1">
                   ${data.current_price.toLocaleString()}
                 </div>
                 {/* <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.market_cap.toLocaleString()}</div> */}
                 {/* <div className="text-center md:w-[250px] w-[150px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.total_volume.toLocaleString()} </div> */}
-                <div className="text-center md:w-[175px] w-[100px] md:text-[15px] text-[15px] lg:mx-1 mx-1 md:pr-6 pr-2 ">
+                <div className="mx-1 w-[100px] pr-2 text-center text-[15px] md:w-[175px] md:pr-6 md:text-[15px] lg:mx-1 ">
                   <Sparklines data={data.sparkline_in_7d.price}>
                     {data.current_price > data.sparkline_in_7d.price[0] ? (
                       <SparklinesLine
@@ -121,9 +121,9 @@ const CoinCarousel = (props) => {
 
           <Link to="/Home">
             <button
-              className="text-white mt-6 mb-2 flex justify-center  
-                            xl:text-[13px] lg:text-[13px] md:text-[15px] px-3 py-1 bg-blue-500
-                            hover:bg-blue-100 hover:text-blue-500 duration-200 ease-in-out rounded-lg"
+              className="mb-2 mt-6 flex justify-center rounded-lg  
+                            bg-blue-500 px-3 py-1 text-white duration-200 ease-in-out
+                            hover:bg-blue-100 hover:text-blue-500 md:text-[15px] lg:text-[13px] xl:text-[13px]"
             >
               View all coins here
             </button>
@@ -132,17 +132,17 @@ const CoinCarousel = (props) => {
 
         <div
           className="
-                xl:w-[600px] xl:h-[500px]
-                lg:w-[475px] lg:h-[550px]
-                md:w-[700px] md:h-[500px]
-                w-[95%] h-[500px]
-                chart rounded-3xl 
-                xl:mt-[200px] lg:mt-[250px] md:mt-[30px] mt-[30px]
-                xl:flex-col lg:flex-col md:flex-col flex-col flex justify-around items-center pb-[20px]
+                chart mt-[30px]
+                flex h-[500px]
+                w-[95%] flex-col
+                items-center justify-around
+                rounded-3xl pb-[20px] 
+                md:mt-[30px] md:h-[500px] md:w-[700px] md:flex-col
+                lg:mt-[250px] lg:h-[550px] lg:w-[475px] lg:flex-col xl:mt-[200px] xl:h-[500px] xl:w-[600px] xl:flex-col
                 "
         >
-          <div className="flex flex-col mx-4 xl:mb-[10px] mb-[20px] mt-4 items-center xl:text-[1rem]">
-            <h1 className="text-3xl text-[white] font-bold text-center">
+          <div className="mx-4 mb-[20px] mt-4 flex flex-col items-center xl:mb-[10px] xl:text-[1rem]">
+            <h1 className="text-center text-3xl font-bold text-[white]">
               Trending Coins now
             </h1>
           </div>
@@ -153,36 +153,36 @@ const CoinCarousel = (props) => {
                 key={`${id}-${data.id}-${index}`}
                 className=" 
                             cryptocard-grad
-                            xl:w-[500px] xl:h-[60px]
-                            lg:w-[400px] lg:h-[700px]
-                            md:w-[600px] md:h-[70px]
-                            w-[85%] h-[50px]
-                            mt-5 rounded-lg 
-                            text-white z-[1]
-                            flex flex-row items-center justify-between
+                            z-[1] mt-5
+                            flex h-[50px]
+                            w-[85%] flex-row
+                            items-center justify-between
+                            rounded-lg text-white 
+                            md:h-[70px] md:w-[600px]
+                            lg:h-[700px] lg:w-[400px] xl:h-[60px] xl:w-[500px]
                             "
               >
-                <div className="text-center md:w-[75px] w-[50px] md:text-[15px] text-[15px] md:ml-6 ml-2">
+                <div className="ml-2 w-[50px] text-center text-[15px] md:ml-6 md:w-[75px] md:text-[15px]">
                   {data.item.score + 1}
                 </div>
-                <div className="text-center md:w-[200px] w-[110px] md:text-[14px] text-[15px] flex flex-row items-center ">
+                <div className="flex w-[110px] flex-row items-center text-center text-[15px] md:w-[200px] md:text-[14px] ">
                   <Link
                     rel="noopener noreferrer"
-                    className="flex flex-row items-center hover:scale-[1.1] duration-200 ease-in-out"
+                    className="flex flex-row items-center duration-200 ease-in-out hover:scale-[1.1]"
                     to={`/view/${data.id}`}
                   >
                     <img
                       src={data.item.small}
                       alt=""
-                      className="md:h-[30px] md:w-[30px] h-[22.5px] w-[22.5px] mr-2 lg:ml-5 md:ml-5 ml-3"
+                      className="ml-3 mr-2 h-[22.5px] w-[22.5px] md:ml-5 md:h-[30px] md:w-[30px] lg:ml-5"
                     />
                     <span className="overflow-hidden">{data.item.name}</span>
                   </Link>
                 </div>
-                <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[15px] lg:mx-1 mx-2">
+                <div className="mx-2 w-[75px] text-center text-[15px] md:w-[175px] md:text-[15px] lg:mx-1">
                   ${((data.item.price_btc * usdprice) / 1).toFixed(8)}
                 </div>
-                <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[15px] lg:mx-1 mx-2 font-semibold text-glow">
+                <div className="text-glow mx-2 w-[75px] text-center text-[15px] font-semibold md:w-[175px] md:text-[15px] lg:mx-1">
                   ${data.item.symbol}
                 </div>
                 {/* <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.market_cap.toLocaleString()}</div> */}
@@ -194,9 +194,9 @@ const CoinCarousel = (props) => {
           )}
           <Link to="/Home">
             <button
-              className="text-white mt-6 mb-2 flex justify-center  
-                        xl:text-[13px] lg:text-[13px] md:text-[15px] px-3 py-1 bg-blue-500
-                        hover:bg-blue-100 hover:text-blue-500 duration-200 ease-in-out rounded-lg"
+              className="mb-2 mt-6 flex justify-center rounded-lg  
+                        bg-blue-500 px-3 py-1 text-white duration-200 ease-in-out
+                        hover:bg-blue-100 hover:text-blue-500 md:text-[15px] lg:text-[13px] xl:text-[13px]"
             >
               View all coins here
             </button>

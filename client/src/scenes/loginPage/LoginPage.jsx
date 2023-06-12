@@ -1,14 +1,12 @@
 import React from "react";
 import Form from "./Form";
-import { useState } from "react";
 
 const commonstyles =
   "rounded-t-lg mt-[4rem] md:w-[500px] md:h-[100px] w-[400px] h-[100px]";
 
 const RegisterPage = (props) => {
-  props.funcNav(true);
   return (
-    <div className="w-full h-[100vh] bg-[#051925] flex items-center flex-col ">
+    <div className="flex h-[100vh] w-full flex-col items-center bg-[#051925] ">
       <Form></Form>
     </div>
   );

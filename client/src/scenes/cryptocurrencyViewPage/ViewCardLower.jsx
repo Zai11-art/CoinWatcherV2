@@ -1,169 +1,245 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import CoinChartDisplay from './CoinChartDisplay';
-import { Interweave } from 'interweave';
-import CoinMarketList from './CoinMarketList';
+import React from "react";
+import { useParams } from "react-router-dom";
+import CoinChartDisplay from "./CoinChartDisplay";
+import { Interweave } from "interweave";
+import CoinMarketList from "./CoinMarketList";
 
 const ViewCardLower = (props) => {
-    const {id} = useParams();
-    const response = props.data
+  const { id } = useParams();
+  const response = props.data;
 
-    const formatNum = (x) => {
-        let isNegative = x < 0 ? '-' : '';
-        return  isNegative + '$ ' + Math.abs(x.toFixed(2));
-      }
-  
-      const formatNumLessOne = (x) => {
-        let isNegative = x < 0 ? '-' : '';
-        return  isNegative + '$ ' + Math.abs(x.toFixed(6));
-      }
+  const formatNum = (x) => {
+    let isNegative = x < 0 ? "-" : "";
+    return isNegative + "$ " + Math.abs(x.toFixed(2));
+  };
+
+  const formatNumLessOne = (x) => {
+    let isNegative = x < 0 ? "-" : "";
+    return isNegative + "$ " + Math.abs(x.toFixed(6));
+  };
 
   return (
-    <div className="
-        lg:w-[100%] lg:h-[100%]
-        md:w-[100%] md:h-[400px]
-        w-[100%] h-[400px]
-        rounded-lg
-        xl:mt-[0px]  lg:mt-[50px] md:mt-[350px] mt-[330px]
-        flex  justify-center">
-          <div className="
-          xl:w-[1300px] xl:h-[100%]
-          lg:w-[1000px] lg:h-[1300px]
-          md:w-[700px] md:h-[2200px]
-          w-[95%] h-[2300px]
-          rounded-bl-3xl rounded-br-3xl  
-          bg-[#062130]
-          border-[#054569] border-[2px]
-          xl:p-[1%]  lg:p-[1.5%]  md:p-[3%] p-[3%] 
-          flex xl:flex-col  lg:flex-row flex-col justify-between">
-            <div className="flex xl:flex-row lg:flex-row flex-col justify-between">
-              <div className="
-              xl:w-[800px] xl:h-[420px]
-              lg:w-[640px] lg:h-[380px]
-              md:w-[640px] md:h-[350px]
-              w-[100%] h-[350px] p-2 rounded-xl
-              chart flex flex-col mt-3 mr-3">
-                 
-                  <CoinChartDisplay
-                  data={response} />
-              </div>
-              
-              <div className="
-              xl:w-[445px] xl:h-[420px]
-              lg:w-[400px] lg:h-[380px]
-              md:w-[640px] md:h-[400px]
-              w-[100%] h-[420px] p-3 rounded-xl
-              chart flex flex-col mt-3">
-                <div className="mx-7">
-                  <h1 className="xl:text-3xl lg:text-xl md:text-3xl text-2xl xl:text-left lg:text-left text-center md:text-center font-bold text-[white] mb-4">Coin Stats</h1>
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>Current Price</span>
-                    <span className="font-semibold">$ {response.market_data.current_price.usd.toLocaleString()}</span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>Price Change 24hr</span>
-                    <span className="font-semibold">
-                    {response.market_data.price_change_24h_in_currency.usd > 1 ? formatNum(response.market_data.price_change_24h_in_currency.usd) : formatNumLessOne(response.market_data.price_change_24h_in_currency.usd) }
-                      </span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>24hr High / 24hr Low</span>
-                    <span className="font-semibold">$ {(response.market_data.high_24h.usd.toLocaleString())} / $ {(response.market_data.low_24h.usd.toLocaleString())}</span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>Total trading Vol.</span>
-                    <span className="font-semibold">$ {(response.market_data.total_volume.usd.toLocaleString())}</span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>All Time High</span>
-                    <span className="font-semibold">$ {(response.market_data.ath.usd.toLocaleString())}</span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>All Time Low</span>
-                    <span className="font-semibold">
-                    {response.market_data.atl.usd > 1 ? formatNum(response.market_data.atl.usd) : formatNumLessOne(response.market_data.atl.usd) }
-                    </span>
-                  </div>
-                    <hr className="border-blue-500" />
-                  <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[13.5px] md:text-[15px]">
-                    <span>Genesis Date</span>
-                    <span className="font-semibold">{(!response.genesis_date || response.genesis_date == ''? 'N/A' : response.genesis_date)}</span>
-                  </div>
-                    <hr className="border-blue-500" />
-                </div>
-              </div>
-            </div>
+    <div
+      className="
+        mt-[330px] flex
+        h-[400px] w-[100%]
+        justify-center rounded-lg
+        md:mt-[350px]
+        md:h-[400px]  md:w-[100%] lg:mt-[50px] lg:h-[100%]
+        lg:w-[100%]  xl:mt-[0px]"
+    >
+      <div
+        className="
+          flex h-[2300px]
+          w-[95%] flex-col
+          justify-between rounded-bl-3xl
+          rounded-br-3xl border-[2px]
+          border-[#054569] bg-[#062130]  
+          p-[3%]
+          md:h-[2200px] md:w-[700px]
+          md:p-[3%]  lg:h-[1300px]  lg:w-[1000px] lg:flex-row 
+          lg:p-[1.5%] xl:h-[100%]  xl:w-[1300px] xl:flex-col xl:p-[1%]"
+      >
+        <div className="flex flex-col justify-between lg:flex-row xl:flex-row">
+          <div
+            className="
+              chart mr-3
+              mt-3 flex
+              h-[350px] w-[100%]
+              flex-col rounded-xl p-2 md:h-[350px]
+              md:w-[640px] lg:h-[380px] lg:w-[640px] xl:h-[420px] xl:w-[800px]"
+          >
+            <CoinChartDisplay data={response} />
+          </div>
 
-            <div className="
-              xl:w-[100%] xl:h-[420px]
-              lg:w-[100%] lg:h-[380px]
-              md:w-[640px] md:h-[400px]
-              w-[100%] h-[420px] 
-              p-3 rounded-xl
-              flex flex-col 
-              xl:mt-[45px] lg:mt-[-70px] md:mt-[-100px] mt-[-170px]  
-              ">
-                <h1 className="xl:text-3xl lg:text-xl md:text-3xl text-2xl xl:text-left lg:text-left text-center md:text-center font-bold text-[white] mb-4">
-                  {response.localization.en} Info {response.description.en == "" ? 'Unavailable' : ''}
-                </h1>
-                <Interweave className="text-[#d4d3d2] xl:text-md lg:text-[15px] md:text-[13.5px] text-[12px] " content={response.description.en} />
-            </div>
-
-            <div className=" ml-3 flex xl:flex-row lg:flex-row flex-col">
-                <CoinMarketList
-                data={response}/>
-                <div className="
-                xl:w-[600px] xl:h-[400px]
-                lg:w-[400px] lg:h-[380px]
-                md:w-[640px] md:h-[400px]
-                w-[100%] h-[420px] p-3 rounded-xl
-                chart flex flex-col mt-3">
-                  <div className="mx-7">
-                    <h1 className="xl:text-3xl lg:text-xl md:text-3xl text-2xl xl:text-left lg:text-left text-center md:text-center font-bold text-[white] mb-4">
-                       Currency to {response.localization.en}
-                    </h1>
-                    <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[15px] md:text-[15px]">
-                      <span>{response.symbol.toUpperCase()} / {Object.keys(response.market_data.current_price)[48].toUpperCase()}</span>
-                      <span className="font-semibold">${response.tickers[0].last.toLocaleString()}</span>
-                    </div>
-                      <hr className="border-blue-500" />
-                    <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[15px] md:text-[15px]">
-                      <span>{response.symbol.toUpperCase()} / {Object.keys(response.market_data.current_price)[61-24].toUpperCase()}</span>
-                      <span className="font-semibold">P {response.market_data.current_price.php.toLocaleString()}</span>
-                    </div>
-                      <hr className="border-blue-500" />
-                    <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[15px] md:text-[15px]">
-                      <span>{response.symbol.toUpperCase()} / {Object.keys(response.market_data.current_price)[25].toUpperCase()}</span>
-                      <span className="font-semibold">R {response.market_data.current_price.inr.toLocaleString()}</span>
-                    </div>
-                      <hr className="border-blue-500" />
-                    <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[15px] md:text-[15px]">
-                      <span>{response.symbol.toUpperCase()} / {Object.keys(response.market_data.current_price)[13].toUpperCase()}</span>
-                      <span className="font-semibold">Y {response.market_data.current_price.cny.toLocaleString()}</span>
-                    </div>
-                      <hr className="border-blue-500" />
-                    <div className="text-white mt-3 mb-2 flex justify-between xl:text-[16px] lg:text-[15px] md:text-[15px]">
-                      <span>{response.symbol.toUpperCase()} / {Object.keys(response.market_data.current_price)[48].toUpperCase()}</span>
-                      <span className="font-semibold">$ {response.tickers[0].last.toLocaleString()}</span>
-                    </div>
-                      <hr className="border-blue-500" />
-                    
-                    <div className="text-white mt-6 mb-2 flex justify-center  
-                    xl:text-[13px] lg:text-[13px] md:text-[15px] p-1 bg-blue-500
-                    hover:bg-blue-100 hover:text-blue-500 duration-200 ease-in-out rounded-lg">
-                      <a href="#" className="font-bold"> Full Currency List </a>
-                    </div>
-                  </div>
-                  </div>
+          <div
+            className="
+              chart mt-3
+              flex h-[420px]
+              w-[100%] flex-col
+              rounded-xl p-3 md:h-[400px] md:w-[640px]
+              lg:h-[380px] lg:w-[400px] xl:h-[420px] xl:w-[445px]"
+          >
+            <div className="mx-7">
+              <h1 className="mb-4 text-center text-2xl font-bold text-[white] md:text-center md:text-3xl lg:text-left lg:text-xl xl:text-left xl:text-3xl">
+                Coin Stats
+              </h1>
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>Current Price</span>
+                <span className="font-semibold">
+                  $ {response.market_data.current_price.usd.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>Price Change 24hr</span>
+                <span className="font-semibold">
+                  {response.market_data.price_change_24h_in_currency.usd > 1
+                    ? formatNum(
+                        response.market_data.price_change_24h_in_currency.usd
+                      )
+                    : formatNumLessOne(
+                        response.market_data.price_change_24h_in_currency.usd
+                      )}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>24hr High / 24hr Low</span>
+                <span className="font-semibold">
+                  $ {response.market_data.high_24h.usd.toLocaleString()} / ${" "}
+                  {response.market_data.low_24h.usd.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>Total trading Vol.</span>
+                <span className="font-semibold">
+                  $ {response.market_data.total_volume.usd.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>All Time High</span>
+                <span className="font-semibold">
+                  $ {response.market_data.ath.usd.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>All Time Low</span>
+                <span className="font-semibold">
+                  {response.market_data.atl.usd > 1
+                    ? formatNum(response.market_data.atl.usd)
+                    : formatNumLessOne(response.market_data.atl.usd)}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[13.5px] xl:text-[16px]">
+                <span>Genesis Date</span>
+                <span className="font-semibold">
+                  {!response.genesis_date || response.genesis_date == ""
+                    ? "N/A"
+                    : response.genesis_date}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
             </div>
           </div>
         </div>
-  )
-}
 
-export default ViewCardLower
+        <div
+          className="
+              mt-[-170px] flex
+              h-[420px] w-[100%]
+              flex-col rounded-xl
+              p-3 md:mt-[-100px] 
+              md:h-[400px] md:w-[640px]
+              lg:mt-[-70px] lg:h-[380px] 
+              lg:w-[100%] xl:mt-[45px] xl:h-[420px] xl:w-[100%]  
+              "
+        >
+          <h1 className="mb-4 text-center text-2xl font-bold text-[white] md:text-center md:text-3xl lg:text-left lg:text-xl xl:text-left xl:text-3xl">
+            {response.localization.en} Info{" "}
+            {response.description.en == "" ? "Unavailable" : ""}
+          </h1>
+          <Interweave
+            className="xl:text-md text-[12px] text-[#d4d3d2] md:text-[13.5px] lg:text-[15px] "
+            content={response.description.en}
+          />
+        </div>
+
+        <div className=" ml-3 flex flex-col lg:flex-row xl:flex-row">
+          <CoinMarketList data={response} />
+          <div
+            className="
+                chart mt-3
+                flex h-[420px]
+                w-[100%] flex-col
+                rounded-xl p-3 md:h-[400px] md:w-[640px]
+                lg:h-[380px] lg:w-[400px] xl:h-[400px] xl:w-[600px]"
+          >
+            <div className="mx-7">
+              <h1 className="mb-4 text-center text-2xl font-bold text-[white] md:text-center md:text-3xl lg:text-left lg:text-xl xl:text-left xl:text-3xl">
+                Currency to {response.localization.en}
+              </h1>
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[15px] xl:text-[16px]">
+                <span>
+                  {response.symbol.toUpperCase()} /{" "}
+                  {Object.keys(
+                    response.market_data.current_price
+                  )[48].toUpperCase()}
+                </span>
+                <span className="font-semibold">
+                  ${response.tickers[0].last.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[15px] xl:text-[16px]">
+                <span>
+                  {response.symbol.toUpperCase()} /{" "}
+                  {Object.keys(response.market_data.current_price)[
+                    61 - 24
+                  ].toUpperCase()}
+                </span>
+                <span className="font-semibold">
+                  P {response.market_data.current_price.php.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[15px] xl:text-[16px]">
+                <span>
+                  {response.symbol.toUpperCase()} /{" "}
+                  {Object.keys(
+                    response.market_data.current_price
+                  )[25].toUpperCase()}
+                </span>
+                <span className="font-semibold">
+                  R {response.market_data.current_price.inr.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[15px] xl:text-[16px]">
+                <span>
+                  {response.symbol.toUpperCase()} /{" "}
+                  {Object.keys(
+                    response.market_data.current_price
+                  )[13].toUpperCase()}
+                </span>
+                <span className="font-semibold">
+                  Y {response.market_data.current_price.cny.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+              <div className="mb-2 mt-3 flex justify-between text-white md:text-[15px] lg:text-[15px] xl:text-[16px]">
+                <span>
+                  {response.symbol.toUpperCase()} /{" "}
+                  {Object.keys(
+                    response.market_data.current_price
+                  )[48].toUpperCase()}
+                </span>
+                <span className="font-semibold">
+                  $ {response.tickers[0].last.toLocaleString()}
+                </span>
+              </div>
+              <hr className="border-blue-500" />
+
+              <div
+                className="mb-2 mt-6 flex justify-center rounded-lg  
+                    bg-blue-500 p-1 text-white duration-200 ease-in-out
+                    hover:bg-blue-100 hover:text-blue-500 md:text-[15px] lg:text-[13px] xl:text-[13px]"
+              >
+                <a href="#" className="font-bold">
+                  {" "}
+                  Full Currency List{" "}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewCardLower;

@@ -10,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const ViewPage = (props) => {
-  props.funcNav(true);
   const [response, setCoinData] = useState(null);
   const { id } = useParams();
 
@@ -48,7 +47,7 @@ const ViewPage = (props) => {
 
   if (!response) {
     return (
-      <div className={`w-full h-[100vh] bg-[#051925] flex flex-col pb-[200px]`}>
+      <div className={`flex h-[100vh] w-full flex-col bg-[#051925] pb-[200px]`}>
         <Loader />
       </div>
     );
@@ -56,7 +55,7 @@ const ViewPage = (props) => {
 
   return (
     <div
-      className={`w-full xl:h-[100%] lg:h-[100%] md:h-[6000px] h-[6000px] bg-[#051925] flex flex-col pb-[200px]`}
+      className={`flex h-[6000px] w-full flex-col bg-[#051925] pb-[200px] md:h-[6000px] lg:h-[100%] xl:h-[100%]`}
     >
       <ViewCardUpper data={response} />
       <ViewCardLower data={response} />

@@ -7,12 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
 
-
 function CryptocurrencyPage(props) {
-
-
-    props.funcNav(true);
- 
 
   const { data: coinList } = useQuery(["coinListData"], () => {
     return axios
@@ -37,14 +32,12 @@ function CryptocurrencyPage(props) {
   });
 
   return (
-    <main
-      className="w-[100%]  h-[100%] bg-[#051925] flex flex-col items-center"
-    >
+    <main className="flex  h-[100%] w-[100%] flex-col items-center bg-[#051925]">
       <HomeHeadCard />
       <div
-        className="flex flex-row lg:w-[1000px] lg:h-[260px]
-            md:w-[700px] md:h-[300px]
-            w-[450px] h-[250px]"
+        className="flex h-[250px] w-[450px] flex-row
+            md:h-[300px] md:w-[700px]
+            lg:h-[260px] lg:w-[1000px]"
       >
         <HomeTrendingCard trendingData={coinTrending} btcPrice={btcPrice} />
         <FearGreedIndex />

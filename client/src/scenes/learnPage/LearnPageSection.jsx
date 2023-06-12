@@ -5,23 +5,22 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { sectionLinks } from "../../data/learnData";
 import { useId } from "react";
+import { useEffect } from "react";
 
 const LearnPage = (props) => {
-  const id = useId()
-  props.funcNav(true);
+  const id = useId();
   const { sectionId } = useParams();
   const [open, setOpen] = useState(false);
-
-  const section = learnData.find(item => item.id === sectionId);
+  const section = learnData.find((item) => item.id === sectionId);
 
   return (
     <div className="h-[100%] w-[100%]">
       {/* Bar */}
-      <div className="top-[70px] left-0 shadow-2xl w-full sticky bg-[#062436] h-10 z-[50] flex flex-row items-center">
+      <div className="sticky left-0 top-[60px] z-[50] flex h-10 w-full flex-row items-center bg-[#062436] shadow-2xl">
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl w-[45px] text-blue-300 pl-2  mt-1 bg-gray-900 hover:text-blue-100 transition-all md:hidden
-             duration-150 ease-in-out hover:scale-[1.04] cursor-pointer"
+          className="mt-1 w-[45px] cursor-pointer bg-gray-900  pl-2 text-3xl text-blue-300 transition-all duration-150
+             ease-in-out hover:scale-[1.04] hover:text-blue-100 md:hidden"
         >
           <ion-icon
             onClick={() => setOpen(!open)}
@@ -29,118 +28,113 @@ const LearnPage = (props) => {
           ></ion-icon>
         </div>
 
-        <span className="text-white text-glow w-[200px] ml-7 ">Learn / {section.sectionName}</span>
+        <span className="text-glow ml-7 w-[200px] text-white ">
+          Learn / {section.sectionName}
+        </span>
       </div>
 
       <div className="flex h-[100%] bg-[#061016]">
         {/* SIDEBAR */}
         <div
-          className={`xl:h-relative lg:h-relative md:h-relative sm:h-[1720px] h-[1990px]
+          className={`xl:h-relative lg:h-relative md:h-relative top-25 glass-v2
     
-          md:w-[250px] w-[200px] 
-        left-0 
-        top-25 
-        xl:sticky lg:sticky md:sticky absolute 
-        shadow-2xl transition-all ease-in-out z-[30]
-        glass-v2
+          absolute left-0 
+        z-[30] 
+        h-[1990px] 
+        w-[200px] shadow-2xl transition-all ease-in-out 
+        sm:h-[1720px] md:sticky md:w-[250px] lg:sticky
+        xl:sticky
         ${open ? "left-[50] " : "left-[-360px]"}
         `}
         >
-          <ul className="mt-16 px-6 sticky left-4 top-32">
+          <ul className="sticky left-4 top-32 mt-16 px-6">
             <div className="flex">
-              <span className="text-white text-2xl">
+              <span className="text-2xl text-white">
                 <ion-icon name="code-working"></ion-icon>
               </span>
-              <span className="text-white  text-xl font-bold mb-2 ml-1">
+              <span className="mb-2  ml-1 text-xl font-bold text-white">
                 Introduction
-                
               </span>
             </div>
-            {sectionLinks.slice(0,6).map((section, index) => (
-              <li key={`${id}-${index}-${section.id}`}
-                className="text-white text-md my-2.5 font-normal
-              hover:scale-[1.05] cursor-pointer transition-all ease-in-out"
+            {sectionLinks.slice(0, 6).map((section, index) => (
+              <li
+                key={`${id}-${index}-${section.id}`}
+                className="text-md my-2.5 cursor-pointer font-normal
+              text-white transition-all ease-in-out hover:scale-[1.05]"
               >
                 <Link to={`/Learn/${section.link}`}>{section.name}</Link>
-                <div className="bg-blue-300 w-full h-[0.9px] my-2 opacity-20" />
+                <div className="my-2 h-[0.9px] w-full bg-blue-300 opacity-20" />
               </li>
             ))}
-            
-            <div className="flex mt-12">
-              <span className="text-white text-2xl">
+
+            <div className="mt-12 flex">
+              <span className="text-2xl text-white">
                 <ion-icon name="prism-outline"></ion-icon>
               </span>
-              <span className="text-white  text-xl font-bold mb-2 ml-1">
+              <span className="mb-2  ml-1 text-xl font-bold text-white">
                 Guides
-                
               </span>
-              
-              
             </div>
             {sectionLinks.slice(6).map((section, index) => (
-              <li key={`${id}-${index}-${section.id}`}
-                className="text-white text-md my-3 font-normal
-              hover:scale-[1.05] cursor-pointer transition-all ease-in-out"
+              <li
+                key={`${id}-${index}-${section.id}`}
+                className="text-md my-3 cursor-pointer font-normal
+              text-white transition-all ease-in-out hover:scale-[1.05]"
               >
                 <Link to={`/Learn/${section.link}`}>{section.name}</Link>
-                <div className="bg-blue-300 w-full h-[0.9px] my-2 opacity-40" />
+                <div className="my-2 h-[0.9px] w-full bg-blue-300 opacity-40" />
               </li>
-              
             ))}
-            
-            
           </ul>
         </div>
 
-        <div className=" bg-[red] flex flex-col w-full h-[100%]">
-          
-
+        <div className=" flex h-[100%] w-full flex-col bg-[red]">
           {/* <div className="bg-[yellow] h-[2000px]"></div> */}
 
-          <div className="bg-[#061016] h-[100%] w-[100%] xl:px-[16%] lg:px-[12%] md:px-[10%] px-[10%]">
+          <div className="h-[100%] w-[100%] bg-[#061016] px-[10%] md:px-[10%] lg:px-[12%] xl:px-[16%]">
             <div
               className=" 
-          w-[100%]
-          h-[100%]
-          justify-center flex   
-          xl:flex-row lg:flex-row md:flex-row flex-col mt-8"
+          mt-8
+          flex
+          h-[100%] w-[100%]   
+          flex-col justify-center md:flex-row lg:flex-row xl:flex-row"
             >
               <div
                 className=" 
-          xl:w-[60%] xl:h-[80%] 
-          lg:w-[60%] lg:h-[80%] 
-          md:w-[50%] md:h-[50%] 
-          w-[100%] h-[50%] 
+          h-[50%] w-[100%] 
+          md:h-[50%] md:w-[50%] 
+          lg:h-[80%] lg:w-[60%] 
+          xl:h-[80%] xl:w-[60%] 
           "
               >
-                <h1 className="text-3xl font-bold text-white mb-4">
+                <h1 className="mb-4 text-3xl font-bold text-white">
                   {section.sectionName}
                 </h1>
                 <p
                   className="
-            xl:text-[1.1rem] lg:text-[1.05rem]
-            md:text-[0.90rem] text-[0.9rem] 
-            text-white mb-2 mr-7"
+            mb-2 mr-7
+            text-[0.9rem] text-white 
+            md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.paragraphFirst}
                 </p>
               </div>
               <div
                 className=" 
-          xl:w-[40%] xl:h-[250px] 
-          lg:w-[40%] lg:h-[275px] 
-          md:w-[50%] md:h-[400px] 
-          w-[100%] h-[250px] rounded-xl
-          md:my-0 my-6 flex items-center justify-center
-          hover:shadow-yellow-100/50 hover:scale-[1.01] learn-card-banner
-          shadow-yellow-400/50 shadow-xl transition-all ease-in-out"
+          learn-card-banner my-6 
+          flex h-[250px] 
+          w-[100%] items-center 
+          justify-center rounded-xl shadow-xl
+          shadow-yellow-400/50 transition-all ease-in-out hover:scale-[1.01] hover:shadow-yellow-100/50
+          md:my-0 md:h-[400px] md:w-[50%]
+          lg:h-[275px] lg:w-[40%] xl:h-[250px] xl:w-[40%]"
               >
                 <div
-                  className="text-yellow-200 text-7xl w-32 h-32 border-[5px] 
-              hover:border-[8px] 
-            border-yellow-300 hover:border-yellow-100 transition-all ease-in-out
-            rounded-full btc-card-circle-gradient flex items-center justify-center 
-            hover:rotate-[360deg] hover:text-yellow-100"
+                  className="btc-card-circle-gradient flex h-32 w-32 items-center 
+              justify-center 
+            rounded-full border-[5px] border-yellow-300 text-7xl
+            text-yellow-200 transition-all ease-in-out hover:rotate-[360deg] hover:border-[8px] 
+            hover:border-yellow-100 hover:text-yellow-100"
                 >
                   <ion-icon name="logo-bitcoin"></ion-icon>
                 </div>
@@ -148,27 +142,25 @@ const LearnPage = (props) => {
             </div>
             <div
               className=" 
-          w-[100%]
-          h-[100%]
-          justify-center flex   
-          xl:flex-row lg:flex-row md:flex-row flex-col mt-8"
+          mt-8
+          flex
+          h-[100%] w-[100%]   
+          flex-col justify-center md:flex-row lg:flex-row xl:flex-row"
             >
               <div
                 className=" 
-          xl:w-[100%] xl:h-[80%] 
-          lg:w-[100%] lg:h-[80%] 
-          md:w-[100%] md:h-[50%] 
-          w-[100%] h-[50%] 
+          h-[50%] w-[100%] 
+          md:h-[50%] md:w-[100%] 
+          lg:h-[80%] lg:w-[100%] 
+          xl:h-[80%] xl:w-[100%] 
           "
               >
-                <h1 className="text-3xl font-bold text-white mb-4">
-                  Content
-                </h1>
+                <h1 className="mb-4 text-3xl font-bold text-white">Content</h1>
                 <p
                   className="
-            xl:text-[1.1rem] lg:text-[1.05rem]
-            md:text-[0.90rem] text-[0.9rem] 
-            text-white mb-2 mr-7"
+            mb-2 mr-7
+            text-[0.9rem] text-white 
+            md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.paragraphSecond}
                 </p>
@@ -178,29 +170,26 @@ const LearnPage = (props) => {
             <div
               className=" 
        
-        w-[100%]  h-[100%]
-        justify-center flex   
-        xl:flex-row lg:flex-row md:flex-row flex-col mt-12 mb-12"
+        mb-12  mt-12
+        flex h-[100%]   
+        w-[100%] flex-col justify-center md:flex-row lg:flex-row xl:flex-row"
             >
               <div
                 className=" 
         
-          w-[100%] h-[50%] 
+          h-[50%] w-[100%] 
           "
               >
-                <h1 className="text-2xl font-bold text-white mb-4">
-                  Summary
-                </h1>
+                <h1 className="mb-4 text-2xl font-bold text-white">Summary</h1>
 
                 <p
                   className="
-                  xl:text-[1.1rem] lg:text-[1.05rem]
-                  md:text-[0.90rem] text-[0.9rem] 
-                  text-white mb-2 mr-7"
+                  mb-2 mr-7
+                  text-[0.9rem] text-white 
+                  md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.summary}
                 </p>
-                
               </div>
             </div>
           </div>
@@ -219,5 +208,3 @@ export default LearnPage;
 // #5591a9
 // #9ccddc
 // #ced7e0
-
-

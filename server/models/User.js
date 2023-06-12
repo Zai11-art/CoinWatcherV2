@@ -2,13 +2,7 @@ import mongoose from "mongoose";
 
 const Userschema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      min: 2,
-      max: 50,
-    },
-    lastName: {
+    userName: {
       type: String,
       required: true,
       min: 2,
@@ -33,9 +27,11 @@ const Userschema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    location: String,
-    occupation: String,
-    viewedProfile: Number,
+    followers: {
+      type: Array,
+      default: [],
+    },
+    bio: String,
     impressions: Number,
   },
   {

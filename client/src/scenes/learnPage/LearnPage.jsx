@@ -34,14 +34,14 @@ const faq = [
 
 const LearnPage = (props) => {
   const id = useId();
-  props.funcNav(true);
+
   const { sectionId } = useParams();
   const [open, setOpen] = useState(false);
 
   return (
     <div className="h-[100%] w-[100%]">
       {/* Bar */}
-      <div className="top-[70px] left-0 shadow-2xl w-full sticky bg-[#062436] h-10 z-[50] flex flex-row items-center">
+      <div className="top-[60px] left-0 shadow-2xl w-full sticky bg-[#062436] h-10 z-[50] flex flex-row items-center">
         <div
           onClick={() => setOpen(!open)}
           className="text-3xl w-[45px] text-blue-300 pl-2  mt-1 bg-gray-900 hover:text-blue-100 transition-all md:hidden

@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,30 +8,33 @@ import { useState } from "react";
 
 // CONFIG REGISTER SCHEMA
 const registerSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
+  userName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
+  bio: yup.string().required("required"),
   password: yup.string().required("required"),
-  location: yup.string().required("required"),
-  occupation: yup.string().required("required"),
   picture: yup.string().required("required"),
 });
 
 // CONFIG LOGIN SCHEMA
 const loginSchema = yup.object().shape({
-  email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
+  email: yup
+    .string()
+    .email("invalid email")
+    .required("required")
+    .matches(/[a-zA-Z]/, "Incorrect password or email"),
+  password: yup
+    .string()
+    .required("required")
+    .matches(/[a-zA-Z]/, "Incorrect password or email"),
 });
 
 // INITIAL VALUES
 const initialValuesRegister = {
-  firstName: "",
-  lastName: "",
+  userName: "",
   email: "",
   password: "",
-  location: "",
-  occupation: "",
   picture: "",
+  bio: "",
 };
 
 const initialValuesLogin = {
@@ -48,6 +51,10 @@ const Form = () => {
   const navigate = useNavigate();
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+  // log in status
+  const [message, setMessage] = useState("");
+  // register status
+  const [registerMessage, setregisterMessage] = useState("");
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
@@ -68,7 +75,14 @@ const Form = () => {
     onSubmitProps.resetForm();
 
     if (savedUser) {
-      setPageType("login");
+      setregisterMessage("Register Successful! Redirecting to Login");
+      setTimeout(() => {
+        setPageType("login");
+        setregisterMessage("");
+        setMessage("");
+      }, 2000);
+    } else {
+      setregisterMessage("Please fill up all fields.");
     }
   };
 
@@ -79,17 +93,24 @@ const Form = () => {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    console.log(loggedInResponse, loggedIn);
     onSubmitProps.resetForm();
-    if (loggedIn) {
+    if (loggedIn.msg != "User does not exist. ") {
       dispatch(
         setLogin({
           user: loggedIn.user,
           token: loggedIn.token,
         })
       );
-      navigate("/home");
+      setTimeout(() => navigate("/home"), 2000);
+      setMessage("Welcome!");
+    } else {
+      setMessage("Incorrect email or password. Please try again.");
+      navigate("/login");
     }
   };
+
+  // const resultMessage = login
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
@@ -98,21 +119,45 @@ const Form = () => {
   return (
     <>
       <div
-        className={`${commonstyles} homePageCard-filter shadow-lg  absolute z-[2]`}
+        className={`${commonstyles} homePageCard-filter absolute  z-[2] shadow-lg`}
       ></div>
       <div
-        className={`${commonstyles} h-[100px] homePageCard  absolute z-[1]`}
+        className={`${commonstyles} homePageCard absolute  z-[1] h-[100px]`}
       ></div>
-      <div className={`${commonstyles} h-[100px] z-[3] p-6`}>
+      <div className={`${commonstyles} z-[3] h-[100px] p-6`}>
         {isLogin ? (
-          <h1 className="text-[white] text-glow text-4xl font-bold">LOGIN</h1>
+          <h1 className="text-glow text-4xl font-bold text-[white]">LOGIN</h1>
         ) : (
-          <h1 className="text-[white] text-glow text-4xl font-bold">
+          <h1 className="text-glow text-4xl font-bold text-[white]">
             REGISTER
           </h1>
         )}
       </div>
-      <div className=" rounded-t-none md:w-[500px] md:h-[650px] w-[400px] h-[650px] bg-[#062c43] p-6 shadow-lg shadow-cyan-500/30 mb-[200px]">
+
+      {isLogin &&
+        (message === "Welcome!" ? (
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]">
+            {message}
+          </div>
+        ) : (
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]">
+            {message}
+          </div>
+        ))}
+
+      {isRegister &&
+        (registerMessage === "Register Successful! Redirecting to Login" &&
+        registerMessage?.length ? (
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]">
+            {registerMessage}
+          </div>
+        ) : (
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]">
+            {registerMessage}
+          </div>
+        ))}
+
+      <div className=" mb-[200px] h-[650px] w-[400px] rounded-t-none bg-[#062c43] p-6 shadow-lg shadow-cyan-500/30 md:h-[650px] md:w-[500px]">
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -125,122 +170,106 @@ const Form = () => {
             handleSubmit,
             setFieldValue,
             resetForm,
+            errors,
+            touched,
           }) => (
             <form onSubmit={handleSubmit}>
               {isRegister && (
                 <>
-                  <div className="flex justify-between w-[100%]">
-                    <div className="flex w-[45%] flex-col text-[white] text-glow pb-5">
-                      <label className="pb-2" htmlFor="firstName">
-                        First Name
-                      </label>
+                  <div className="flex w-[100%] justify-between">
+                    <div className=" flex w-[100%] flex-col pb-5 text-[white]">
+                      <div className="flex flex-row justify-between">
+                        <label className="text-glow pb-2" htmlFor="userName">
+                          Username
+                        </label>
+                        {/* error handling */}
+                        {errors.userName && touched.userName ? (
+                          <div className="text-red-500 transition-all ease-in-out">
+                            {errors.userName}
+                          </div>
+                        ) : null}
+                      </div>
+
                       <input
                         required
-                        className="text-[white] h-8 bg-[#0e1721] "
-                        name="firstName"
+                        className="h-8 bg-[#0e1721] text-[white] "
+                        name="userName"
                         type="text"
-                        label="FirstName"
-                        value={values.firstName || ""}
+                        label="UserName"
+                        value={values.userName || ""}
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        // error={
-                        //   Boolean(touched.userName) && Boolean(errors.userName)
-                        // }
-                        //   helperText={touched.userName && errors.userName}
-                      />
-                    </div>
-                    <div className="flex w-[45%] flex-col text-[white] text-glow pb-5">
-                      <label className="pb-2" htmlFor="lastName">
-                        Last Name
-                      </label>
-                      <input
-                        required
-                        className="text-[white] h-8 bg-[#0e1721] "
-                        name="lastName"
-                        type="text"
-                        label="LastName"
-                        value={values.lastName || ""}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        // error={
-                        //   Boolean(touched.userName) && Boolean(errors.userName)
-                        // }
-                        //   helperText={touched.userName && errors.userName}
                       />
                     </div>
                   </div>
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="location">
-                      Location
-                    </label>
+
+                  <div className=" flex flex-col pb-5 text-[white]">
+                    <div className="flex flex-row justify-between">
+                      <label className="text-glow pb-2" htmlFor="email">
+                        Email
+                      </label>
+                      {/* error handling */}
+                      {errors.email && touched.email ? (
+                        <div className="text-red-500 transition-all ease-in-out">
+                          {errors.email}
+                        </div>
+                      ) : null}
+                    </div>
                     <input
                       required
-                      className="text-[white] h-8 bg-[#0e1721] "
-                      name="location"
-                      type="text"
-                      label="Location"
-                      value={values.location || ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      // error={
-                      //   Boolean(touched.userName) && Boolean(errors.userName)
-                      // }
-                      //   helperText={touched.userName && errors.userName}
-                    />
-                  </div>
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="occupation">
-                      Occupation
-                    </label>
-                    <input
-                      required
-                      className="text-[white] h-8 bg-[#0e1721] "
-                      name="occupation"
-                      type="text"
-                      label="Occupation"
-                      value={values.occupation || ""}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      // error={
-                      //   Boolean(touched.userName) && Boolean(errors.userName)
-                      // }
-                      //   helperText={touched.userName && errors.userName}
-                    />
-                  </div>
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      required
-                      className="text-[white] h-8 bg-[#0e1721] "
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="email"
                       type="text"
                       label="Email"
                       value={values.email || ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      // error={Boolean(touched.email) && Boolean(errors.email)}
-                      //   helperText={touched.email && errors.email}
                     />
                   </div>
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="password">
-                      Password
-                    </label>
+                  <div className=" flex flex-col pb-5 text-[white]">
+                    <div className="flex flex-row justify-between">
+                      <label className="text-glow pb-2" htmlFor="bio">
+                        Bio
+                      </label>
+                      {/* error handling */}
+                      {errors.bio && touched.bio ? (
+                        <div className="text-red-500 transition-all ease-in-out">
+                          {errors.bio}
+                        </div>
+                      ) : null}
+                    </div>
                     <input
                       required
-                      className="text-[white] h-8 bg-[#0e1721] "
+                      className="h-8 bg-[#0e1721] text-[white] "
+                      name="bio"
+                      type="text"
+                      label="Bio"
+                      value={values.bio || ""}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className=" flex flex-col pb-5 text-[white]">
+                    <div className="flex flex-row justify-between">
+                      <label className="text-glow pb-2" htmlFor="password">
+                        Password
+                      </label>
+                      {/* error handling */}
+                      {errors.password && touched.password ? (
+                        <div className="text-red-500 transition-all ease-in-out">
+                          {errors.password}
+                        </div>
+                      ) : null}
+                    </div>
+                    <input
+                      required
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="password"
                       type="password"
                       label="Password"
                       value={values.password || ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      // error={
-                      //   Boolean(touched.password) && Boolean(errors.password)
-                      // }
-                      //   helperText={touched.password && errors.password}
                     />
                   </div>
                   <div>
@@ -255,9 +284,9 @@ const Form = () => {
                         <div {...getRootProps()}>
                           <input {...getInputProps()} />
                           {!values.picture ? (
-                            <div className="flex flex-row items-center justify-center h-[5rem] border-[#9ccddc] border-dashed border-[1px]">
+                            <div className="flex h-[5rem] flex-row items-center justify-center border-[1px] border-dashed border-[#9ccddc]">
                               <div className="flex flex-col text-center">
-                                <p className="text-[white] cursor-pointer pb-1 font-bold">
+                                <p className="cursor-pointer pb-1 font-bold text-[white]">
                                   Add User Picture Here
                                 </p>
                                 <span className="text-[white]">
@@ -268,8 +297,8 @@ const Form = () => {
                               </div>
                             </div>
                           ) : (
-                            <div className="flex flex-row items-center justify-around h-[5rem] border-[#9ccddc] border-dashed border-[1px]">
-                              <div className="flex flex-row justify-center items-center">
+                            <div className="flex h-[5rem] flex-row items-center justify-around border-[1px] border-dashed border-[#9ccddc]">
+                              <div className="flex flex-row items-center justify-center">
                                 <span className="text-[white]">
                                   {!values.picture?.name
                                     ? "No photo"
@@ -287,51 +316,61 @@ const Form = () => {
 
               {!isRegister && (
                 <>
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="email">
-                      Email
-                    </label>
+                  <div className=" flex flex-col pb-5 text-[white]">
+                    <div className="flex flex-row justify-between">
+                      <label className="text-glow pb-2" htmlFor="email">
+                        Email
+                      </label>
+                      {/* error handling */}
+                      {errors.email && touched.email ? (
+                        <div className="text-red-500 transition-all ease-in-out">
+                          {errors.email}
+                        </div>
+                      ) : null}
+                    </div>
+
                     <input
                       required
-                      className="text-[white] h-8 bg-[#0e1721] "
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="email"
                       type="email"
                       label="Email"
                       value={values.email || ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      // error={Boolean(touched.email) && Boolean(errors.email)}
-                      //   helperText={touched.email && errors.email}
                     />
                   </div>
 
-                  <div className="flex flex-col text-[white] text-glow pb-5">
-                    <label className="pb-2" htmlFor="password">
-                      Password
-                    </label>
+                  <div className="flex flex-col pb-5 text-[white]">
+                    <div className="flex flex-row justify-between">
+                      <label className="text-glow pb-2 " htmlFor="password">
+                        Password
+                      </label>
+                      {/* error handling */}
+                      {errors.password && touched.password ? (
+                        <div className="text-red-500">{errors.password}</div>
+                      ) : null}
+                    </div>
                     <input
                       required
-                      className="text-[white] h-8 bg-[#0e1721] "
+                      className="h-8 bg-[#0e1721] text-[#928c8c] "
                       name="password"
                       type="password"
                       label="Password"
                       value={values.password || ""}
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      // error={
-                      //   Boolean(touched.password) && Boolean(errors.password)
-                      // }
-                      //   helperText={touched.password && errors.password}
                     />
                   </div>
                 </>
               )}
               <div className="mt-5">
                 <button
+                  id="hehe"
                   type="submit"
-                  className=" text-white border-[2px] rounded-md px-2 md:py-1 py- w-full
-                border-[#9ccddc] md:bg-[#054569] bg-[#062c43] font-semibold hover:bg-[#9ccddc] md:mt-0 mt-2 
-                hover:text-[white] duration-200 ease-in-out hover:scale-[1.02]"
+                  className=" py- hehe mt-2 w-full rounded-md border-[2px] border-[#9ccddc]
+                bg-[#062c43] px-2 font-semibold text-white duration-200 ease-in-out hover:scale-[1.02] 
+                hover:bg-[#9ccddc] hover:text-[white] md:mt-0 md:bg-[#054569] md:py-1"
                 >
                   {isLogin ? "LOGIN" : "REGISTER"}
                 </button>
@@ -341,7 +380,7 @@ const Form = () => {
                   setPageType(isLogin ? "register" : "login");
                   resetForm();
                 }}
-                className="flex flex-row justify-center cursor-pointer text-[#ced7e0] text-sm mt-5"
+                className="mt-5 flex cursor-pointer flex-row justify-center text-sm text-[#ced7e0]"
               >
                 {isLogin
                   ? "Don't have an account? Sign Up here."

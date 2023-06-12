@@ -12,9 +12,10 @@ function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user || {});
   const isAuth = Boolean(useSelector((state) => state.token));
+  const isLoggedIn = Boolean(useSelector((state) => state.isLoggedIn));
   const { picturePath } = useSelector((state) => state.user || {});
 
-  const name = `${user.firstName} ${user.lastName}`;
+  const name = `${user.userName}`;
 
   let navLinks = [
     { name: "Home", link: "/Home", id: 0 },
@@ -28,42 +29,41 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="top-0 left-0 shadow-2xl w-full sticky z-[100]">
+    <nav className="sticky left-0 top-0 z-[100] w-full shadow-2xl">
       <div
-        className=" flex md:justify-between justify-center flex-col md:flex-row  z-[10]
-             p-2 md:items-center bg-[#062c43] h-[60px]"
+        className=" z-[10] flex h-[60px] flex-col justify-center  bg-[#062c43]
+             p-2 md:flex-row md:items-center md:justify-between"
       >
         <div>
-          <h1 className="text-white ml-4 text-xl font-bold ">
+          <h1 className="ml-4 text-xl font-bold text-white ">
             <span className="text-glow">CoinWatcher</span>
             <span className="span-material text-xl">.Io</span>{" "}
           </h1>
         </div>
 
         <div
-            className="absolute right-5 top-5 text-xl text-[#9ccddc] md:hidden
-              hover:text-[white] duration-150 ease-in-out hover:scale-[1.04] cursor-pointer"
-          >
-            <ion-icon
-              onClick={() => setOpen(!open)}
-              name={open ? "close" : "apps-outline"}
-            ></ion-icon>
-          </div>
+          className="absolute right-5 top-5 cursor-pointer text-xl text-[#9ccddc]
+              duration-150 ease-in-out hover:scale-[1.04] hover:text-[white] md:hidden"
+        >
+          <ion-icon
+            onClick={() => setOpen(!open)}
+            name={open ? "close" : "apps-outline"}
+          ></ion-icon>
+        </div>
 
-
-        <div className="md:static md:z-[1] z-[-1] ">
+        <div className="z-[-1] md:static md:z-[1] ">
           <ul
-            className={`flex md:flex-row flex-col xl:items-center lg:items-center md:items-center mr-4  md:static absolute
-             w-full  md:bg-[transparent] md:mt-6 mt-[15px]  ${
+            className={`absolute mr-4 mt-[15px] flex w-full flex-col md:static  md:mt-6 md:flex-row
+             md:items-center  md:bg-[transparent] lg:items-center xl:items-center  ${
                open ? "top-[45px]  bg-[#054569] " : "top-[-360px] "
              } 
-            duration-500 ease-in-out left-[-0.1px]  pb-[25px]`}
+            left-[-0.1px] pb-[25px] duration-500  ease-in-out`}
           >
             {navLinks.map((link) => (
               <Link
                 to={link.link}
-                className="hover:scale-[1.02] transition-all ease-in-out
-                text-white mx-2 font-semibold md:text-[13px] text-[15px] md:ml-2 ml-8 md:my-1 my-3"
+                className="mx-2 my-3 ml-8
+                text-[15px] font-semibold text-white transition-all ease-in-out hover:scale-[1.02] md:my-1 md:ml-2 md:text-[13px]"
                 key={link.id}
               >
                 {link.name}
@@ -71,13 +71,17 @@ function Navbar() {
             ))}
 
             {isAuth ? (
-              <LoggedInDropdown userId={user._id} userName={name} imagePath={picturePath} />
+              <LoggedInDropdown
+                userId={user._id}
+                userName={name}
+                imagePath={picturePath}
+              />
             ) : (
               <button
                 onClick={() => navigate("/login")}
-                className=" text-white border-[2px] rounded-md px-2 md:py-1 py-1 md:w-[100px] w-[200px] 
-                mx-5 border-[#9ccddc]  md:bg-[#054569] bg-[#062c43] font-semibold hover:bg-[#9ccddc] md:mt-0 mt-2 
-                hover:text-[white] duration-200 ease-in-out hover:scale-[1.04]"
+                className=" py- mx-5 mt-2 rounded-md border-[2px] border-[#9ccddc]  
+                bg-[#062c43] font-semibold  text-white duration-200 ease-in-out hover:scale-[1.04] hover:bg-[#9ccddc] hover:text-[white] 
+                md:mt-0 md:w-[90px] md:bg-[#054569] "
               >
                 LOGIN
               </button>

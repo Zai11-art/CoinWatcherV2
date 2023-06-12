@@ -4,59 +4,44 @@ import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
 
 const HomeTrendingCard = (props) => {
-  // const trending = props.trendingData
-  // const [trending, setTrending] = useState([]);
-  // const [usdprice, setUsdPrice] = useState();
 
-  // useEffect(() => {
-
-  //     // fetch('https://api.coingecko.com/api/v3/search/trending')
-  //     //     .then(response => response.json())
-  //     //     .then(data => setTrending([...data.coins]))
-  //     //     .catch(error => console.log(error));
-
-  //     fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-  //         .then(response => response.json())
-  //         .then(data => setUsdPrice(data.bitcoin.usd))
-  //         .catch(error => console.log(error));
-  //     },[])
 
   return (
     <div
       className=" 
             cryptocard-grad
-            lg:w-[1000px] lg:h-[350px]
-            md:w-[700px] md:h-[400px]
-            w-[450px] h-[400px]
-            mt-5 rounded-lg 
-            text-white z-[1]
-            pt-3 pb-5  mr-1
+            z-[1] mr-1
+            mt-5 h-[400px]
+            w-[450px] rounded-lg
+            pb-5 pt-3 
+            text-white md:h-[400px]
+            md:w-[700px] lg:h-[350px]  lg:w-[1000px]
                 "
     >
-      <h1 className=" font-semibold lg:text-2xl md:text-xl text-[16px] text-center mx-2">
+      <h1 className=" mx-2 text-center text-[16px] font-semibold md:text-xl lg:text-2xl">
         Trending in the last 24 Hrs.
       </h1>
-      <div className="flex flex-col flex-wrap h-full items-center">
+      <div className="flex h-full flex-col flex-wrap items-center">
         {props.trendingData?.length ? (
           props.trendingData.slice(0, 7).map((trend) => (
             <div
               key={trend.item.id}
               className="
-                                bg-[#054569]
-                                lg:w-[210px] lg:h-[50px]
-                                md:w-[270px] md:h-[30px]
-                                border-[1px]
-                                border-[#9ccddc]
-                                w-[200px]  h-[30px]
-                                mt-5 rounded-lg 
-                                text-white z-[1]
-                                flex flex-row items-center 
+                                z-[1]
+                                mt-5 flex
+                                h-[30px] w-[200px]
+                                flex-row
+                                items-center
+                                rounded-lg  border-[1px]
+                                border-[#9ccddc] bg-[#054569] 
+                                text-white md:h-[30px]
+                                md:w-[270px] lg:h-[50px] lg:w-[210px] 
                                 "
             >
-              <div className="text-center md:w-[75px] w-[50px] md:text-[15px] text-[12px] md:ml-3 ml-0">
+              <div className="ml-0 w-[50px] text-center text-[12px] md:ml-3 md:w-[75px] md:text-[15px]">
                 #{trend.item.score + 1}
               </div>
-              <div className="text-center md:w-[200px] w-[100px] md:text-[14px] text-[12px] flex flex-row items-center ">
+              <div className="flex w-[100px] flex-row items-center text-center text-[12px] md:w-[200px] md:text-[14px] ">
                 <Link
                   rel="noopener noreferrer"
                   className="flex flex-row items-center"
@@ -65,12 +50,12 @@ const HomeTrendingCard = (props) => {
                   <img
                     src={trend.item.large}
                     alt=""
-                    className="lg:h-[30px] lg:w-[30px] md:h-[20px] md:w-[20px] h-[22.5px] w-[22.5px] mr-2 lg:ml-2 md:ml-2 ml-1"
+                    className="ml-1 mr-2 h-[22.5px] w-[22.5px] md:ml-2 md:h-[20px] md:w-[20px] lg:ml-2 lg:h-[30px] lg:w-[30px]"
                   />
                   <span className="overflow-hidden">${trend.item.symbol}</span>
                 </Link>
               </div>
-              <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">
+              <div className="mx-2 w-[75px] text-center text-[11px] md:w-[175px] md:text-[15px] lg:mx-1">
                 ${((trend.item.price_btc * props.btcPrice) / 1).toFixed(5)}{" "}
               </div>
             </div>

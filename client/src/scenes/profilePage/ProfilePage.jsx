@@ -7,8 +7,6 @@ import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 
 const ProfilePage = (props) => {
-  props.funcNav(true);
-
   const [user, setUser] = useState(null);
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
@@ -29,7 +27,7 @@ const ProfilePage = (props) => {
 
   if (!user) {
     return (
-      <div className="bg-[#061016] w-screen h-[100vh]  flex xl:flex-row lg:flex-row md:flex-col flex-col lg:items-start md:items-center items-center  xl:px-[15%] lg:px-[10%]  md:px-32 px-12 pt-12 pb-24">
+      <div className="flex h-[100vh] w-screen  flex-col items-center bg-[#061016] px-12 pb-24 pt-12 md:flex-col md:items-center  md:px-32 lg:flex-row  lg:items-start lg:px-[10%] xl:flex-row xl:px-[15%]">
         <Loader />;
       </div>
     );
@@ -37,15 +35,15 @@ const ProfilePage = (props) => {
 
   return (
     <div
-      className={`bg-[#061016] w-screen ${
+      className={`w-screen bg-[#061016] ${
         !userId ? "h-[2000px]" : "h-[100%]"
-      }   flex xl:flex-row lg:flex-row md:flex-col flex-col lg:items-start md:items-center items-center  xl:px-[15%] lg:px-[10%]  md:px-32 px-12 pt-12 pb-24`}
+      }   flex flex-col items-center px-12 pb-24 pt-12 md:flex-col md:items-center  md:px-32 lg:flex-row  lg:items-start lg:px-[10%] xl:flex-row xl:px-[15%]`}
     >
-      <div className="flex flex-col justify-center items-center xl:w-[40%] lg:w-[40%] w-[100%] mx-5">
+      <div className="mx-5 flex w-[100%] flex-col items-center justify-center lg:w-[40%] xl:w-[40%]">
         <UserWidget userId={userId} picturePath={user.picturePath} />
         {/* <FriendListWidget userId={userId} /> */}
       </div>
-      <div className="flex flex-col justify-center items-center xl:w-[60%] lg:w-[60%] w-[100%] mx-5">
+      <div className="mx-5 flex w-[100%] flex-col items-center justify-center lg:w-[60%] xl:w-[60%]">
         <AllPostsWidget userId={userId} isProfile />
       </div>
     </div>

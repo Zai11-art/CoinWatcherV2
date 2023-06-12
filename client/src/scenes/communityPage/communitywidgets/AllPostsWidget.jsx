@@ -39,6 +39,14 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const refetchPosts = () => {
+    if (isProfile) {
+      getUserPosts();
+    } else {
+      getPosts();
+    }
+  };
+
   if (posts.length === 0) {
     return (
       <div className="text-blue-100 text-glow font-bold text-xl w-[100%] h-[100%] p-8 bg-[#062c43] rounded-lg">
@@ -54,10 +62,9 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
           ({
             _id,
             userId,
-            firstName,
-            lastName,
+            userName,
             description,
-            location,
+            bio,
             picturePath,
             userPicturePath,
             likes,
@@ -67,13 +74,15 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
               key={_id}
               postId={_id}
               postUserId={userId}
-              name={`${firstName} ${lastName}`}
+              name={`${userName}`}
               description={description}
-              location={location}
+              bio={bio}
               picturePath={picturePath}
               userPicturePath={userPicturePath}
               likes={likes}
               comments={comments}
+              refetchPosts={refetchPosts}
+              getPosts={getPosts}
             />
           )
         )}

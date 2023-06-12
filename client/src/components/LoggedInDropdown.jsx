@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 export default function LoggedInDropdown({ userName, imagePath, userId }) {
-  console.log(userId)
+  // console.log(userId)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (

@@ -35,7 +35,7 @@ const FriendListWidget = ({ userId }) => {
   return (
     <div className="h-[100%] w-[100%] rounded-t-lg bg-[#062c43] mb-5 mt-6">
       <div className="w-[100%] h-[45px] bg-[#054569] rounded-t-lg px-6 py-3">
-        <h1 className="font-semibold text-white">Friends</h1>
+        <h1 className="font-semibold text-white">Following</h1>
       </div>
       <div className="px-6 p-2 w-[100%] flex flex-col rounded-b-lg mt-2 ">
         {friends.map((friend) => (
@@ -43,8 +43,8 @@ const FriendListWidget = ({ userId }) => {
             <Friend
               key={friend._id}
               friendId={friend._id}
-              name={`${friend.firstName} ${friend.lastName}`}
-              subtitle={friend.occupation}
+              name={`${friend.userName}`}
+              subtitle={friend.bio}
               userPicturePath={friend.picturePath}
             />
             {/* break */}

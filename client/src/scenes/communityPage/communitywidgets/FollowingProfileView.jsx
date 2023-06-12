@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+const FriendView = ({ friendId, name, subtitle, userPicturePath }) => {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,7 +48,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   };
 
 
-
   return (
     <div className="flex flex-row items-center justify-between w-[100%] my-4">
       <div className="flex items-center">
@@ -63,7 +62,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         />
         <div className="flex flex-col">
           <span
-            className="text-white ml-4 cursor-pointer font-bold"
+            className="text-white ml-4 cursor-pointer"
             onClick={() => {
               navigate(`/profile/${friendId}`);
               navigate(0);
@@ -76,17 +75,17 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
       </div>
       
 
-      {friendId !== _id && (
+      {friendId !== _id  && (
         <div
           className="cursor-pointer hover:scale-[1.02] transition-all ease-in-out"
           onClick={() => patchFriend()}
         >
           {isFriend ? (
-            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#0f405e] rounded-full px-2 py-1 ">
+            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#051925] rounded-full px-2 py-1 ">
               <ion-icon name="person-remove"></ion-icon>
             </div>
           ) : (
-            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#0f405e] rounded-full px-2 py-1 ">
+            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#051925] rounded-full px-2 py-1 ">
               <ion-icon name="person-add"></ion-icon>
             </div>
           )}
@@ -97,4 +96,12 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   );
 };
 
-export default Friend;
+export default FriendView;
+
+// HEX CODES:
+// #051925
+// #062c43
+// #054569
+// #5591a9
+// #9ccddc
+// #ced7e0

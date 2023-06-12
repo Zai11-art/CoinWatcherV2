@@ -3,6 +3,8 @@ import {
     getUser, 
     getUserFriends,
     addRemoveFriend,
+    addFollowing,
+    getFollowers,
 } from "../controllers/users.js"; // controllers for user handling
 import { verifyToken } from "../middleware/auth.js"; // verify using jwt
 
@@ -10,10 +12,11 @@ const router = express.Router();
 
 //  READ 
 router.get("/:id", verifyToken, getUser);
-router.get("/:id/friends", verifyToken, getUserFriends);
+router.get("/:id/friends", verifyToken, getUserFriends);    
+router.get("/:id/followers", verifyToken, getFollowers);    
 
 // UPDATE
-router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
+router.patch("/:id/:friendId", verifyToken, addFollowing);
 
 export default router;
 

@@ -7,23 +7,23 @@ import { Carousel } from "flowbite-react";
 import { useSelector } from "react-redux";
 import AllPostsWidget from "./communitywidgets/AllPostsWidget";
 import FriendListWidget from "./communitywidgets/FriendListWidget";
+import { useEffect } from "react";
 
 const CommunityPage = (props) => {
-  props.funcNav(true);
   const { _id, picturePath } = useSelector((state) => state.user);
 
   return (
     <div
-      className={`bg-[#061016] w-screen ${
+      className={`w-screen bg-[#061016] pb-[400px] ${
         !_id ? "h-[2000px]" : "h-[100%]"
-      } flex lg:flex-row md:flex-col flex-col justify-around lg:items-start md:items-center items-center xl:px-[10%] lg:px-[5%] md:px-6 px-2 py-12 `}
+      } flex flex-col items-center justify-around px-2 py-12 md:flex-col md:items-center md:px-6 lg:flex-row lg:items-start lg:px-[5%] xl:px-[10%] `}
     >
       <div
         className="
-        xl:h-[100%] xl:w-[60%]
-        lg:h-[100%] lg:w-[60%]
-        md:h-[100%] md:w-[90%]
-        h-[100%] w-[90%] mb-5"
+        mb-5 h-[100%]
+        w-[90%] md:h-[100%]
+        md:w-[90%] lg:h-[100%]
+        lg:w-[60%] xl:h-[100%] xl:w-[60%]"
       >
         <UserWidget userId={_id} picturePath={picturePath} />
       </div>
@@ -31,23 +31,23 @@ const CommunityPage = (props) => {
       <div
         className="
         h-[100%] w-[90%]
-        lg:mx-5 pb-2"
+        pb-2 lg:mx-5"
       >
         <MyPostWidget picturePath={picturePath} />
 
-        <div className="w-full h-[2000pxflex flex-col items-center justify-center">
+        <div className="h-[2000pxflex w-full flex-col items-center justify-center">
           <AllPostsWidget userId={_id} />
         </div>
       </div>
 
       <div
         className="
-        xl:h-[100%] xl:w-[25%]
-        lg:h-[100%] lg:w-[25%]
-        md:h-[100%] md:w-[50%]
+        chart flex
         h-[300px] w-[90%]
-      bg-[#051925] chart rounded-2xl
-        lg:mr-4 flex flex-col "
+        flex-col rounded-2xl
+        bg-[#051925] md:h-[100%]
+        md:w-[90%] lg:mr-4 lg:h-[100%]
+        lg:w-[25%] xl:h-[100%] xl:w-[25%] "
       >
         <div className="h-[425px] ">
           <Carousel slide={true} className="" leftControl=" " rightControl=" ">
