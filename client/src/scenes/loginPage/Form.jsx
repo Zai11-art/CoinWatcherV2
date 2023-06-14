@@ -102,7 +102,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
-      setTimeout(() => navigate("/home"), 2000);
+      setTimeout(() => navigate("/community"), 2000);
       setMessage("Welcome!");
     } else {
       setMessage("Incorrect email or password. Please try again.");

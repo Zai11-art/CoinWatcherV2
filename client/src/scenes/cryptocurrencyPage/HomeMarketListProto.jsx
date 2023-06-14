@@ -4,9 +4,17 @@ import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
+import { useSelector } from "react-redux";
 
 const HomeMarketListProto = (props) => {
+  const loggedInUserId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
+  const [watchList, setwatchList] = useState([]);
+
+  console.log(watchList.coinWatchList);
+
   useEffect(() => {
+    getWatchList();
     const tableContainer = document.getElementById("table-container");
     const stickyColumns = document.querySelectorAll(".sticky-column");
 
@@ -27,6 +35,62 @@ const HomeMarketListProto = (props) => {
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
+
+  const getWatchList = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${loggedInUserId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const fetchedWatchList = await response.json();
+    setwatchList(fetchedWatchList);
+    console.log(fetchedWatchList);
+  };
+
+  const addToWatchList = async (coin) => {
+    console.log(coin);
+    const data = coin;
+    const response = await fetch(
+      `http://localhost:3001/users/${loggedInUserId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const watchListData = await response.json();
+    console.log(watchListData);
+    getWatchList()
+  };
+
+  const removetoWatchList = async (coin) => {
+    console.log(coin);
+    const data = coin;
+    const response = await fetch(
+      `http://localhost:3001/users/${loggedInUserId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const watchListData = await response.json();
+    console.log(watchListData);
+    getWatchList()
+  };
 
   return (
     <div>
@@ -94,10 +158,43 @@ const HomeMarketListProto = (props) => {
                     {data?.length ? (
                       data?.slice(firstPostIndex, lastPostIndex).map((data) => (
                         <tr key={data.name}>
-                          <td className="whitespace-nowrap  py-4 pl-5 pr-0 text-sm">
-                            # {data.market_cap_rank}
+                          <td className="whitespace-nowrap  py-4 pl-3 pr-0 text-sm">
+                            {/* watchlist button */}
+
+                            {watchList?.coinWatchList?.some(
+                              (coin) => coin.coinId === data.id
+                            ) ? (
+                              // Render if the coin is already in the watchlist
+                              <button
+                                onClick={() => removetoWatchList(data)}
+                                className="mr-3 border-r-[1px] pr-1 text-[1.1rem] text-yellow-200 hover:text-blue-400"
+                              >
+                                <ion-icon name="star"></ion-icon>
+                              </button>
+                            ) : (
+                              // Render if the coin is not in the watchlist
+                              <button
+                                onClick={() => addToWatchList(data)}
+                                className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400"
+                              >
+                                <ion-icon name="star-outline"></ion-icon>
+                              </button>
+                            )}
+
+                            {/* <button
+                              onClick={() => {
+                                addToWatchList(data);
+                              }}
+                              className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400"
+                            >
+                              <ion-icon name="star-half-outline"></ion-icon>
+                            </button> */}
+
+                            <span className="text-[0.8rem]">
+                              {data.market_cap_rank}
+                            </span>
                           </td>
-                          <td className="flex whitespace-nowrap px-5 py-[18.5px] text-sm">
+                          <td className="flex whitespace-nowrap px-3 py-[18.5px] text-sm">
                             <Link className="flex" to={`/view/${data.id}`}>
                               <img
                                 src={data.image}

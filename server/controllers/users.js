@@ -92,7 +92,7 @@ export const addFollowing = async (req, res) => {
 
     console.log(user);
     console.log("------------");
-    console.log(friend)
+    console.log(friend);
 
     if (user.friends.includes(friendId)) {
       user.friends = user.friends.filter((id) => id !== friendId);
@@ -114,10 +114,76 @@ export const addFollowing = async (req, res) => {
     );
 
     console.log("------friend after follow event------");
-    console.log(user)
-    console.log(friend)
+    console.log(user);
+    console.log(friend);
 
     res.status(200).json(formattedFriends);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const addToWatchList = async (req, res) => {
+  try {
+    const { id: coinId, name: coinName } = req.body;
+    const { id } = req.params;
+    const user = await User.findById(id)
+
+     // Check if the coin already exists in the watchlist
+     const existingCoin = user.coinWatchList.find(
+      (coin) => coin.coinId === coinId
+    );
+
+    if (existingCoin) {
+      return res.status(409).json({ message: 'Coin already exists in watchlist' });
+    }
+
+    // Add the coin to the watchlist
+    user.coinWatchList.push({ coinId, coinName });
+
+    // Save the updated user object
+    await user.save();
+
+    res.status(200).json(user.coinWatchList);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const removeToWatchList = async (req, res) => {
+  try {
+    const {  id: coinId, } = req.body;
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+
+    const coinIndex = user.coinWatchList.findIndex(
+      (coin) => coin.coinId === coinId
+    );
+    console.log(coinIndex)
+
+    if (coinIndex === -1) {
+      return res.status(404).json({ message: 'Coin not found in watchlist' });
+    }
+
+    // Remove the coin from the watchlist
+    user.coinWatchList.splice(coinIndex, 1);
+
+    // Save the updated user object
+    await user.save();
+
+    res.status(200).json(user.coinWatchList);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const getUserWatchList = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id)
+
+    res.status(200).json(user.coinWatchList);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

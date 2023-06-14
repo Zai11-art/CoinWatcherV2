@@ -31,6 +31,11 @@ const Userschema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    coinWatchList:{
+      type: Array,
+      default: [],
+      validate: [limitArray(20), 'Cannot have more than 20 coins in watchlist']
+    },
     bio: String,
     impressions: Number,
   },
@@ -38,6 +43,12 @@ const Userschema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+function limitArray(limit){
+  return function(value){
+      return value.length <= limit;
+  }
+}
 
 const User = mongoose.model("User", Userschema);
 

@@ -108,24 +108,22 @@ export const addComment = async (req, res) => {
 // REMOVE COMMENT ON POST
 export const deleteComment = async (req, res) => {
   try {
-    const { commentId } = req.body;
+     const { commentId } = req.body;
     const { id } = req.params;
-
-    // const deletedcomment = await Comment.findByIdAndDelete(commentId);
 
     const post = await Post.findById(id);
 
     const commentIndex = post.comments.findIndex(
-      (comment) => comment._id.toString() === commentId.toString()
+      (comment) => comment._id.equals(commentId)
     );
-    console.log(commentIndex);
+    console.log(commentIndex)
 
     if (commentIndex === -1) {
-      throw new Error("Does not exist");
+      throw new Error("Comment does not exist");
     }
-    post.comments.splice(commentIndex, 1);
 
-    // await deletedcomment.save();
+    post.comments.splice(commentIndex - 1, 1);
+
     await post.save();
 
     res.status(200).json(post.comments);
