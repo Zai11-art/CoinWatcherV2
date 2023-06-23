@@ -6,15 +6,11 @@ const postSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    firstName: {
+    userName: {
       type: String,
       required: true,
     },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    location: String,
+    bio: String,
     description: String,
     picturePath: String,
     userPicturePath: String,

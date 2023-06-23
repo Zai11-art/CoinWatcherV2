@@ -2,10 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { setLogout } from "../state";
-import ImageHolder from "./ImageHolder";
 import LoggedInDropdown from "./LoggedInDropdown";
+import { setMode } from "../state";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,36 +11,48 @@ function Navbar() {
   const user = useSelector((state) => state.user || {});
   const isAuth = Boolean(useSelector((state) => state.token));
   const { picturePath } = useSelector((state) => state.user || {});
+  const mode = useSelector((state) => state.mode);
 
-  const name = `${user.firstName} ${user.lastName}`;
+  const handleMode = () => {
+    dispatch(setMode());
+  };
+
+  const name = `${user.userName}`;
 
   let navLinks = [
     { name: "Home", link: "/Home", id: 0 },
-    { name: "Apps", link: "/Apps", id: 1 },
-    { name: "News", link: "/News", id: 2 },
-    { name: "Community", link: "/Community", id: 3 },
-    { name: "Learn", link: "/Learn", id: 4 },
-    { name: "art", link: "/Art", id: 4 },
+    { name: "Cryptocurrencies", link: "/Cryptocurrencies", id: 1 },
+    { name: "Apps", link: "/Apps", id: 2 },
+    { name: "News", link: "/News", id: 3 },
+    { name: "Community", link: "/Community", id: 4 },
+    { name: "Learn", link: "/Learn", id: 5 },
   ];
 
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="top-0 left-0 shadow-2xl w-full sticky z-[50]">
+    <nav className="sticky left-0 top-0 z-[100] w-full shadow-lg">
       <div
-        className=" flex md:justify-between justify-center flex-col md:flex-row  z-[10]
-             p-2 md:items-center bg-[#062c43] h-[75px]"
+        className={` z-[100] flex h-[60px] flex-col justify-center ${
+          mode === "light" ? "bg-slate-300" : "bg-[#062c43]"
+        } 
+             p-2 md:flex-row md:items-center md:justify-between`}
       >
         <div>
-          <h1 className="text-white ml-4 text-2xl font-bold ">
-            <span className="text-glow">CoinWatch</span>
-            <span className="span-material text-3xl">.Io</span>{" "}
+          <h1
+            className={`ml-4 text-xl font-bold ${
+              mode === "light" ? "text-[#3259af]" : "text-white"
+            } `}
+          >
+            <span className="text-glow text-2xl">CoinWatcher</span>
+            <span className="span-material text-2xl">.Io</span>{" "}
           </h1>
         </div>
 
         <div
-          className="absolute right-5 top-6 text-3xl text-[#9ccddc] md:hidden
-            hover:text-[white] duration-150 ease-in-out hover:scale-[1.04] cursor-pointer"
+          className={`absolute right-5 top-5 cursor-pointer text-xl 
+              duration-150 ease-in-out hover:scale-[1.04] hover:text-[white] md:hidden
+              ${mode === "light" ? "text-[#060d16]" : "text-[#9ccddc] "}`}
         >
           <ion-icon
             onClick={() => setOpen(!open)}
@@ -50,33 +60,66 @@ function Navbar() {
           ></ion-icon>
         </div>
 
-        <div className="md:static md:z-[1] z-[-1] ">
+        <div className="z-[-1] md:static md:z-[1] ">
           <ul
-            className={`flex md:flex-row flex-col xl:items-center lg:items-center md:items-center mr-4  md:static absolute
-             w-full  md:bg-[transparent] md:mt-6 mt-[30px]  ${
-               open ? "top-[45px]  bg-[#054569] " : "top-[-360px] "
-             } 
-            duration-500 ease-in-out left-[-0.1px]  pb-[25px]`}
+            className={`absolute mr-4 mt-[15px] flex w-full flex-col md:static  md:mt-6 md:flex-row
+             md:items-center  md:bg-[transparent] lg:items-center xl:items-center  ${
+               open
+                 ? `top-[45px]   ${
+                     mode === "light" ? "bg-slate-300" : "bg-[#062c43]"
+                   } `
+                 : "top-[-360px] "
+             } left-[-0.1px] pb-[25px] duration-500  ease-in-out`}
           >
             {navLinks.map((link) => (
               <Link
                 to={link.link}
-                className="hover:scale-[1.02] transition-all ease-in-out
-                text-white mx-2 font-semibold md:text-[14.5px] text-[15px] md:ml-3 ml-8 md:my-1 my-3"
+                className={`mx-2 my-3 ml-8
+                text-[15px] font-semibold ${
+                  mode === "light" ? "text-black" : "text-white"
+                } transition-all ease-in-out hover:scale-[1.02] md:my-1 md:ml-2 md:text-[13px]`}
                 key={link.id}
               >
                 {link.name}
               </Link>
             ))}
 
+            <div className="ml-7 md:ml-1 lg:ml-1 xl:ml-1">
+              {mode === "light" ? (
+                <button
+                  onClick={handleMode}
+                  className=" flex rounded-full bg-slate-200 p-1 text-2xl text-blue-400 shadow-xl "
+                >
+                  <ion-icon name="sunny"></ion-icon>
+                </button>
+              ) : (
+                <button
+                  onClick={handleMode}
+                  className=" flex rounded-full bg-[#060d16] p-1 text-2xl text-blue-300 shadow-xl "
+                >
+                  <ion-icon name="moon"></ion-icon>
+                </button>
+              )}
+            </div>
+
             {isAuth ? (
-              <LoggedInDropdown userId={user._id} userName={name} imagePath={picturePath} />
+              <LoggedInDropdown
+                userId={user._id}
+                userName={name}
+                imagePath={picturePath}
+              />
             ) : (
               <button
                 onClick={() => navigate("/login")}
-                className=" text-white border-[2px] rounded-md px-2 md:py-1 py-1 md:w-[100px] w-[200px] 
-                mx-5 border-[#9ccddc]  md:bg-[#054569] bg-[#062c43] font-semibold hover:bg-[#9ccddc] md:mt-0 mt-2 
-                hover:text-[white] duration-200 ease-in-out hover:scale-[1.04]"
+                className={` py- mx-4 mt-2 rounded-md border-[2px] 
+                font-semibold   duration-200 ease-in-out   hover:scale-[1.04] 
+                md:mt-0 md:w-[90px] 
+                ${
+                  mode === "light"
+                    ? "border-blue-900 bg-slate-300 text-blue-900 hover:bg-[#12406b] hover:text-[white]"
+                    : "border-[#9ccddc] bg-[#062c43]  text-white  hover:bg-[#9ccddc] hover:text-[white]"
+                } 
+                `}
               >
                 LOGIN
               </button>

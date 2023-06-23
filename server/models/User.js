@@ -2,13 +2,7 @@ import mongoose from "mongoose";
 
 const Userschema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      min: 2,
-      max: 50,
-    },
-    lastName: {
+    userName: {
       type: String,
       required: true,
       min: 2,
@@ -33,15 +27,28 @@ const Userschema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    location: String,
-    occupation: String,
-    viewedProfile: Number,
+    followers: {
+      type: Array,
+      default: [],
+    },
+    coinWatchList:{
+      type: Array,
+      default: [],
+      validate: [limitArray(20), 'Cannot have more than 20 coins in watchlist']
+    },
+    bio: String,
     impressions: Number,
   },
   {
     timestamps: true,
   }
 );
+
+function limitArray(limit){
+  return function(value){
+      return value.length <= limit;
+  }
+}
 
 const User = mongoose.model("User", Userschema);
 

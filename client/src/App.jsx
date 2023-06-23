@@ -1,64 +1,74 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import Home from "./Pages/HomePage";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import NewsPage from "./Pages/NewsPage";
-import AppPage from "./Pages/Appspage";
-import ViewPage from "./Pages/ViewPage";
-import PriceBar from "./components/PriceBar";
-import RegisterPage from "./Pages/LoginPage";
-import CommunityPage from "./Pages/CommunityPage";
-import ProfilePage from "./Pages/ProfilePage";
-import LearnPage from "./Pages/LearnPage";
-import LearnPageSection from "./Pages/LearnPageSection";
-import ArtPage from "./Pages/ArtPage";
+
+
+import NewsPage from "./scenes/newsPage/NewsPage";
+import AppPage from "./scenes/appsPage/Appspage";
+import ViewPage from "./scenes/cryptocurrencyViewPage/cryptoViewPage";
+import RegisterPage from "./scenes/loginPage/LoginPage";
+import CommunityPage from "./scenes/communityPage/CommunityPage";
+import ProfilePage from "./scenes/profilePage/ProfilePage";
+import LearnPage from "./scenes/learnPage/LearnPage";
+import LearnPageSection from "./scenes/learnPage/LearnPageSection";
+import CryptocurrencyPage from "./scenes/cryptocurrencyPage/CryptocurrencyPage";
+import WithoutNav from "./layouts/withoutNav";
+import WithNav from "./layouts/withNav";
+import HomePage from "./scenes/homePage/HomePage";
+import ProfileFollowers from "./scenes/profilePage/ProfileFollowers";
+import ProfileFollowings from "./scenes/profilePage/ProfileFollowing";
+import TestPage from "./scenes/TestPage";
+import ProfileWatchList from "./scenes/profilePage/ProfileWatchList";
+
 
 function App() {
-  // const mode = useSelector((state) => state.mode);
   const isAuth = Boolean(useSelector((state) => state.token));
-  const [showNav, setShowNav] = useState(true);
-
+ 
   return (
-    <BrowserRouter >
-
-      {showNav && (
-        <>
-          <Navbar />
-        </>
-      )}
-
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/art" element={<ArtPage funcNav={setShowNav}/>}></Route>
-        <Route path={`/View/:id`} element={<ViewPage />}></Route>
-        <Route path="/News" element={<NewsPage />}></Route>
-        <Route path="/Apps" element={<AppPage />}></Route>
-        <Route path="/login" element={<RegisterPage />}></Route>
-        <Route path="/Learn" element={<LearnPage />}></Route>
-        <Route path="/Learn/:sectionId" element={<LearnPageSection />}></Route>
-        <Route
-          path="/community"
-          element={isAuth ? <CommunityPage /> : <Home />}
-        ></Route>
-        <Route
-          path="/profile/:userId"
-          element={isAuth ? <ProfilePage /> : <Home />}
-        ></Route>
+        <Route element={<WithNav />}>
+          <Route path="/" element={<CryptocurrencyPage />}></Route>
+          <Route path="/test" element={<TestPage />}></Route>
+          <Route
+            path="/Cryptocurrencies"
+            element={<CryptocurrencyPage />}
+          ></Route>
+          <Route path={`/View/:id`} element={<ViewPage />}></Route>
+          <Route path="/News" element={<NewsPage />}></Route>
+          <Route path="/Apps" element={<AppPage />}></Route>
+          <Route path="/login" element={<RegisterPage />}></Route>
+          <Route path="/Learn" element={<LearnPage />}></Route>
+          <Route
+            path="/Learn/:sectionId"
+            element={<LearnPageSection />}
+          ></Route>
+          <Route
+            path="/community"
+            element={isAuth ? <CommunityPage /> : <CryptocurrencyPage />}
+          ></Route>
+          <Route
+            path="/profile/:userId"
+            element={isAuth ? <ProfilePage /> : <CryptocurrencyPage />}
+          ></Route>
+          <Route
+            path="/profile/:userId/followings"
+            element={isAuth ? <ProfileFollowings /> : <CryptocurrencyPage />}
+          ></Route>
+          <Route
+            path="/profile/:userId/followers"
+            element={isAuth ? <ProfileFollowers /> : <CryptocurrencyPage />}
+          ></Route>
+          <Route
+            path="/profile/:userId/watchlist"
+            element={isAuth ? <ProfileWatchList /> : <CryptocurrencyPage />}
+          ></Route>
+        </Route>
+        <Route element={<WithoutNav />}>
+          <Route path={`/Home`} element={<HomePage />}></Route>
+        </Route>
       </Routes>
-
-      {showNav && (
-        <>
-          <PriceBar></PriceBar>
-          <Footer></Footer>
-        </>
-      )}
     </BrowserRouter>
   );
 }
 
 export default App;
-
-//  <Route path="/documentation/:docsId" component={DocumentationSection} />

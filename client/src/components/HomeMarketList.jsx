@@ -114,6 +114,8 @@ const HomeMarketList = (props) => {
                         <div className="text-center md:w-[250px] w-[100px] md:text-[15px] text-[12px] lg:mx-1 mx-2">Volume <span className="text-[9px]">24hr</span></div>
                         <div className="text-center md:w-[175px] w-[100px] md:text-[15px] text-[11px] lg:mx-1 ml-2 mr-4">Graph - Week</div>           
                     </div>
+
+                  
             
                 {data?.length ? (
                         data?.slice(firstPostIndex,lastPostIndex).map(data => 
