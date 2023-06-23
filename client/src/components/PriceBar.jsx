@@ -16,6 +16,10 @@ const PriceBar = (props) => {
     return axios.get("https://api.coingecko.com/api/v3/ping")
     .then((res) => res.data)
     })
+  const {data : status } = useQuery(['status'], () => {
+    return axios.get("https://api.coingecko.com/api/v3/ping")
+    .then((res) => res.data)
+    })
 
 
   const formatNum = (x) => {
