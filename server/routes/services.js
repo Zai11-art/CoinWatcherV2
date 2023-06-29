@@ -29,6 +29,32 @@ const getAllCoins = async () => {
   }
 };
 
+let fetchedExchanges = [];
+
+const getAllExchanges = async () => {
+  try {
+    const resPageOne = await axios.get(
+      "https://api.coingecko.com/api/v3/exchanges?per_page=250&page=1"
+    );
+    const resPageTwo = await axios.get(
+      "https://api.coingecko.com/api/v3/exchanges?per_page=250&page=2"
+    );
+    const resPageThree = await axios.get(
+      "https://api.coingecko.com/api/v3/exchanges?per_page=250&page=3"
+    );
+
+    fetchedExchanges = [
+      ...resPageOne?.data,
+      ...resPageTwo?.data,
+      ...resPageThree?.data,
+    ];
+
+    console.log("Data fetched and stored in fetchedCoinsAll:", fetchedCoinsAll);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 let fetchedTrendingCoins = [];
 
 const getTrendingCoins = async () => {
@@ -83,18 +109,35 @@ const getAllNews = async () => {
   }
 };
 
+let globalData; 
+
+const getGlobal =  async() => {
+  try {
+    const res = await axios.get(`https://api.coingecko.com/api/v3/global`)
+    
+    globalData = res.data
+  } catch (error) {
+    
+  }
+}
+
 const startFetchingData = () => {
   // Call getAllCoins immediately on server startup
   getAllCoins();
+  getAllExchanges();
   getTrendingCoins();
   getBtcPrice();
   getAllNews();
+  getGlobal()
+  
 
   // Schedule getAllCoins to be called every 2 minutes
   setInterval(getAllCoins, 3 * 60 * 1000); // 2 minutes in milliseconds
+  setInterval(getAllExchanges, 3 * 60 * 1000); // 2 minutes in milliseconds
   setInterval(getTrendingCoins, 3 * 60 * 1000); // 2 minutes in milliseconds
   setInterval(getBtcPrice, 3 * 60 * 1000); // 2 minutes in milliseconds
   setInterval(getAllNews, 3 * 60 * 1000); // 2 minutes in milliseconds
+  setInterval(getGlobal, 3 * 60 * 1000); // 2 minutes in milliseconds
 
   console.log("after two minutes");
 };
@@ -104,6 +147,14 @@ startFetchingData();
 router.get("/coins", async (req, res) => {
   try {
     res.status(200).json(fetchedCoinsAll);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
+router.get("/exchanges", async (req, res) => {
+  try {
+    res.status(200).json(fetchedExchanges);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -132,5 +183,14 @@ router.get("/news", async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 });
+
+router.get("/globaldata", async (req, res) => {
+  try {
+    res.status(200).json(globalData);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
 
 export default router;

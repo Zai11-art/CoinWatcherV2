@@ -13,6 +13,7 @@ const ProfileFollowings = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
+  const mode = useSelector((state) => state.mode)
 
   // console.log(friends);
 
@@ -47,25 +48,36 @@ const ProfileFollowings = () => {
     <div
       className={`flex ${
         friends?.length > 5 ? "h-[100%]" : "h-screen"
-      } w-[100%] flex-col items-center  bg-[#062c43] p-8 shadow-2xl`}
+      } w-[100%] flex-col items-center  p-8 shadow-2xl
+      ${
+        mode === "light"
+          ? "text-glow bg-slate-300 text-blue-900"
+          : "bg-[#062c43] text-white"
+      }`}
     >
-      <div className="mt-3 flex h-[70px] w-[500px] items-center justify-between rounded-t-xl bg-[#051731] px-10">
-        <Link to={`/profile/${userId}`} className="flex cursor-pointer items-center justify-center text-xl text-white hover:scale-[1.1] hover:text-blue-300">
+      <div className={`mt-3 flex h-[70px] w-[500px] items-center justify-between rounded-t-xl ${
+            mode === "light"
+              ? "newscard-filter-light shadow-3xl"
+              : "bg-[#051731]"
+          } px-10`}>
+        <Link to={`/profile/${userId}`} className="flex cursor-pointer items-center justify-center text-xl  hover:scale-[1.1] hover:text-blue-300">
           <ion-icon name="arrow-back"></ion-icon>
         </Link>
 
-        <div className="text-xl font-bold text-white">
+        <div className="text-xl font-bold ">
           {user?.userName}s' Following
         </div>
 
-        <div className="flex cursor-pointer items-center justify-center text-xl text-white hover:scale-[1.1] hover:text-blue-300 invisible">
+        <div className="flex cursor-pointer items-center justify-center text-xl  hover:scale-[1.1] hover:text-blue-300 invisible">
           <ion-icon name="arrow-forward"></ion-icon>
         </div>
       </div>
       <div
         className={`flex ${
           friends?.length > 5 ? "h-[100%]" : "h-[400px]"
-        } w-[500px] flex-col items-center rounded-b-xl bg-[#0c101a] pt-4`}
+        } w-[500px] flex-col items-center rounded-b-xl ${
+          mode === "light" ? "bg-slate-200" : "bg-[#0c101a]"
+        } pt-4`}
       >
         {friends?.length ? (
           friends?.map((friend) => (
@@ -84,7 +96,7 @@ const ProfileFollowings = () => {
             </>
           ))
         ) : (
-          <h1 className="font-lg rounded-lg bg-slate-900 p-3 px-5 font-bold text-white">
+          <h1 className={`font-lg rounded-lg ${mode === 'light' ? "bg-slate-300 shadow-lg" : "bg-slate-900 text-white"} p-3 px-5 font-bold `}>
             Not Following Anyone.
           </h1>
         )}

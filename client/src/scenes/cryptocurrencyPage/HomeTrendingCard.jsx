@@ -6,8 +6,7 @@ import { useSelector } from "react-redux";
 
 const HomeTrendingCard = (props) => {
   const mode = useSelector((state) => state.mode);
-  console.log('below is the t data')
-  console.log(props.btcPrice)
+
   return (
     <div
       className={`
@@ -44,7 +43,7 @@ const HomeTrendingCard = (props) => {
                         md:w-[270px] lg:h-[50px] lg:w-[210px] 
                         ${
                           mode === "light"
-                            ? "bg-slate-200/50 text-[#142435] border-blue-200/50"
+                            ? "border-blue-200/50 bg-slate-200/50 text-[#142435]"
                             : "border-[#9ccddc] bg-[#054569] text-[white]"
                         }
                         `}
@@ -71,7 +70,11 @@ const HomeTrendingCard = (props) => {
               <div className="mx-2 w-[75px] text-center text-[11px] md:w-[175px] md:text-[15px] lg:mx-1">
                 $
                 {parseInt(
-                  (trend?.item?.price_btc * props?.btcPrice) / 1
+                  (trend?.item?.price_btc *
+                    (props?.btcPrice?.bitcoin?.usd
+                      ? props?.btcPrice?.bitcoin?.usd
+                      : props?.btcPrice)) /
+                    1
                 ).toFixed(3)}{" "}
               </div>
             </div>

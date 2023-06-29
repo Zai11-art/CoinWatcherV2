@@ -87,10 +87,10 @@ const Following = ({ friendId, name, subtitle, userPicturePath }) => {
 
             isFriend
               ? toast.success(`You unfollowed ${name}.`, {
-                  toastId: "unfollowed success",
+                  theme: `${mode === "light" ? "light" : "colored"}`,
                 })
               : toast.success(`You followed ${name}.`, {
-                  toastId: "followed success",
+                  theme: `${mode === "light" ? "light" : "colored"}`,
                 });
           }}
         >

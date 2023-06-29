@@ -34,11 +34,46 @@ function CryptocurrencyPage(props) {
       .then((res) => res.data);
   });
 
-  console.log(btcPrice)
+  const { data: globalData } = useQuery(["globalData"], () => {
+    return axios
+      .get(
+        "http://localhost:3001/services/globaldata"
+      )
+      .then((res) => res.data);
+  });
+
+  
+  let cardLinks = [
+    {
+      icon: <ion-icon name="bar-chart-outline"></ion-icon>,
+      label: "Global Cryptocurrencies ",
+      details: `${globalData?.data?.active_cryptocurrencies}`,
+      id: 0,
+    },
+    {
+      icon: <ion-icon name="calculator-outline"></ion-icon>,
+      label: "Exchanges:",
+      details: `${globalData?.data?.markets}`,
+      id: 1,
+    },
+    {
+      icon: <ion-icon name="search-circle-outline"></ion-icon>,
+      label: "Crypto Global MarketCap ",
+      details: `$${globalData?.data?.total_market_cap.usd.toLocaleString()}`,
+      id: 2,
+    },
+    {
+      icon: <ion-icon name="search-circle-outline"></ion-icon>,
+      label: "24 hour Trading Volume",
+      details: `$${globalData?.data?.total_volume.usd.toLocaleString()}`,
+      id: 3,
+    },
+  ];
+
 
   return (
     <main className={`flex  h-[100%] w-[100%] flex-col items-center ${mode === 'light' ? "bg-slate-300/95" : "bg-[#051925]"} `}>
-      <HomeHeadCard />
+      <HomeHeadCard globalData={globalData} cardLinks={cardLinks}/>
       
       <div
         className="flex h-[250px] w-[450px] flex-row

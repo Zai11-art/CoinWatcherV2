@@ -15,6 +15,7 @@ const ProfileFollowers = () => {
   const token = useSelector((state) => state.token);
   const followers = useSelector((state) => state.user.followers);
   const { _id } = useSelector((state) => state.user); // loggedin user
+  const mode = useSelector((state) => state.mode);
 
   const getFollowers = async () => {
     const response = await fetch(
@@ -46,52 +47,64 @@ const ProfileFollowers = () => {
 
   return (
     <div
-      className={`flex ${
+      className={`flex  ${
         followers?.length > 5 ? "h-[100%]" : "h-screen"
-      } w-[100%] flex-col items-center  bg-[#062c43] p-8 shadow-2xl`}
+      } w-[100%] flex-col items-center  ${
+        mode === "light"
+          ? "text-glow bg-slate-300 text-blue-900"
+          : "bg-[#062c43] text-white"
+      } p-8 `}
     >
-      <div className="mt-3 flex h-[70px] w-[500px] items-center justify-between rounded-t-xl bg-[#051731] px-10">
-        <Link
-          to={`/profile/${userId}`}
-          className="flex cursor-pointer items-center justify-center text-xl text-white hover:scale-[1.1] hover:text-blue-300"
+      <div className="shadow-xl">
+        <div
+          className={`mt-3 flex h-[70px] w-[500px] items-center justify-between rounded-t-xl  ${
+            mode === "light"
+              ? "newscard-filter-light shadow-3xl bg-red-800"
+              : "bg-[#051731]"
+          }   px-10`}
         >
-          <ion-icon name="arrow-back"></ion-icon>
-        </Link>
+          <Link
+            to={`/profile/${userId}`}
+            className="flex cursor-pointer items-center justify-center text-xl  hover:scale-[1.1] hover:text-blue-300"
+          >
+            <ion-icon name="arrow-back"></ion-icon>
+          </Link>
 
-        <div className="text-xl font-bold text-white">
-          {user?.userName}s' Followers
+          <div className="text-xl font-bold ">{user?.userName}s' Followers</div>
+
+          <div className="invisible flex cursor-pointer items-center justify-center text-xl  hover:scale-[1.1] hover:text-blue-300">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </div>
         </div>
+        <div
+          className={`flex ${
+            followers?.length > 5 ? "h-[100%]" : "h-[400px]"
+          } w-[500px] flex-col items-center rounded-b-xl ${
+            mode === "light" ? "bg-slate-200" : "bg-[#0c101a]"
+          } pt-4`}
+        >
+          {followers?.length ? (
+            followers?.map((follower) => (
+              <>
+                <div className="flex w-[100%] px-12">
+                  <FriendView
+                    key={follower._id}
+                    friendId={follower._id}
+                    name={`${follower.userName}`}
+                    subtitle={follower.bio}
+                    userPicturePath={follower.picturePath}
+                  />
+                </div>
 
-        <div className="flex cursor-pointer items-center justify-center text-xl text-white hover:scale-[1.1] hover:text-blue-300 invisible">
-          <ion-icon name="arrow-forward"></ion-icon>
+                <div className="h-[0.1px] w-[80%] bg-blue-300/30" />
+              </>
+            ))
+          ) : (
+            <h1 className={`font-lg rounded-lg ${mode === 'light' ? "bg-slate-300 shadow-lg" : "bg-slate-900 text-white"}  p-3 px-5 font-bold `}>
+              No Followers Yet.
+            </h1>
+          )}
         </div>
-      </div>
-      <div
-        className={`flex ${
-          followers?.length > 5 ? "h-[100%]" : "h-[400px]"
-        } w-[500px] flex-col items-center rounded-b-xl bg-[#0c101a] pt-4`}
-      >
-        {followers?.length ? (
-          followers?.map((follower) => (
-            <>
-              <div className="flex w-[100%] px-12">
-                <FriendView
-                  key={follower._id}
-                  friendId={follower._id}
-                  name={`${follower.userName}`}
-                  subtitle={follower.bio}
-                  userPicturePath={follower.picturePath}
-                />
-              </div>
-
-              <div className="h-[0.1px] w-[80%] bg-blue-300/30" />
-            </>
-          ))
-        ) : (
-          <h1 className="font-lg rounded-lg bg-slate-900 p-3 px-5 font-bold text-white">
-            No Followers Yet.
-          </h1>
-        )}
       </div>
     </div>
   );

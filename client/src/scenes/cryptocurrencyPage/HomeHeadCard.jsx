@@ -1,26 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const HomeHeadCard = () => {
+const HomeHeadCard = ({ globalData, cardLinks }) => {
   const mode = useSelector((state) => state.mode);
-
-  let cardLinks = [
-    {
-      icon: <ion-icon name="bar-chart-outline"></ion-icon>,
-      details: "Exploring the Exciting World of Cryptocurrency Markets.",
-      id: 0,
-    },
-    {
-      icon: <ion-icon name="calculator-outline"></ion-icon>,
-      details: "Maximizing Your Crypto Trading Potential.",
-      id: 1,
-    },
-    {
-      icon: <ion-icon name="search-circle-outline"></ion-icon>,
-      details: "Discovering the Latest Trends and Insights in Crypto Markets.",
-      id: 2,
-    },
-  ];
 
   return (
     <div
@@ -43,13 +25,13 @@ const HomeHeadCard = () => {
       >
         <div
           className={`${
-            mode === "light" ? "text-[#1b4169] text-glow-light" : " text-white"
+            mode === "light" ? "text-glow-light text-[#1b4169]" : " text-white"
           } mb-2 mt-3 text-center `}
         >
           <h1 className="mt-2 text-2xl font-bold uppercase md:text-3xl">
             <span className="">Watch</span> the Top coins now.
           </h1>
-          <p className="md:text-md mt-2 font text-[13.5px] italic">
+          <p className="md:text-md font mt-2 text-[13.5px] italic">
             Watch the latest crypto prices, markets, and news at your
             convenience.
           </p>
@@ -58,31 +40,37 @@ const HomeHeadCard = () => {
           className=" 
                 mt-2 flex
                 h-[300px] w-[400px]
-                flex-col flex-wrap
+                flex-row flex-wrap
                 items-center justify-center md:h-[270px] md:w-[650px] md:flex-row lg:h-[150px]
                 lg:w-[960px] lg:flex-row 
                 
                 "
         >
-          {cardLinks.map((link) => (
+          {cardLinks?.map((link) => (
             <div
               key={link.id}
-              className={` ${mode === 'light' ? "bg-slate-200/50 text-[#101218] shadow-xl" : "HeadCard-bg text-white"} 
-                        m-2 flex 
-                        h-[50px] w-[350px]
-                        flex-row rounded-lg
-                        border-[2px] border-[#9ccddc] py-6
+              className={`font-semibold ${
+                mode === "light"
+                  ? "text-glow bg-slate-200 text-blue-900 shadow-xl"
+                  : "text-glow bg-slate-900 text-white"
+              } 
+                        m-2 flex h-[70px]
+                        w-[175px] flex-col
+                         justify-center rounded-lg
+                        border-[2px] border-[#9ccddc] 
                         duration-100 ease-in-out
-                        hover:scale-[1.02] md:h-[50px]
-                        md:w-[300px] lg:h-[50px] lg:w-[300px]`}
+                        hover:scale-[1.02] md:h-[70px]
+                        md:w-[300px] lg:h-[62.5px] lg:w-[210px]`}
             >
-              <div className="mx-2 flex flex-row items-center">
-                <h1 className="mx-2 text-3xl lg:text-4xl">{link.icon}</h1>
-
-                <p className="text- mx-2 text-[12px] lg:text-[13px]">
-                  {link.details}
-                </p>
-              </div>
+              <span className="text- mx-2 text-[16px] lg:text-[18px] flex items-center">
+                {link.image && (
+                  <img className="h-5 w-5 mr-1" src={link.image} alt="" />
+                )}{" "}
+                {link.details}
+              </span>
+              <span className="text- mx-2 text-[12px] font-normal italic lg:text-[11px]">
+                {link.label}
+              </span>
             </div>
           ))}
         </div>
@@ -94,9 +82,9 @@ const HomeHeadCard = () => {
             mt-12 h-[320px]
             w-[450px] rounded-lg
             border-[2px] border-[#9ccddc]
-            md:h-[300px] 
-            md:w-[700px] lg:h-[200px] lg:w-[1000px]
-            opacity-[100%]
+            opacity-[100%] 
+            md:h-[300px] md:w-[700px] lg:h-[200px]
+            lg:w-[1000px]
             "
       ></div>
     </div>

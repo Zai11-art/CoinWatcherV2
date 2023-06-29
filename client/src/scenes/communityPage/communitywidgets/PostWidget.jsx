@@ -6,6 +6,8 @@ import Following from "./Following";
 import { setComments } from "../../../state";
 import { setPosts } from "../../../state";
 import { toast } from "react-toastify";
+import { dateConverter } from "../../../state/utils/utils";
+import { dateReformat } from "../../../state/utils/utils";
 
 const PostWidget = ({
   postId,
@@ -19,6 +21,7 @@ const PostWidget = ({
   comments,
   webPath,
   refetchPosts,
+  createdAt,
 }) => {
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
@@ -147,7 +150,11 @@ const PostWidget = ({
               onClick={() => setShowConfirmationPosts(!showConfirmationPosts)}
               className="mr-2 flex  cursor-pointer flex-row-reverse items-center text-xl text-red-500 hover:text-red-200 active:text-blue-500"
             >
-              <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-[#0f405e] text-[1.4rem]">
+              <span
+                className={`mt-1 flex h-10 w-10 items-center justify-center rounded-full ${
+                  mode === "light" ? "bg-slate-100 shadow-lg" : "bg-[#0f405e]"
+                }  text-[1.4rem]`}
+              >
                 <ion-icon name="trash-bin-outline"></ion-icon>
               </span>
             </button>
@@ -155,21 +162,27 @@ const PostWidget = ({
             {showConfirmationPosts && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
                 <div
-                  className={`w-[200px] rounded-lg border-[0.02px] ${
-                    mode === "light" ? "" : "border-slate-500/40 bg-[#041625]"
-                  }  p-6 shadow-xl shadow-blue-200/10 `}
+                  className={`w-[250px] rounded-lg border-[0.02px] ${
+                    mode === "light"
+                      ? "border-slate-500/40 bg-slate-200 text-blue-900 shadow-blue-200/10"
+                      : "border-slate-500/40 bg-[#041625] text-blue-100 shadow-blue-200/10"
+                  } p-6 shadow-xl  `}
                 >
                   {/* Pop-up content goes here */}
-                  <h2 className="mb-4 text-lg font-bold text-blue-100">
-                    Delete This Post?
-                  </h2>
+                  <h2 className="mb-4 text-lg font-bold">Delete This Post?</h2>
                   <div className="flex flex-col">
                     <span
                       onClick={() => {
-                        toast.success("Post deleted Successfully");
+                        toast.success("Post deleted Successfully", {
+                          theme: `${mode === "light" ? "light" : "colored"}`,
+                        });
                         handleDeletePost(postId);
                       }}
-                      className="cursor-pointer text-[17px] font-semibold text-green-300 transition-all ease-in-out hover:bg-[#193952] hover:text-green-100"
+                      className={`cursor-pointer text-[17px] font-semibold ${
+                        mode === "light"
+                          ? "rounded-lg p-1 text-green-500 hover:bg-slate-300 hover:text-green-500"
+                          : "rounded-lg p-1 text-green-300 hover:bg-[#193952] hover:text-green-100"
+                      }  transition-all ease-in-out `}
                     >
                       <ion-icon name="checkmark-outline"></ion-icon> Confirm
                     </span>
@@ -178,7 +191,11 @@ const PostWidget = ({
                       onClick={() =>
                         setShowConfirmationPosts(!showConfirmationPosts)
                       }
-                      className="cursor-pointer text-[17px] font-semibold text-red-400 transition-all ease-in-out hover:bg-[#193952] hover:text-red-100"
+                      className={`cursor-pointer text-[17px] font-semibold ${
+                        mode === "light"
+                          ? "rounded-lg p-1 text-red-500 hover:bg-slate-300 hover:text-red-500"
+                          : "rounded-lg p-1 text-red-300 hover:bg-[#193952] hover:text-red-100"
+                      }  transition-all ease-in-out `}
                     >
                       <ion-icon name="close-outline"></ion-icon> Cancel
                     </span>
@@ -193,6 +210,7 @@ const PostWidget = ({
         <div className="mt-3">
           <p className="">{description}</p>
         </div>
+
         {picturePath && (
           <img
             width="100%"
@@ -202,6 +220,28 @@ const PostWidget = ({
             style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
           />
         )}
+
+        <div className="group relative mt-2 flex w-28">
+          <div
+            data-popover-target="popover-default"
+            className={`mr-1 text-[1rem] text-slate-900 hover:text-red-400`}
+          >
+            <ion-icon name="timer-outline"></ion-icon>
+          </div>
+          <div
+            className={`absolute z-[100] hidden w-[150px] rounded-lg ${
+              mode === "light"
+                ? "text-glow bg-slate-100 text-blue-900 shadow-xl"
+                : "bg-[#06132b] text-red-200 shadow-red-800/80"
+            }  p-3 shadow-md  group-hover:block`}
+          >
+            <p className="text-xs font-bold">{dateReformat(createdAt)}</p>
+          </div>
+          <span className="mx-1 mb-1 text-[0.8rem] font-thin">
+            {dateConverter(createdAt)}
+          </span>
+        </div>
+
         <div className="mt-5 flex flex-row justify-between font-thin ">
           <span>{likeCount} Likes</span>
           <span
@@ -213,12 +253,16 @@ const PostWidget = ({
             {commentCount} Comments
           </span>
         </div>
-        <div className={`my-1 mt-1  h-[1px] w-full ${mode === 'light' ? "" : "bg-gray-600"}`}></div>
+        <div
+          className={`my-1 mt-1  h-[1px] w-full ${
+            mode === "light" ? "" : "bg-gray-600"
+          }`}
+        ></div>
 
         <div
           className={`flex w-[100%] flex-row justify-between rounded-lg ${
             mode === "light"
-              ? "bg-slate-300/30 shadow-md text-slate-900"
+              ? "bg-slate-300/30 text-slate-900 shadow-md"
               : "bg-[#071b27] text-white"
           }  p-1`}
         >
@@ -276,7 +320,11 @@ const PostWidget = ({
             <span className=" ml-2">Repost</span>
           </div>
         </div>
-        <div className={`my-1 mt-1  h-[1px] w-full ${mode === 'light' ? "" : "bg-gray-600"}`}></div>
+        <div
+          className={`my-1 mt-1  h-[1px] w-full ${
+            mode === "light" ? "" : "bg-gray-600"
+          }`}
+        ></div>
         {isComments && (
           // <div className="text-md mt-6 rounded-lg bg-[#051925] p-2  text-white">
           //   <CommentingWidget commentImageUser={commentImageUser} postId={postId} comments={comments}/>
@@ -323,7 +371,9 @@ const PostWidget = ({
                 <button
                   onClick={(e) => {
                     handleCommentSubmit(e);
-                    toast.success(`Comment submitted.`);
+                    toast.success(`Comment submitted.`, {
+                      theme: `${mode === "light" ? "light" : "colored"}`,
+                    });
                     setComment("");
                   }}
                   type="submit"
@@ -355,17 +405,38 @@ const PostWidget = ({
                     className={`ml-4 flex h-[100%]  flex-col rounded-xl ${
                       mode === "light"
                         ? "bg-slate-300/30 shadow-inner"
-                        : "bg-blue-900"
+                        : "bg-[#0c1327] shadow-inner"
                     } p-2 px-5 py-3`}
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center">
+                      <div className="flex items-center justify-center">
                         <span className="mb-1 mr-2 font-bold">
                           {comment?.userName}
                         </span>
-                        <ion-icon name="timer-outline"></ion-icon>
-                        <span className="mx-1 text-[0.8rem] font-extralight">
-                          {new Date(comment?.createdAt).toLocaleTimeString()}
+
+                        {/* time hover popup */}
+                        <div className="group relative">
+                          <div
+                            data-popover-target="popover-default"
+                            className={`mr-1 text-[1remm] text-slate-900 hover:text-red-400`}
+                          >
+                            <ion-icon name="timer-outline"></ion-icon>
+                          </div>
+                          <div
+                            className={`absolute z-[100] hidden w-[150px] rounded-lg ${
+                              mode === "light"
+                                ? "text-glow bg-slate-100 text-blue-900 shadow-xl"
+                                : "bg-[#06132b] text-red-200 shadow-red-800/80"
+                            }  p-3 shadow-md  group-hover:block`}
+                          >
+                            <p className="text-sm font-bold">
+                              {dateReformat(comment?.createdAt)}
+                            </p>
+                          </div>
+                        </div>
+
+                        <span className="mx-1 mb-1 text-[0.8rem] font-thin">
+                          {dateConverter(comment?.createdAt)}
                         </span>
                       </div>
 
@@ -406,7 +477,11 @@ const PostWidget = ({
                                 <div className="flex flex-col">
                                   <span
                                     onClick={() => {
-                                      toast.success(`Comment deleted.`);
+                                      toast.success(`Comment deleted.`, {
+                                        theme: `${
+                                          mode === "light" ? "light" : "colored"
+                                        }`,
+                                      });
                                       handleDeleteComment({
                                         commentId: comment._id,
                                         postId: postId,
@@ -417,8 +492,8 @@ const PostWidget = ({
                                     }}
                                     className={`cursor-pointer text-[17px] font-semibold ${
                                       mode === "light"
-                                        ? "text-green-500 hover:bg-slate-300 hover:text-green-500 rounded-lg p-1"
-                                        : "text-green-300 hover:bg-[#193952] hover:text-green-100 rounded-lg p-1"
+                                        ? "rounded-lg p-1 text-green-500 hover:bg-slate-300 hover:text-green-500"
+                                        : "rounded-lg p-1 text-green-300 hover:bg-[#193952] hover:text-green-100"
                                     }  transition-all ease-in-out `}
                                   >
                                     <ion-icon name="checkmark-outline"></ion-icon>{" "}
@@ -434,8 +509,8 @@ const PostWidget = ({
                                     }
                                     className={`cursor-pointer text-[17px] font-semibold ${
                                       mode === "light"
-                                        ? "text-red-500 hover:bg-slate-300 hover:text-red-500 rounded-lg p-1"
-                                        : "text-red-300 hover:bg-[#193952] hover:text-red-100 rounded-lg p-1"
+                                        ? "rounded-lg p-1 text-red-500 hover:bg-slate-300 hover:text-red-500"
+                                        : "rounded-lg p-1 text-red-300 hover:bg-[#193952] hover:text-red-100"
                                     }  transition-all ease-in-out `}
                                   >
                                     <ion-icon name="close-outline"></ion-icon>{" "}
@@ -448,17 +523,6 @@ const PostWidget = ({
                           )}
                         </>
                       )}
-                      {/* 
-                        <button
-              onClick={() => setShowConfirmation(!showConfirmation)}
-              className="mr-2 flex  cursor-pointer flex-row-reverse items-center text-xl text-red-500 hover:text-red-200 active:text-blue-500">
-              <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-[#0f405e] text-[1.4rem]">
-                <ion-icon name="trash-bin-outline"></ion-icon>
-              </span>
-            </button>
-                      */}
-
-                      {/* <span className="text-sm mx-1">{new Date(comment?.date).toLocaleDateString()}</span> */}
                     </div>
                     <div className="flex h-[100%] w-[100%]  py-2 text-[1rem]">
                       <div className="flex h-full w-full items-center">
@@ -470,7 +534,11 @@ const PostWidget = ({
                   </div>
                 </div>
                 {/* break */}
-                <div className={`my-1 mt-1  h-[1px] w-full ${mode === 'light' ? "bg-slate-300" : "bg-gray-600"}`}></div>
+                <div
+                  className={`my-1 mt-1  h-[1px] w-full ${
+                    mode === "light" ? "bg-slate-300" : "bg-gray-600"
+                  }`}
+                ></div>
               </div>
             ))}
           </>

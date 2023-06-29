@@ -76,29 +76,6 @@ const TopCoinWidget = () => {
             <div className="mx-2 w-[75px] overflow-hidden text-center text-[12px] md:w-[175px] md:text-[12px] lg:mx-1">
               ${data.current_price.toLocaleString()}
             </div>
-            {/* <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.market_cap.toLocaleString()}</div> */}
-            {/* <div className="text-center md:w-[250px] w-[150px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.total_volume.toLocaleString()} </div> */}
-            {/* <div className="text-center md:w-[175px] w-[100px] md:text-[15px] text-[15px] lg:mx-1 mx-1 md:pr-6 pr-2 ">
-              <Sparklines data={data.sparkline_in_7d.price}>
-                {data.current_price > data.sparkline_in_7d.price[0] ? (
-                  <SparklinesLine
-                    style={{
-                      stroke: "#4dff58",
-                      fill: "#4dff58",
-                      fillOpacity: "0.2",
-                    }}
-                  />
-                ) : (
-                  <SparklinesLine
-                    style={{
-                      stroke: "#fc3a3a",
-                      fill: "#fc3a3a",
-                      fillOpacity: "0.2",
-                    }}
-                  />
-                )}
-              </Sparklines>
-            </div> */}
           </div>
         ))
       ) : (

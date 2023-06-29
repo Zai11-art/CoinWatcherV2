@@ -19,8 +19,6 @@ const TrendingCoinWidget = () => {
       .then((res) => res.data);
   });
 
-  console.log(btcPrice)
-
   return (
     <div
       className={`
@@ -71,7 +69,7 @@ const TrendingCoinWidget = () => {
               </div>
             </div>
             <div className="mx-2 w-[75px] text-center text-[12px] md:w-[175px] md:text-[12px] lg:mx-1">
-              ${((data?.item?.price_btc * btcPrice) / 1).toFixed(5)}
+              ${((data?.item?.price_btc * `${btcPrice?.bitcoin?.usd ? btcPrice?.bitcoin?.usd : btcPrice}`) / 1).toFixed(5)}
             </div>
             {/* <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.market_cap.toLocaleString()}</div> */}
             {/* <div className="text-center md:w-[250px] w-[150px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.total_volume.toLocaleString()} </div> */}

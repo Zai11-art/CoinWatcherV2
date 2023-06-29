@@ -1,33 +1,57 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import ExchangesTable from "../../components/ExchangesTable";
 import Pagination from "../../components/Pagination";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import CoinTable from "../../components/CoinTable";
+import HomeHeadCard from "../cryptocurrencyPage/HomeHeadCard";
 
-const HomeMarketListProto = (props) => {
-  const mode = useSelector((state) => state.mode);
-  const loggedInUserId = useSelector((state) => state?.user?._id);
-  const token = useSelector((state) => state.token);
-
-  const data = props.coinData;
-
-  const [searchData, setSearchData] = useState(data);
-
+const ExchangePage = () => {
+  console.log(`exchange Page here`)
+  
   // for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostsPerPage] = useState(50);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
+  const mode = useSelector((state) => state.mode);
+
+  const { data: exchangeList } = useQuery(["exchangeList"], () => {
+    return axios
+      .get("http://localhost:3001/services/exchanges")
+      .then((res) => res?.data);
+  });
+  
+
+  const cardLinks = [
+    {
+      label: "No. of available exchanges: ",
+      details: `${exchangeList?.length}`,
+      id: 0,
+    },
+    {
+      label: "Highest Rated Exchange: ",
+      details: `${exchangeList?.length > 0 ? exchangeList[0].name : null}`,
+      image:`${exchangeList?.length > 0 ? exchangeList[0].image : null}`,
+      id: 1,
+    }
+  ];
 
   return (
-    <div>
+    <div
+      className={`flex  h-[100%] w-[100%] flex-col items-center ${
+        mode === "light" ? "bg-slate-300/95" : "bg-[#051925]"
+      } `}
+    >
+      <HomeHeadCard cardLinks={cardLinks} />
       <div
         className="
-            mt-[175px] flex
+             flex
             h-[100%] w-[450px] 
-            items-center justify-center md:mt-[120px]
-            md:h-[100%] md:w-[700px] lg:mt-[110px] lg:h-[100%] lg:w-[1000px]"
+            items-center justify-center 
+            md:h-[100%] md:w-[700px]  lg:h-[100%] lg:w-[1000px]"
       >
         <div className="my-2 flex w-full flex-col items-center justify-between md:flex-row lg:flex-row">
           <div className="flex">
@@ -36,12 +60,13 @@ const HomeMarketListProto = (props) => {
                 mode === "light" ? "text-blue-900" : "text-[#c0f0ff]"
               } md:text-[15px] lg:text-[17px]`}
             >
-              Crypto Ranks: #{firstPostIndex + 1} - #{lastPostIndex} Coins available: {data?.length}
+              Exchange Ranks: #{firstPostIndex + 1} - #{lastPostIndex}{" "}
+              Exchannges available: {exchangeList?.length}
             </span>
           </div>
           <div>
             <Pagination
-              totalPosts={data?.length}
+              totalPosts={exchangeList?.length}
               postsPerPage={postsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
@@ -49,9 +74,8 @@ const HomeMarketListProto = (props) => {
           </div>
         </div>
       </div>
-
-      <CoinTable
-        data={data}
+      <ExchangesTable
+        data={exchangeList}
         firstPostIndex={firstPostIndex}
         lastPostIndex={lastPostIndex}
       />
@@ -69,13 +93,16 @@ const HomeMarketListProto = (props) => {
                 mode === "light" ? "text-blue-900" : "text-[#9ccddc]"
               }  md:text-[15px] lg:text-[17px]`}
             >
-              Showing {Math.ceil(data?.length / (data?.length / postsPerPage))}{" "}
-              results out of {data?.length}
+              Showing{" "}
+              {Math.ceil(
+                exchangeList?.length / (exchangeList?.length / postsPerPage)
+              )}{" "}
+              results out of {exchangeList?.length}
             </h1>
           </div>
           <div>
             <Pagination
-              totalPosts={data?.length}
+              totalPosts={exchangeList?.length}
               postsPerPage={postsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
@@ -87,4 +114,4 @@ const HomeMarketListProto = (props) => {
   );
 };
 
-export default HomeMarketListProto;
+export default ExchangePage;

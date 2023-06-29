@@ -8,8 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import NotificationPopUp from "../../../components/NotificationPopUp";
 import { toast } from "react-toastify";
+import { useId } from "react";
 
 const UserWidget = ({ userId, picturePath }) => {
+  const keyId = useId();
   const [user, setUser] = useState(null);
   const [watchList, setwatchList] = useState([]);
   const [showConfirmationList, setShowConfirmationList] = useState(false);
@@ -46,7 +48,6 @@ const UserWidget = ({ userId, picturePath }) => {
     });
     const fetchedWatchList = await response.json();
     setwatchList(fetchedWatchList);
-    console.log(fetchedWatchList);
   };
 
   const filteredCoins = coinList?.filter((coin) => {
@@ -56,7 +57,6 @@ const UserWidget = ({ userId, picturePath }) => {
   });
 
   const addToWatchList = async (coin) => {
-    console.log(coin);
     const data = coin;
     const response = await fetch(
       `http://localhost:3001/users/${loggedInUserId}`,
@@ -71,12 +71,11 @@ const UserWidget = ({ userId, picturePath }) => {
     );
 
     const watchListData = await response.json();
-    console.log(watchListData);
+
     getWatchList();
   };
 
   const removetoWatchList = async (coin) => {
-    console.log(coin);
     const data = coin;
     const response = await fetch(
       `http://localhost:3001/users/${loggedInUserId}`,
@@ -91,7 +90,7 @@ const UserWidget = ({ userId, picturePath }) => {
     );
 
     const watchListData = await response.json();
-    console.log(watchListData);
+
     getWatchList();
   };
 
@@ -99,10 +98,6 @@ const UserWidget = ({ userId, picturePath }) => {
     getWatchList();
     getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // const { userName, followers, followings, bio, viewedProfile } = user;
-
-  // console.log(picturePath);
 
   if (!user) {
     return (
@@ -243,8 +238,9 @@ const UserWidget = ({ userId, picturePath }) => {
         >
           {filteredCoins?.length > 0 ? (
             <>
-              {filteredCoins?.slice(0, 5).map((data) => (
+              {filteredCoins?.slice(0, 5).map((data, index) => (
                 <div
+                  key={`${keyId}-${index}`}
                   className={`mx-2 my-2 flex h-[100%] w-[90%] items-center justify-around rounded-lg ${
                     mode === "light"
                       ? "viewcard-filter-light"
@@ -261,7 +257,12 @@ const UserWidget = ({ userId, picturePath }) => {
                           onClick={() => {
                             removetoWatchList(data);
                             toast.success(
-                              `${data.name} Coin Removed From Watchlist.`
+                              `${data.name} Coin Removed From Watchlist.`,
+                              {
+                                theme: `${
+                                  mode === "light" ? "light" : "colored"
+                                }`,
+                              }
                             );
                             setShowConfirmationList(!showConfirmationList);
                           }}
@@ -272,7 +273,7 @@ const UserWidget = ({ userId, picturePath }) => {
                         <div
                           className={`absolute z-[100] hidden w-[150px] rounded-lg ${
                             mode === "light"
-                              ? "bg-slate-100 shadow-xl text-blue-900 text-glow"
+                              ? "text-glow bg-slate-100 text-blue-900 shadow-xl"
                               : "bg-[#06132b] text-red-200 shadow-red-800/80"
                           }  p-3 shadow-md  group-hover:block`}
                         >
@@ -285,7 +286,10 @@ const UserWidget = ({ userId, picturePath }) => {
                     <button
                       onClick={() => {
                         addToWatchList(data);
-                        toast.success(`${data.name} Coin Added To Watchlist.`);
+                        toast.success(
+                          `${data.name} Coin Added To Watchlist. `,
+                          { theme: `${mode === "light" ? "light" : "colored"}` }
+                        );
                       }}
                       className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400"
                     >
@@ -333,15 +337,25 @@ const UserWidget = ({ userId, picturePath }) => {
               ))}
             </>
           ) : (
-            <div className="flex h-[200px] w-full flex-col items-center justify-center">
-              <span className="bg-slate-699 p-2 text-xl font-bold text-slate-200">
+            <div
+              className={`flex h-[200px] w-full flex-col items-center justify-center ${
+                mode === "light"
+                  ? "text-glow bg-slate-200 text-blue-900"
+                  : "bg-[#050c14]"
+              }`}
+            >
+              <span className="bg-slate-699 p-2 text-xl font-bold">
                 No coins yet
               </span>
               <Link to="/Cryptocurrencies">
                 <button
-                  className="py-1duration-200 mb-2 mt-6 flex justify-center rounded-lg px-3 font-bold
-                             text-blue-200 ease-in-out hover:text-blue-600 hover:underline
-                             md:text-[15px] lg:text-[13px] xl:text-[13px]"
+                  className={`py-1duration-200 mb-2 mt-6 flex justify-center rounded-lg px-3 font-bold
+                              ease-in-out hover:underline
+                             md:text-[15px] lg:text-[13px] xl:text-[13px] ${
+                               mode === "light"
+                                 ? ""
+                                 : "text-blue-200 hover:text-blue-600 "
+                             }`}
                 >
                   View all crypto here
                 </button>

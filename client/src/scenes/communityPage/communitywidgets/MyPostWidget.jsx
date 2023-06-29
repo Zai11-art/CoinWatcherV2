@@ -37,7 +37,8 @@ const MyPostWidget = ({ picturePath }) => {
     setImage(null);
     setPost("");
 
-    response && toast.success("Posted successfully");
+    response && toast.success("Posted successfully",
+    { theme: `${mode === "light" ? "light" : "colored"}` });
   };
 
   return (

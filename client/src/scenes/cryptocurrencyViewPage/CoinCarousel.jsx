@@ -25,7 +25,6 @@ const CoinCarousel = (props) => {
         md:h-[500px] md:w-[100%] lg:mt-[60px] lg:h-[500px]
         lg:w-[100%] 
         xl:mt-[80px] xl:h-[500px] xl:w-[100%] 
-        
         "
     >
       <div
@@ -199,8 +198,6 @@ const CoinCarousel = (props) => {
                 <div className="text-glow mx-2 w-[75px] text-center text-[15px] font-semibold md:w-[175px] md:text-[15px] lg:mx-1">
                   ${data.item.symbol}
                 </div>
-                {/* <div className="text-center md:w-[175px] w-[75px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.market_cap.toLocaleString()}</div> */}
-                {/* <div className="text-center md:w-[250px] w-[150px] md:text-[15px] text-[11px] lg:mx-1 mx-2">${data.total_volume.toLocaleString()} </div> */}
               </div>
             ))
           ) : (

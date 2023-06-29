@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) => {
-  const mode = useSelector((state) => state.mode)
+const Pagination = ({
+  totalPosts,
+  postsPerPage,
+  setCurrentPage,
+  currentPage,
+}) => {
+  const mode = useSelector((state) => state.mode);
 
   let pages = [];
   const totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -26,10 +31,15 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
   }
 
   return (
-    <div className="flex items-center flex-row justify-center my-2 pagination flex-wrap">
+    <div className="pagination my-2 flex flex-row flex-wrap items-center justify-center">
       {currentPage > 1 && (
         <button
-          className={`p-1 ${mode === 'light' ? "newscard-filter-light text-[#054569]" : "bg-[#054569] text-[#ced7e0]"} lg:mx-[5px] md:mx-[5px] mx-[2px] px-2 my-[2px] rounded-md  hover:scale-[1.1] duration-200 lg:text-[15px] md:text-[12px] text-[15px]`}
+          aria-label="back button"
+          className={`p-1 ${
+            mode === "light"
+              ? "newscard-filter-light text-[#054569]"
+              : "bg-[#054569] text-[#ced7e0]"
+          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px]`}
           onClick={() => setCurrentPage(currentPage - 1)}
         >
           <ion-icon name="chevron-back-outline"></ion-icon>
@@ -37,7 +47,11 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
       )}
       {startPage > 1 && (
         <button
-          className={`p-1 ${mode === 'light' ? "newscard-filter-light text-[#080e11]" : "bg-[#054569] text-[#ced7e0]"} lg:mx-[5px] md:mx-[5px] mx-[2px] px-2 my-[2px] rounded-md  hover:scale-[1.1] duration-200 lg:text-[15px] md:text-[12px] text-[15px]`}
+          className={`p-1 ${
+            mode === "light"
+              ? "newscard-filter-light text-[#080e11]"
+              : "bg-[#054569] text-[#ced7e0]"
+          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px]`}
           onClick={() => setCurrentPage(1)}
         >
           First
@@ -45,8 +59,12 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
       )}
       {pages.map((page, index) => (
         <button
-          className={`p-1 ${mode === 'light' ? "newscard-filter-light text-[#054569]" : "bg-[#054569] text-[#ced7e0]"} lg:mx-[5px] md:mx-[5px] mx-[2px] px-2 my-[2px] rounded-md  hover:scale-[1.1] duration-200 lg:text-[15px] md:text-[12px] text-[15px] ${
-            page === currentPage ? 'active' : ''
+          className={`p-1 ${
+            mode === "light"
+              ? "newscard-filter-light text-[#054569]"
+              : "bg-[#054569] text-[#ced7e0]"
+          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px] ${
+            page === currentPage ? "active" : ""
           }`}
           key={index}
           onClick={() => setCurrentPage(page)}
@@ -56,7 +74,11 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
       ))}
       {endPage < totalPages && (
         <button
-          className={`p-1 ${mode === 'light' ? "newscard-filter-light text-[#054569]" : "bg-[#054569] text-[#ced7e0]"} lg:mx-[5px] md:mx-[5px] mx-[2px] px-2 my-[2px] rounded-md  hover:scale-[1.1] duration-200 lg:text-[15px] md:text-[12px] text-[15px]`}
+          className={`p-1 ${
+            mode === "light"
+              ? "newscard-filter-light text-[#054569]"
+              : "bg-[#054569] text-[#ced7e0]"
+          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px]`}
           onClick={() => setCurrentPage(totalPages)}
         >
           Last
@@ -64,7 +86,12 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
       )}
       {currentPage < totalPages && (
         <button
-          className={`p-1 ${mode === 'light' ? "newscard-filter-light text-[#054569]" : "bg-[#054569] text-[#ced7e0]"} lg:mx-[5px] md:mx-[5px] mx-[2px] px-2 my-[2px] rounded-md  hover:scale-[1.1] duration-200 lg:text-[15px] md:text-[12px] text-[15px]`}
+          aria-label="next button"
+          className={`p-1 ${
+            mode === "light"
+              ? "newscard-filter-light text-[#054569]"
+              : "bg-[#054569] text-[#ced7e0]"
+          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px]`}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
           <ion-icon name="chevron-forward-outline"></ion-icon>
@@ -75,7 +102,6 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
 };
 
 export default Pagination;
-
 
 // HEX CODES:
 // #062c43

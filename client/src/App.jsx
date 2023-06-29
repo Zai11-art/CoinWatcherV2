@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
 import NewsPage from "./scenes/newsPage/NewsPage";
 import AppPage from "./scenes/appsPage/Appspage";
 import ViewPage from "./scenes/cryptocurrencyViewPage/cryptoViewPage";
@@ -18,11 +17,13 @@ import ProfileFollowers from "./scenes/profilePage/ProfileFollowers";
 import ProfileFollowings from "./scenes/profilePage/ProfileFollowing";
 import TestPage from "./scenes/TestPage";
 import ProfileWatchList from "./scenes/profilePage/ProfileWatchList";
+import ExchangePage from "./scenes/exchangePage/ExchangePage";
+import ExchangeViewPage from "./scenes/exchangeViewPage/ExchangeViewPage";
 
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
- 
+
   return (
     <BrowserRouter>
       <Routes>
@@ -34,6 +35,11 @@ function App() {
             element={<CryptocurrencyPage />}
           ></Route>
           <Route path={`/View/:id`} element={<ViewPage />}></Route>
+          <Route path="/Exchanges" element={<ExchangePage />}></Route>
+          <Route
+            path={`/Exchanges/:exchangeId`}
+            element={<ExchangeViewPage />}
+          ></Route>
           <Route path="/News" element={<NewsPage />}></Route>
           <Route path="/Apps" element={<AppPage />}></Route>
           <Route path="/login" element={<RegisterPage />}></Route>
@@ -44,7 +50,7 @@ function App() {
           ></Route>
           <Route
             path="/community"
-            element={isAuth ? <CommunityPage /> : <CryptocurrencyPage />}
+            element={isAuth ? <CommunityPage /> : <RegisterPage />}
           ></Route>
           <Route
             path="/profile/:userId"

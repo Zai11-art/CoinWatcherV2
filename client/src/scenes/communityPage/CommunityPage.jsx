@@ -11,19 +11,21 @@ import { useEffect } from "react";
 
 const CommunityPage = (props) => {
   const { _id, picturePath } = useSelector((state) => state.user);
-  const mode = useSelector((state) => state.mode)
+  const mode = useSelector((state) => state.mode);
   return (
     <div
-      className={`w-screen ${mode === 'light' ? "bg-slate-300" : "bg-[#061016]"}  pb-[400px] ${
+      className={`w-[screen] ${
+        mode === "light" ? "bg-slate-300" : "bg-[#061016]"
+      }  pb-[400px] ${
         !_id ? "h-[2000px]" : "h-[100%]"
-      } flex flex-col items-center justify-around px-2 py-12 md:flex-col md:items-center md:px-6 lg:flex-row lg:items-start lg:px-[5%] xl:px-[10%] `}
+      } flex flex-col items-center justify-around px-2 py-12 md:flex-col md:items-center md:px-6 lg:flex-col xl:items-start lg:items- lg:px-[10%] xl:flex-row xl:px-[10%] `}
     >
       <div
         className="
         mb-5 h-[100%]
         w-[90%] md:h-[100%]
         md:w-[90%] lg:h-[100%]
-        lg:w-[60%] xl:h-[100%] xl:w-[60%]"
+        lg:w-[90%] xl:h-[100%] xl:w-[60%]"
       >
         <UserWidget userId={_id} picturePath={picturePath} />
       </div>
@@ -47,7 +49,7 @@ const CommunityPage = (props) => {
         flex-col 
          md:h-[100%]
         md:w-[90%] lg:mr-4 lg:h-[100%]
-        lg:w-[25%] xl:h-[100%] xl:w-[25%] `}
+        lg:w-[90%] xl:h-[100%] xl:w-[25%] `}
       >
         <div className="h-[425px] ">
           <Carousel slide={true} className="" leftControl=" " rightControl=" ">

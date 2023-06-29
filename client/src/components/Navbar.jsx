@@ -4,8 +4,11 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LoggedInDropdown from "./LoggedInDropdown";
 import { setMode } from "../state";
+import { toast } from "react-toastify";
+import { useId } from "react";
 
 function Navbar() {
+  const keyId = useId()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user || {});
@@ -20,12 +23,11 @@ function Navbar() {
   const name = `${user.userName}`;
 
   let navLinks = [
-    { name: "Home", link: "/Home", id: 0 },
-    { name: "Cryptocurrencies", link: "/Cryptocurrencies", id: 1 },
+    { name: "Cryptocurrencies", link: "/Cryptocurrencies", id: 0 },
+    { name: "Exchanges", link: "/Exchanges", id: 1 },
     { name: "Apps", link: "/Apps", id: 2 },
     { name: "News", link: "/News", id: 3 },
-    { name: "Community", link: "/Community", id: 4 },
-    { name: "Learn", link: "/Learn", id: 5 },
+    { name: "Learn", link: "/Learn", id: 4 },
   ];
 
   const [open, setOpen] = useState(false);
@@ -61,7 +63,7 @@ function Navbar() {
         </div>
 
         <div className="z-[-1] md:static md:z-[1] ">
-          <ul
+          <div
             className={`absolute mr-4 mt-[15px] flex w-full flex-col md:static  md:mt-6 md:flex-row
              md:items-center  md:bg-[transparent] lg:items-center xl:items-center  ${
                open
@@ -71,22 +73,40 @@ function Navbar() {
                  : "top-[-360px] "
              } left-[-0.1px] pb-[25px] duration-500  ease-in-out`}
           >
-            {navLinks.map((link) => (
+            {navLinks.map((link , index) => (
+              <div key={`${keyId}-${index}`}>
+                <Link
+                  to={link.link}
+                  className={`mx-2 my-3 ml-8
+                text-[15px] font-semibold ${
+                  mode === "light" ? "text-black" : "text-white"
+                } transition-all ease-in-out hover:scale-[1.02] md:my-1 md:ml-2 md:text-[13px]`}
+                >
+                  {link.name}
+                </Link>
+              </div>
+            ))}
+
+            <div key={keyId + 111}>
               <Link
-                to={link.link}
+                to={"/Community"}
+                onClick={() => {
+                  !isAuth && toast("Please Login to access it anon.");
+                }}
                 className={`mx-2 my-3 ml-8
                 text-[15px] font-semibold ${
                   mode === "light" ? "text-black" : "text-white"
                 } transition-all ease-in-out hover:scale-[1.02] md:my-1 md:ml-2 md:text-[13px]`}
-                key={link.id}
+                key={"Community"}
               >
-                {link.name}
+                Community
               </Link>
-            ))}
+            </div>
 
             <div className="ml-7 md:ml-1 lg:ml-1 xl:ml-1">
               {mode === "light" ? (
                 <button
+                  aria-label="light mode"
                   onClick={handleMode}
                   className=" flex rounded-full bg-slate-200 p-1 text-2xl text-blue-400 shadow-xl "
                 >
@@ -94,6 +114,7 @@ function Navbar() {
                 </button>
               ) : (
                 <button
+                  aria-label="dark mode"
                   onClick={handleMode}
                   className=" flex rounded-full bg-[#060d16] p-1 text-2xl text-blue-300 shadow-xl "
                 >
@@ -124,7 +145,7 @@ function Navbar() {
                 LOGIN
               </button>
             )}
-          </ul>
+          </div>
         </div>
       </div>
     </nav>

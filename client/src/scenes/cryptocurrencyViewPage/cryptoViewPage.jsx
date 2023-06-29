@@ -11,7 +11,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const ViewPage = (props) => {
-  const mode = useSelector((state) => state.mode)
+  console.log(`crypto view page`);
+  const mode = useSelector((state) => state.mode);
   const [response, setCoinData] = useState(null);
   const { id } = useParams();
 
@@ -49,7 +50,11 @@ const ViewPage = (props) => {
 
   if (!response) {
     return (
-      <div className={`flex h-[100vh] w-full flex-col bg-[#03111a] pb-[200px]`}>
+      <div
+        className={`flex h-[100vh] w-full flex-col ${
+          mode === "light" ? "bg-slate-200" : "bg-[#03111a]"
+        }  pb-[200px]`}
+      >
         <Loader />
       </div>
     );
@@ -57,7 +62,9 @@ const ViewPage = (props) => {
 
   return (
     <div
-      className={`flex h-[6000px] w-full flex-col ${mode === 'light' ? "bg-slate-300" : "bg-[#030d13]" }  pb-[200px] md:h-[6000px] lg:h-[100%] xl:h-[100%]`}
+      className={`flex h-[6000px] w-full flex-col ${
+        mode === "light" ? "bg-slate-300" : "bg-[#030d13]"
+      }  pb-[200px] md:h-[6000px] lg:h-[100%] xl:h-[100%]`}
     >
       <ViewCardUpper data={response} />
       <ViewCardLower data={response} />

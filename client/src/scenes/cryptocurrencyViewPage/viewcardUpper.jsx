@@ -38,7 +38,7 @@ const ViewCardUpper = (props) => {
         w-[95%] flex-col
         justify-between rounded-tl-3xl
         rounded-tr-3xl border-[2px]
-        p-[5%] md:h-[650px]  
+        p-[5%] md:h-[750px]  
          md:w-[700px]
         md:p-[3%]  lg:h-[400px]  lg:w-[1000px] lg:flex-row 
         lg:p-[3%] xl:h-[350px] xl:w-[1300px] xl:p-[2%] 
