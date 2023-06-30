@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
 import Dropzone from "react-dropzone";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 // CONFIG REGISTER SCHEMA
 const registerSchema = yup.object().shape({
@@ -47,7 +46,6 @@ const commonstyles =
   "rounded-t-lg mt-[4rem] md:w-[500px] md:h-[100px] w-[400px] h-[100px]";
 
 const Form = () => {
-  const mode = useSelector((state) => state.mode);
   const [pageType, setPageType] = useState("login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -121,42 +119,28 @@ const Form = () => {
   return (
     <>
       <div
-        className={`${commonstyles} ${
-          mode === "light"
-            ? "newscard-filter-light opacity-[95%] "
-            : "newscard-filter text-white"
-        }  absolute  z-[2] shadow-lg`}
+        className={`${commonstyles} homePageCard-filter absolute  z-[2] shadow-lg`}
       ></div>
       <div
-        className={`${commonstyles}  homePageCard absolute  z-[1] h-[100px] `}
+        className={`${commonstyles} homePageCard absolute  z-[1] h-[100px]`}
       ></div>
-      <div
-        className={`${commonstyles} ${
-          mode === "light" ? "text-glow-light text-[#1b4169]" : "text-white"
-        } z-[3] h-[100px] p-6`}
-      >
+      <div className={`${commonstyles} z-[3] h-[100px] p-6`}>
         {isLogin ? (
-          <h1 className=" text-4xl font-bold">LOGIN</h1>
+          <h1 className="text-glow text-4xl font-bold text-[white]">LOGIN</h1>
         ) : (
-          <h1 className=" text-4xl font-bold ">REGISTER</h1>
+          <h1 className="text-glow text-4xl font-bold text-[white]">
+            REGISTER
+          </h1>
         )}
       </div>
 
       {isLogin &&
         (message === "Welcome!" ? (
-          <div
-            className={`text-md w-[400px] ${
-              mode === "light" ? "bg-slate-200" : "bg-[#000f1b]"
-            } py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]`}
-          >
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]">
             {message}
           </div>
         ) : (
-          <div
-            className={`text-md w-[400px] ${
-              mode === "light" ? "bg-slate-200" : "bg-[#000f1b]"
-            } py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]`}
-          >
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]">
             {message}
           </div>
         ))}
@@ -164,30 +148,16 @@ const Form = () => {
       {isRegister &&
         (registerMessage === "Register Successful! Redirecting to Login" &&
         registerMessage?.length ? (
-          <div
-            className={`text-md w-[400px] ${
-              mode === "light" ? "bg-slate-200" : "bg-[#000f1b]"
-            } py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]`}
-          >
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-green-300 transition-all ease-in-out md:w-[500px]">
             {registerMessage}
           </div>
         ) : (
-          <div
-            className={`text-md w-[400px] ${
-              mode === "light" ? "bg-slate-200" : "bg-[#000f1b]"
-            } py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]`}
-          >
+          <div className="text-md w-[400px] bg-[#000f1b] py-3 text-center font-semibold text-red-500 transition-all ease-in-out md:w-[500px]">
             {registerMessage}
           </div>
         ))}
 
-      <div
-        className={` mb-[200px] h-[650px] w-[400px] rounded-t-none ${
-          mode === "light"
-            ? "newscard-filter-light opacity-[80%]"
-            : "newscard-filter"
-        } p-6 shadow-lg shadow-cyan-500/30 md:h-[650px] md:w-[500px]`}
-      >
+      <div className=" mb-[200px] h-[650px] w-[400px] rounded-t-none bg-[#062c43] p-6 shadow-lg shadow-cyan-500/30 md:h-[650px] md:w-[500px]">
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -207,13 +177,7 @@ const Form = () => {
               {isRegister && (
                 <>
                   <div className="flex w-[100%] justify-between">
-                    <div
-                      className={` flex w-[100%] flex-col pb-5 ${
-                        mode === "light"
-                          ? "font-semibold text-black"
-                          : "text-[white]"
-                      } `}
-                    >
+                    <div className=" flex w-[100%] flex-col pb-5 text-[white]">
                       <div className="flex flex-row justify-between">
                         <label className="text-glow pb-2" htmlFor="userName">
                           Username
@@ -228,9 +192,7 @@ const Form = () => {
 
                       <input
                         required
-                        className={`h-8 ${
-                          mode === "light" ? "bg-slate-200/90" : "bg-[#02121c]"
-                        } `}
+                        className="h-8 bg-[#0e1721] text-[white] "
                         name="userName"
                         type="text"
                         label="UserName"
@@ -241,13 +203,7 @@ const Form = () => {
                     </div>
                   </div>
 
-                  <div
-                    className={` flex w-[100%] flex-col pb-5 ${
-                      mode === "light"
-                        ? "font-semibold text-black"
-                        : "text-[white]"
-                    } `}
-                  >
+                  <div className=" flex flex-col pb-5 text-[white]">
                     <div className="flex flex-row justify-between">
                       <label className="text-glow pb-2" htmlFor="email">
                         Email
@@ -261,9 +217,7 @@ const Form = () => {
                     </div>
                     <input
                       required
-                      className={`h-8 ${
-                        mode === "light" ? "bg-slate-200/90" : "bg-[#02121c]"
-                      } `}
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="email"
                       type="text"
                       label="Email"
@@ -272,13 +226,7 @@ const Form = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div
-                    className={` flex w-[100%] flex-col pb-5 ${
-                      mode === "light"
-                        ? "font-semibold text-black"
-                        : "text-[white]"
-                    } `}
-                  >
+                  <div className=" flex flex-col pb-5 text-[white]">
                     <div className="flex flex-row justify-between">
                       <label className="text-glow pb-2" htmlFor="bio">
                         Bio
@@ -292,9 +240,7 @@ const Form = () => {
                     </div>
                     <input
                       required
-                      className={`h-8 ${
-                        mode === "light" ? "bg-slate-200/90" : "bg-[#02121c]"
-                      } `}
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="bio"
                       type="text"
                       label="Bio"
@@ -303,13 +249,7 @@ const Form = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div
-                    className={` flex w-[100%] flex-col pb-5 ${
-                      mode === "light"
-                        ? "font-semibold text-black"
-                        : "text-[white]"
-                    } `}
-                  >
+                  <div className=" flex flex-col pb-5 text-[white]">
                     <div className="flex flex-row justify-between">
                       <label className="text-glow pb-2" htmlFor="password">
                         Password
@@ -323,9 +263,7 @@ const Form = () => {
                     </div>
                     <input
                       required
-                      className={`h-8 ${
-                        mode === "light" ? "bg-slate-200/90" : "bg-[#02121c]"
-                      } `}
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="password"
                       type="password"
                       label="Password"
@@ -346,18 +284,12 @@ const Form = () => {
                         <div {...getRootProps()}>
                           <input {...getInputProps()} />
                           {!values.picture ? (
-                            <div
-                              className={`flex h-[5rem] flex-row items-center justify-center border-[1px] border-dashed ${
-                                mode === "light"
-                                  ? "border-blue-900 text-blue-900"
-                                  : "border-[#9ccddc] text-white"
-                              } `}
-                            >
+                            <div className="flex h-[5rem] flex-row items-center justify-center border-[1px] border-dashed border-[#9ccddc]">
                               <div className="flex flex-col text-center">
-                                <p className="cursor-pointer pb-1 font-bold ">
+                                <p className="cursor-pointer pb-1 font-bold text-[white]">
                                   Add User Picture Here
                                 </p>
-                                <span className="">
+                                <span className="text-[white]">
                                   {!values.picture?.name
                                     ? "Choose photo (Required)"
                                     : values.picture.name}
@@ -365,15 +297,9 @@ const Form = () => {
                               </div>
                             </div>
                           ) : (
-                            <div
-                              className={`flex h-[5rem] flex-row items-center justify-around border-[1px] border-dashed ${
-                                mode === "light"
-                                  ? "border-blue-900 text-blue-900"
-                                  : "border-[#9ccddc] text-white"
-                              }`}
-                            >
+                            <div className="flex h-[5rem] flex-row items-center justify-around border-[1px] border-dashed border-[#9ccddc]">
                               <div className="flex flex-row items-center justify-center">
-                                <span className="">
+                                <span className="text-[white]">
                                   {!values.picture?.name
                                     ? "No photo"
                                     : values.picture.name}
@@ -390,13 +316,7 @@ const Form = () => {
 
               {!isRegister && (
                 <>
-                  <div
-                    className={` flex w-[100%] flex-col pb-5 ${
-                      mode === "light"
-                        ? "font-semibold text-black"
-                        : "text-[white]"
-                    } `}
-                  >
+                  <div className=" flex flex-col pb-5 text-[white]">
                     <div className="flex flex-row justify-between">
                       <label className="text-glow pb-2" htmlFor="email">
                         Email
@@ -411,11 +331,7 @@ const Form = () => {
 
                     <input
                       required
-                      className={`h-8 ${
-                        mode === "light"
-                          ? "bg-slate-200/90 text-slate-900"
-                          : "bg-[#02121c] text-white"
-                      } `}
+                      className="h-8 bg-[#0e1721] text-[white] "
                       name="email"
                       type="email"
                       label="Email"
@@ -425,13 +341,7 @@ const Form = () => {
                     />
                   </div>
 
-                  <div
-                    className={` flex w-[100%] flex-col pb-5 ${
-                      mode === "light"
-                        ? "font-semibold text-black"
-                        : "text-[white]"
-                    } `}
-                  >
+                  <div className="flex flex-col pb-5 text-[white]">
                     <div className="flex flex-row justify-between">
                       <label className="text-glow pb-2 " htmlFor="password">
                         Password
@@ -443,11 +353,7 @@ const Form = () => {
                     </div>
                     <input
                       required
-                      className={`h-8 ${
-                        mode === "light"
-                          ? "bg-slate-200/90 text-slate-900"
-                          : "bg-[#02121c] text-white"
-                      } `}
+                      className="h-8 bg-[#0e1721] text-[#928c8c] "
                       name="password"
                       type="password"
                       label="Password"
@@ -474,9 +380,7 @@ const Form = () => {
                   setPageType(isLogin ? "register" : "login");
                   resetForm();
                 }}
-                className={`mt-5 flex cursor-pointer flex-row justify-center text-sm ${
-                  mode === "light" ? "font-semibold text-black" : "text-[white]"
-                }`}
+                className="mt-5 flex cursor-pointer flex-row justify-center text-sm text-[#ced7e0]"
               >
                 {isLogin
                   ? "Don't have an account? Sign Up here."

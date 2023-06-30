@@ -5,9 +5,8 @@ import { setFriends } from "../../../state";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 
-const Following = ({ friendId, name, subtitle, userPicturePath }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ const Following = ({ friendId, name, subtitle, userPicturePath }) => {
   const { _id } = useSelector((state) => state.user); // loggedin user
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
-  const mode = useSelector((state) => state.mode);
 
   const isFriend = friends.find((friend) => friend?._id === friendId);
 
@@ -49,12 +47,10 @@ const Following = ({ friendId, name, subtitle, userPicturePath }) => {
     dispatch(setFriends({ friends: data }));
   };
 
+
+
   return (
-    <div
-      className={`my-2  flex w-[100%] flex-row items-center justify-between ${
-        mode === "light" ? "texct-slate-900" : "text-white"
-      }`}
-    >
+    <div className="flex flex-row items-center justify-between w-[100%] my-4">
       <div className="flex items-center">
         <img
           onClick={() => {
@@ -63,11 +59,11 @@ const Following = ({ friendId, name, subtitle, userPicturePath }) => {
           }}
           src={`http://localhost:3001/assets/${userPicturePath}`}
           alt="user"
-          className="h-14 w-14 cursor-pointer rounded-full"
+          className="w-14 h-14 rounded-full cursor-pointer"
         />
         <div className="flex flex-col">
           <span
-            className="ml-4 cursor-pointer font-bold "
+            className="text-white ml-4 cursor-pointer font-bold"
             onClick={() => {
               navigate(`/profile/${friendId}`);
               navigate(0);
@@ -75,50 +71,30 @@ const Following = ({ friendId, name, subtitle, userPicturePath }) => {
           >
             {name}
           </span>
-          <span className="ml-4 text-sm italic">{subtitle}</span>
+          <span className="text-gray-300 ml-4 text-sm italic">{subtitle}</span>
         </div>
       </div>
+      
 
       {friendId !== _id && (
         <div
-          className="cursor-pointer transition-all ease-in-out hover:scale-[1.02]"
-          onClick={() => {
-            patchFriend();
-
-            isFriend
-              ? toast.success(`You unfollowed ${name}.`, {
-                  theme: `${mode === "light" ? "light" : "colored"}`,
-                })
-              : toast.success(`You followed ${name}.`, {
-                  theme: `${mode === "light" ? "light" : "colored"}`,
-                });
-          }}
+          className="cursor-pointer hover:scale-[1.02] transition-all ease-in-out"
+          onClick={() => patchFriend()}
         >
           {isFriend ? (
-            <div
-              className={`rounded-full ${
-                mode === "light"
-                  ? "bg-slate-100 text-blue-500/90 shadow-lg hover:text-blue-300"
-                  : "bg-[#0f405e] text-blue-200 hover:text-blue-400"
-              }  px-2 py-1 text-2xl  `}
-            >
+            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#0f405e] rounded-full px-2 py-1 ">
               <ion-icon name="person-remove"></ion-icon>
             </div>
           ) : (
-            <div
-              className={`rounded-full ${
-                mode === "light"
-                  ? "bg-slate-100 text-blue-500/90 shadow-lg hover:text-blue-300"
-                  : "bg-[#0f405e] text-blue-200 hover:text-blue-400"
-              }  px-2 py-1 text-2xl  `}
-            >
+            <div className="text-2xl hover:text-blue-400 text-blue-200 bg-[#0f405e] rounded-full px-2 py-1 ">
               <ion-icon name="person-add"></ion-icon>
             </div>
           )}
         </div>
       )}
+      
     </div>
   );
 };
 
-export default Following;
+export default Friend;

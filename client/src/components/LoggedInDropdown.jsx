@@ -4,35 +4,29 @@ import { setLogout } from "../state";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function LoggedInDropdown({ userName, imagePath, userId }) {
-  const mode = useSelector((state) => state.mode);
+  // console.log(userId)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loggedInUserId = useSelector((state) => state.user._id);
-
   return (
     <Menu as="div" className="">
       <div>
-        <Menu.Button
-          className={`flex items-center  transition-all duration-200 ${
-            mode === "light" ? "hover:bg-blue-200" : "hover:bg-slate-800"
-          }  ml-2  rounded-lg`}
-        >
-          <div className="flex h-[35px] w-[35px] items-center justify-center rounded-full">
+        <Menu.Button className="flex items-center  transition-all duration-200 hover:bg-slate-800 rounded-lg p-1 pr-3 ml-2">
+          <div className="w-[35px] h-[35px] rounded-full ml-3  flex items-center justify-center">
             <img
-              className="h-full w-full object-cover rounded-full"
+              className="w-[30px] h-[30px] rounded-full"
               src={`http://localhost:3001/assets/${imagePath}`}
               alt="user"
             />
           </div>
+          
           <ChevronDownIcon
-            className="mr-1 h-5 w-5 text-gray-400"
+            className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         </Menu.Button>
@@ -47,20 +41,16 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items
-          className={`absolute right-0 z-50 mr-6 mt-2 w-[8rem] origin-top-left rounded-md ${
-            mode === "light"
-              ? "bg-slate-200 text-slate-900"
-              : "bg-[#051925] text-[#ced7e0]"
-          }  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
-        >
+        <Menu.Items className="absolute right-0 z-50 mt-2 w-[8rem] mr-6 origin-top-left rounded-md bg-[#051925] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <form method="POST" action="#">
               <Menu.Item>
                 {({ active }) => (
                   <div
                     className={classNames(
-                      active ? " transition-all ease-in-out" : "",
+                      active
+                        ? "text-[#ced7e0] transition-all ease-in-out"
+                        : "text-[#ced7e0]",
                       "block w-full px-4 py-2 text-left text-sm"
                     )}
                   >
@@ -70,17 +60,17 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <div
-                    onClick={() => navigate(`/profile/${userId}`)}
+                  <Link
+                    to={`/profile/${userId}`}
                     className={classNames(
                       active
-                        ? "transition-all  ease-in-out hover:bg-[#054569]"
-                        : "",
-                      "block w-full cursor-pointer px-4 py-2 text-left text-sm"
+                        ? "hover:bg-[#054569] text-[#ced7e0] transition-all ease-in-out"
+                        : "text-[#ced7e0]",
+                      "block w-full px-4 py-2 text-left text-sm"
                     )}
                   >
                     User Profile
-                  </div>
+                  </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
@@ -93,8 +83,8 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
                     type="submit"
                     className={classNames(
                       active
-                        ? "transition-all  ease-in-out hover:bg-[#054569]"
-                        : "",
+                        ? "hover:bg-[#054569] text-[#ced7e0] transition-all ease-in-out"
+                        : "text-[#ced7e0]",
                       "block w-full px-4 py-2 text-left text-sm"
                     )}
                   >
@@ -109,3 +99,11 @@ export default function LoggedInDropdown({ userName, imagePath, userId }) {
     </Menu>
   );
 }
+
+// HEX CODES:
+// #051925
+// #062c43
+// #054569
+// #5591a9
+// #9ccddc
+// #ced7e0

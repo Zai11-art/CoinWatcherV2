@@ -9,7 +9,6 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
-  const mode = useSelector((state) => state.mode)
 
   const getPosts = async () => {
     const response = await fetch("http://localhost:3001/posts", {
@@ -50,12 +49,11 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
 
   if (posts.length === 0) {
     return (
-      <div className={` text-glow font-bold text-xl w-[100%] h-[100%] p-8 ${mode === 'light' ? "bg-slate-200 shadow-lg text-blue-900" : "bg-[#062c43] text-blue-100"}  rounded-lg`}>
-        <h1>No posts yet..</h1>
+      <div className="text-blue-100 text-glow font-bold text-xl w-[100%] h-[100%] p-8 bg-[#062c43] rounded-lg">
+        <h1>No more posts yet..</h1>
       </div>
     );
   }
-
 
   return (
     <>
@@ -71,7 +69,6 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
             userPicturePath,
             likes,
             comments,
-            createdAt
           }) => (
             <PostWidget
               key={_id}
@@ -86,7 +83,6 @@ const AllPostsWidget = ({ userId, isProfile = false }) => {
               comments={comments}
               refetchPosts={refetchPosts}
               getPosts={getPosts}
-              createdAt={createdAt}
             />
           )
         )}

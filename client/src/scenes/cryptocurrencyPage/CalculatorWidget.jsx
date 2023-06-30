@@ -94,7 +94,6 @@ const CalculatorWidget = () => {
                   Investment:{" "}
                 </label>
                 <input
-                  aria-label="investment variable"
                   min="0"
                   onChange={(e) =>
                     setcurrentInitial(parseFloat(e.target.value))
@@ -109,7 +108,6 @@ const CalculatorWidget = () => {
                   Price:{" "}
                 </label>
                 <input
-                  aria-label="Current Crypto price"
                   min="0"
                   onChange={(e) => setcurrentPrice(parseFloat(e.target.value))}
                   value={currentPrice}
@@ -122,7 +120,6 @@ const CalculatorWidget = () => {
                   Sell Price:{" "}
                 </label>
                 <input
-                  aria-label="Selling Price"
                   min="0"
                   onChange={(e) => seturrentSell(parseFloat(e.target.value))}
                   value={currentSell}
@@ -132,14 +129,12 @@ const CalculatorWidget = () => {
               </div>
               <div className="mx-6 mt-6 flex flex-row justify-around">
                 <button
-                  aria-label="calculate"
                   onClick={handleSubmit}
                   className="w-[100px] rounded-lg border-[2px] border-[#9ccddc]  bg-[#062c43] p-1  text-[white] "
                 >
                   Calculate
                 </button>
                 <button
-                  aria-label="reset values"
                   onClick={handleReset}
                   className="] w-[100px] rounded-lg border-[2px]  border-[#9ccddc] bg-[#062c43] p-1 text-[white] "
                 >

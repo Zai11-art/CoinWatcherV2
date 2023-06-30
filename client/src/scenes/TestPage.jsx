@@ -1,13 +1,7 @@
 import React from "react";
 import { inView, animate } from "motion";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 
 inView("animateCont", ({ target }) => {
-
-
-  console.log(coinList);
-
   animate(
     target.querySelector("#animate"),
     { opacity: 1, transform: "none" },
@@ -16,17 +10,12 @@ inView("animateCont", ({ target }) => {
 });
 
 const TestPage = () => {
-    
-  const { data: coinList } = useQuery(["newCoinList"], () => {
-    return axios
-      .get("http://localhost:3001/services/coins")
-      .then((res) => res.data);
-  });
-  console.log(coinList)
-
   return (
     <div className="h-[6000px] w-screen text-white ">
-      <div className="mb-[750px] h-[200px] w-[500px] bg-[red] " id="animate">
+      <div
+        className="mb-[750px] h-[200px] w-[500px] bg-[red] "
+        id="animate"
+      >
         Some Text
       </div>
 

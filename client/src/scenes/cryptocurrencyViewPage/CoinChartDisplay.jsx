@@ -14,7 +14,6 @@ import {
   Chart,
   BarElement,
 } from "chart.js";
-import { useSelector } from "react-redux";
 
 import { Line } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
@@ -33,16 +32,27 @@ ChartJS.register(
 );
 
 Chart.defaults.elements.point.radius = 0;
+Chart.defaults.color = "#c9c9c7";
 
 // console.log(price.length);
 
 const CoinChartDisplay = (props) => {
-  const mode = useSelector((state) => state.mode);
-  Chart.defaults.color = `${mode === 'light' ? "#061b36" : "#c9c9c7"}`;
+  // const { id } = useParams();
+
+  // const [response, setresponseData] = useState([]);
+
+  // useEffect(() => {
+
+  //   fetch(`https://api.coingecko.com/api/v3/coins/${id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true`)
+  //   .then(response => response.json())
+  //   .then(data => setresponseData([data]))
+  //   .catch(error => console.log(error));
+
+  // }, []);
 
   const price = props.data.market_data.sparkline_7d.price;
 
-  // console.log(props);
+  console.log(props);
 
   const dateString = props.data.last_updated;
   const date = new Date(dateString);
@@ -57,7 +67,7 @@ const CoinChartDisplay = (props) => {
 
   // Loop through the dates and times and push them to the array
   while (date < endTime) {
-    const formattedDate = date?.toLocaleDateString();
+    const formattedDate = date.toISOString();
     datesArray.push(formattedDate);
     date.setHours(date.getHours() + 1); // Add 1 hour for the next interval
   }
@@ -68,7 +78,7 @@ const CoinChartDisplay = (props) => {
     maintainAspectRatio: false,
     legend: {
       labels: {
-        fontColor: `${mode === 'light' ? "#061b36" : "#c9c9c7"}`,
+        fontColor: "f00",
       },
     },
     interaction: {
@@ -87,7 +97,7 @@ const CoinChartDisplay = (props) => {
         },
       },
       labels: {
-        fontColor: `${mode === 'light' ? "#061b36" : "#c9c9c7"}`,
+        fontColor: "#ffffff",
       },
     },
     responsive: true,
@@ -95,24 +105,18 @@ const CoinChartDisplay = (props) => {
       x: {
         ticks: {
           stepSize: 1,
-          color: `${mode === 'light' ? "#061b36" : "#c9c9c7"}`,
+          color: "#c9c9c7",
           font: {
             size: 1,
           },
         },
-        grid: {
-          color: `${mode === 'light' ? "#162a382f" : "#9bd7ff18"}`
-        },
       },
       y: {
         ticks: {
-          color: `${mode === 'light' ? "#061b36" : "#c9c9c7"}`,
+          color: "#c9c9c7",
           font: {
             size: 12,
           },
-        },
-        grid: {
-          color: `${mode === 'light' ? "#162a382f" : "#9bd7ff18"}`
         },
       },
     },
@@ -134,7 +138,6 @@ const CoinChartDisplay = (props) => {
             : "rgb(255, 107, 107)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         borderWidth: "2",
-        
       },
     ],
   };
@@ -154,12 +157,7 @@ const CoinChartDisplay = (props) => {
               ctx.moveTo(x, yAxis.top);
               ctx.lineTo(x, yAxis.bottom);
               ctx.lineWidth = 1;
-              ctx.strokeStyle =
-                props.data.market_data.sparkline_7d.price[
-                  props.data.market_data.sparkline_7d.price.length - 1
-                ] > props.data.market_data.sparkline_7d.price[0]
-                  ? "rgb(93, 212, 85)"
-                  : "rgb(255, 107, 107)";
+              ctx.strokeStyle = "#9ccddc";
               ctx.stroke();
               ctx.restore();
             }

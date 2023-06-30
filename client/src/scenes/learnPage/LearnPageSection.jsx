@@ -6,10 +6,8 @@ import { useState } from "react";
 import { sectionLinks } from "../../data/learnData";
 import { useId } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 const LearnPage = (props) => {
-  const mode = useSelector((state) => state.mode);
   const id = useId();
   const { sectionId } = useParams();
   const [open, setOpen] = useState(false);
@@ -18,11 +16,11 @@ const LearnPage = (props) => {
   return (
     <div className="h-[100%] w-[100%]">
       {/* Bar */}
-      <div className={`top-[60px] left-0 shadow-2xl w-full sticky ${mode === 'light' ? "bg-blue-200 text-blue-900 font-semibold" : "bg-[#062436] text-white"}  h-10 z-[50] flex flex-row items-center`}>
+      <div className="sticky left-0 top-[60px] z-[50] flex h-10 w-full flex-row items-center bg-[#062436] shadow-2xl">
         <div
           onClick={() => setOpen(!open)}
-          className={`text-3xl w-[45px] ${mode === 'light' ? "bg-blue-200 text-blue-900 " : "bg-[#062436] text-white"}  pl-2  mt-1 hover:text-blue-100 transition-all md:hidden
-          duration-150 ease-in-out hover:scale-[1.04] cursor-pointer`}
+          className="mt-1 w-[45px] cursor-pointer bg-gray-900  pl-2 text-3xl text-blue-300 transition-all duration-150
+             ease-in-out hover:scale-[1.04] hover:text-blue-100 md:hidden"
         >
           <ion-icon
             onClick={() => setOpen(!open)}
@@ -30,31 +28,31 @@ const LearnPage = (props) => {
           ></ion-icon>
         </div>
 
-        <span className="text-glow ml-7 w-[200px] ">
+        <span className="text-glow ml-7 w-[200px] text-white ">
           Learn / {section.sectionName}
         </span>
       </div>
 
-      <div className={`flex h-[100%] ${mode === 'light' ? "bg-slate-200 text-blue-900 font-semibold " : "bg-[#062436] text-white"}`}>
+      <div className="flex h-[100%] bg-[#061016]">
         {/* SIDEBAR */}
         <div
-          className={`xl:h-relative lg:h-relative md:h-relative h-[2025px]
-          md:w-[250px] w-[200px] 
-          left-0 
-          top-25 
-          xl:sticky lg:sticky md:sticky absolute 
-          shadow-2xl transition-all ease-in-out z-[30]
-          
-          ${mode === 'light' ? "glass-v2-light text-slate-900" : "glass-v2 text-white"}
-          ${open ? "left-[50] " : "left-[-360px]"}
-          `}
+          className={`xl:h-relative lg:h-relative md:h-relative top-25 glass-v2
+    
+          absolute left-0 
+        z-[30] 
+        h-[1990px] 
+        w-[200px] shadow-2xl transition-all ease-in-out 
+        sm:h-[1720px] md:sticky md:w-[250px] lg:sticky
+        xl:sticky
+        ${open ? "left-[50] " : "left-[-360px]"}
+        `}
         >
           <ul className="sticky left-4 top-32 mt-16 px-6">
             <div className="flex">
-              <span className="text-2xl ">
+              <span className="text-2xl text-white">
                 <ion-icon name="code-working"></ion-icon>
               </span>
-              <span className="mb-2  ml-1 text-xl font-bold">
+              <span className="mb-2  ml-1 text-xl font-bold text-white">
                 Introduction
               </span>
             </div>
@@ -62,18 +60,18 @@ const LearnPage = (props) => {
               <li
                 key={`${id}-${index}-${section.id}`}
                 className="text-md my-2.5 cursor-pointer font-normal
-             transition-all ease-in-out hover:scale-[1.05]"
+              text-white transition-all ease-in-out hover:scale-[1.05]"
               >
                 <Link to={`/Learn/${section.link}`}>{section.name}</Link>
-                <div className={`${mode === 'light' ? "bg-blue-900 h-[2px]" : "bg-blue-300 h-[0.9px]"}  w-full  my-2 opacity-20`} />
+                <div className="my-2 h-[0.9px] w-full bg-blue-300 opacity-20" />
               </li>
             ))}
 
             <div className="mt-12 flex">
-              <span className="text-2xl">
+              <span className="text-2xl text-white">
                 <ion-icon name="prism-outline"></ion-icon>
               </span>
-              <span className="mb-2  ml-1 text-xl font-bold">
+              <span className="mb-2  ml-1 text-xl font-bold text-white">
                 Guides
               </span>
             </div>
@@ -81,10 +79,10 @@ const LearnPage = (props) => {
               <li
                 key={`${id}-${index}-${section.id}`}
                 className="text-md my-3 cursor-pointer font-normal
-             transition-all ease-in-out hover:scale-[1.05]"
+              text-white transition-all ease-in-out hover:scale-[1.05]"
               >
                 <Link to={`/Learn/${section.link}`}>{section.name}</Link>
-                <div className={`${mode === 'light' ? "bg-blue-900 h-[2px]" : "bg-blue-300 h-[0.9px]"}  w-full  my-2 opacity-20`} />
+                <div className="my-2 h-[0.9px] w-full bg-blue-300 opacity-40" />
               </li>
             ))}
           </ul>
@@ -93,7 +91,7 @@ const LearnPage = (props) => {
         <div className=" flex h-[100%] w-full flex-col bg-[red]">
           {/* <div className="bg-[yellow] h-[2000px]"></div> */}
 
-          <div className={`${mode === 'light' ? "bg-slate-200 text-slate-900" : "bg-[#061016]"}  h-[100%] w-[100%] xl:px-[16%] lg:px-[12%] md:px-[10%] px-[10%]`}>
+          <div className="h-[100%] w-[100%] bg-[#061016] px-[10%] md:px-[10%] lg:px-[12%] xl:px-[16%]">
             <div
               className=" 
           mt-8
@@ -109,34 +107,34 @@ const LearnPage = (props) => {
           xl:h-[80%] xl:w-[60%] 
           "
               >
-                <h1 className="mb-4 text-3xl font-bold">
+                <h1 className="mb-4 text-3xl font-bold text-white">
                   {section.sectionName}
                 </h1>
                 <p
                   className="
             mb-2 mr-7
-            text-[0.9rem] 
+            text-[0.9rem] text-white 
             md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.paragraphFirst}
                 </p>
               </div>
               <div
-                className={` 
-                xl:w-[40%] xl:h-[250px] 
-                lg:w-[40%] lg:h-[275px] 
-                md:w-[50%] md:h-[400px] 
-                w-[100%] h-[250px] rounded-xl
-                md:my-0 my-6 flex items-center justify-center
-                 hover:scale-[1.01]  ${mode === 'light' ? "learn-card-banner-light hover:shadow-blue-100/90 shadow-blue-500/90" : "learn-card-banner hover:shadow-yellow-100/50 shadow-yellow-400/50"}
-                 shadow-xl transition-all ease-in-out`}
+                className=" 
+          learn-card-banner my-6 
+          flex h-[250px] 
+          w-[100%] items-center 
+          justify-center rounded-xl shadow-xl
+          shadow-yellow-400/50 transition-all ease-in-out hover:scale-[1.01] hover:shadow-yellow-100/50
+          md:my-0 md:h-[400px] md:w-[50%]
+          lg:h-[275px] lg:w-[40%] xl:h-[250px] xl:w-[40%]"
               >
                 <div
-                  className={`text-7xl w-32 h-32 border-[5px] 
-                  hover:border-[8px] 
-                 transition-all ease-in-out
-                rounded-full btc-card-circle-gradient flex items-center justify-center 
-                hover:rotate-[360deg]  ${mode === 'light' ? "text-blue-200 border-blue-300 hover:border-blue-100 hover:text-blue-100" : "text-yellow-200 border-yellow-300 hover:border-yellow-100 hover:text-yellow-100"}` }
+                  className="btc-card-circle-gradient flex h-32 w-32 items-center 
+              justify-center 
+            rounded-full border-[5px] border-yellow-300 text-7xl
+            text-yellow-200 transition-all ease-in-out hover:rotate-[360deg] hover:border-[8px] 
+            hover:border-yellow-100 hover:text-yellow-100"
                 >
                   <ion-icon name="logo-bitcoin"></ion-icon>
                 </div>
@@ -157,11 +155,11 @@ const LearnPage = (props) => {
           xl:h-[80%] xl:w-[100%] 
           "
               >
-                <h1 className="mb-4 text-3xl font-bold">Content</h1>
+                <h1 className="mb-4 text-3xl font-bold text-white">Content</h1>
                 <p
                   className="
             mb-2 mr-7
-            text-[0.9rem] 
+            text-[0.9rem] text-white 
             md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.paragraphSecond}
@@ -182,12 +180,12 @@ const LearnPage = (props) => {
           h-[50%] w-[100%] 
           "
               >
-                <h1 className="mb-4 text-2xl font-bold">Summary</h1>
+                <h1 className="mb-4 text-2xl font-bold text-white">Summary</h1>
 
                 <p
                   className="
                   mb-2 mr-7
-                  text-[0.9rem] 
+                  text-[0.9rem] text-white 
                   md:text-[0.90rem] lg:text-[1.05rem] xl:text-[1.1rem]"
                 >
                   {section.summary}
