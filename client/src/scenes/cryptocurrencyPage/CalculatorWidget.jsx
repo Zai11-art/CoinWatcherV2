@@ -94,6 +94,10 @@ const CalculatorWidget = () => {
                   Investment:{" "}
                 </label>
                 <input
+<<<<<<< HEAD
+=======
+                  aria-label="investment variable"
+>>>>>>> origin/master
                   min="0"
                   onChange={(e) =>
                     setcurrentInitial(parseFloat(e.target.value))
@@ -108,6 +112,10 @@ const CalculatorWidget = () => {
                   Price:{" "}
                 </label>
                 <input
+<<<<<<< HEAD
+=======
+                  aria-label="Current Crypto price"
+>>>>>>> origin/master
                   min="0"
                   onChange={(e) => setcurrentPrice(parseFloat(e.target.value))}
                   value={currentPrice}
@@ -120,6 +128,10 @@ const CalculatorWidget = () => {
                   Sell Price:{" "}
                 </label>
                 <input
+<<<<<<< HEAD
+=======
+                  aria-label="Selling Price"
+>>>>>>> origin/master
                   min="0"
                   onChange={(e) => seturrentSell(parseFloat(e.target.value))}
                   value={currentSell}
@@ -129,12 +141,20 @@ const CalculatorWidget = () => {
               </div>
               <div className="mx-6 mt-6 flex flex-row justify-around">
                 <button
+<<<<<<< HEAD
+=======
+                  aria-label="calculate"
+>>>>>>> origin/master
                   onClick={handleSubmit}
                   className="w-[100px] rounded-lg border-[2px] border-[#9ccddc]  bg-[#062c43] p-1  text-[white] "
                 >
                   Calculate
                 </button>
                 <button
+<<<<<<< HEAD
+=======
+                  aria-label="reset values"
+>>>>>>> origin/master
                   onClick={handleReset}
                   className="] w-[100px] rounded-lg border-[2px]  border-[#9ccddc] bg-[#062c43] p-1 text-[white] "
                 >

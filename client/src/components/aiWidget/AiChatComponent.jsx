@@ -20,14 +20,20 @@ const AiChatComponent = ({ picturePath, user }) => {
   const [chats, setChats] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
   const scrollToBottom = () => {
     if (containerRef.current) {
       containerRef.current.scrollTop =
         containerRef.current.scrollIntoView({
           behavior: "smooth",
         }) + 1000000000;
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/master
     }
   };
 
@@ -72,25 +78,40 @@ const AiChatComponent = ({ picturePath, user }) => {
       });
   };
 
+<<<<<<< HEAD
 
   return (
     <main className="w-[330px] bg-gray-800 rounded-2xl text-gray-300 h-[500px] flex flex-col justify-between">
       <div className="text-white text-glow text-2xl font-bold text-center py-2 flex flex-row items-center justify-center">
+=======
+  return (
+    <main className="flex h-[500px] w-[330px] flex-col justify-between rounded-2xl bg-gray-800 text-gray-300">
+      <div className="text-glow flex flex-row items-center justify-center py-2 text-center text-2xl font-bold text-white">
+>>>>>>> origin/master
         <ion-icon name="eye-outline"></ion-icon>
         <h1 className="ml-3">Watcher Bot</h1>
       </div>
       <div>
+<<<<<<< HEAD
         <section className="h-[350px] overflow-scroll bg-[black]" >
+=======
+        <section className="h-[350px] overflow-scroll bg-[black]">
+>>>>>>> origin/master
           {chats && chats.length ? (
             chats.map((chat, index) => (
               <>
                 <div
                   key={index}
+<<<<<<< HEAD
                   className={` p-5 flex items-center   ${
+=======
+                  className={` flex items-center p-5   ${
+>>>>>>> origin/master
                     chat.role === "user" ? "flex-row-reverse" : "flex-row"
                   }`}
                 >
                   <div
+<<<<<<< HEAD
                     className={`flex mt-1  ${
                       chat.role === "user" ? "flex-row-reverse" : "flex-row"
                     }`}
@@ -100,6 +121,14 @@ const AiChatComponent = ({ picturePath, user }) => {
 
                     }
                     <div className="bg-gray-900 rounded-2xl p-5 mx-2">
+=======
+                    className={`mt-1 flex  ${
+                      chat.role === "user" ? "flex-row-reverse" : "flex-row"
+                    }`}
+                  >
+                    {Object.keys(chats) > chats.length && <div>new chat</div>}
+                    <div className="mx-2 rounded-2xl bg-gray-900 p-5">
+>>>>>>> origin/master
                       <div className="text-md mb-1">
                         <b>{chat.role.toUpperCase()}</b>
                       </div>
@@ -111,9 +140,15 @@ const AiChatComponent = ({ picturePath, user }) => {
             ))
           ) : (
             <>
+<<<<<<< HEAD
               <div className="flex items-center justify-center mt-2">
                 <div className="text-center p-2 bg-slate-800 w-64 h-9  rounded-2xl">
                   <h1 className="text-sm text-white font-bold">
+=======
+              <div className="mt-2 flex items-center justify-center">
+                <div className="h-9 w-64 rounded-2xl bg-slate-800 p-2  text-center">
+                  <h1 className="text-sm font-bold text-white">
+>>>>>>> origin/master
                     Start chat here.
                   </h1>
                 </div>
@@ -130,16 +165,28 @@ const AiChatComponent = ({ picturePath, user }) => {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="w-full flex">
+=======
+      <div className="flex w-full">
+>>>>>>> origin/master
         <form
           onSubmit={(e) => {
             chat(e, message);
           }}
+<<<<<<< HEAD
           className="flex w-full  items-center mb-2"
         >
           <div className="w-[100%] mx-2 ">
             <input
               className="rounded-2xl w-[100%] h-10  text-gray-200 bg-[#062c43]"
+=======
+          className="mb-2 flex  w-full items-center"
+        >
+          <div className="mx-2 w-[100%] ">
+            <input
+              className="h-10 w-[100%] rounded-2xl  bg-[#062c43] text-gray-200"
+>>>>>>> origin/master
               type="text"
               name="message"
               value={message}
@@ -151,8 +198,14 @@ const AiChatComponent = ({ picturePath, user }) => {
           </div>
 
           <button
+<<<<<<< HEAD
             type="submit"
             className="w-[5%] text-xl  ml-2 mr-6 hover:text-blue-600 transition-all ease-in-out"
+=======
+            aria-label="submit chat"
+            type="submit"
+            className="ml-2 mr-6  w-[5%] text-xl transition-all ease-in-out hover:text-blue-600"
+>>>>>>> origin/master
           >
             <ion-icon name="send-outline"></ion-icon>
           </button>

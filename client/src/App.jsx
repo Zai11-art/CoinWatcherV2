@@ -16,6 +16,13 @@ import HomePage from "./scenes/homePage/HomePage";
 import ProfileFollowers from "./scenes/profilePage/ProfileFollowers";
 import ProfileFollowings from "./scenes/profilePage/ProfileFollowing";
 import TestPage from "./scenes/TestPage";
+<<<<<<< HEAD
+=======
+import ProfileWatchList from "./scenes/profilePage/ProfileWatchList";
+import ExchangePage from "./scenes/exchangePage/ExchangePage";
+import ExchangeViewPage from "./scenes/exchangeViewPage/ExchangeViewPage";
+
+>>>>>>> origin/master
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -31,6 +38,14 @@ function App() {
             element={<CryptocurrencyPage />}
           ></Route>
           <Route path={`/View/:id`} element={<ViewPage />}></Route>
+<<<<<<< HEAD
+=======
+          <Route path="/Exchanges" element={<ExchangePage />}></Route>
+          <Route
+            path={`/Exchanges/:exchangeId`}
+            element={<ExchangeViewPage />}
+          ></Route>
+>>>>>>> origin/master
           <Route path="/News" element={<NewsPage />}></Route>
           <Route path="/Apps" element={<AppPage />}></Route>
           <Route path="/login" element={<RegisterPage />}></Route>
@@ -41,7 +56,11 @@ function App() {
           ></Route>
           <Route
             path="/community"
+<<<<<<< HEAD
             element={isAuth ? <CommunityPage /> : <CryptocurrencyPage />}
+=======
+            element={isAuth ? <CommunityPage /> : <RegisterPage />}
+>>>>>>> origin/master
           ></Route>
           <Route
             path="/profile/:userId"
@@ -55,6 +74,13 @@ function App() {
             path="/profile/:userId/followers"
             element={isAuth ? <ProfileFollowers /> : <CryptocurrencyPage />}
           ></Route>
+<<<<<<< HEAD
+=======
+          <Route
+            path="/profile/:userId/watchlist"
+            element={isAuth ? <ProfileWatchList /> : <CryptocurrencyPage />}
+          ></Route>
+>>>>>>> origin/master
         </Route>
         <Route element={<WithoutNav />}>
           <Route path={`/Home`} element={<HomePage />}></Route>

@@ -8,8 +8,16 @@ import ViewCardUpper from "./viewcardUpper";
 import ViewCardLower from "./ViewCardLower";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+<<<<<<< HEAD
 
 const ViewPage = (props) => {
+=======
+import { useSelector } from "react-redux";
+
+const ViewPage = (props) => {
+  console.log(`crypto view page`);
+  const mode = useSelector((state) => state.mode);
+>>>>>>> origin/master
   const [response, setCoinData] = useState(null);
   const { id } = useParams();
 
@@ -47,7 +55,15 @@ const ViewPage = (props) => {
 
   if (!response) {
     return (
+<<<<<<< HEAD
       <div className={`flex h-[100vh] w-full flex-col bg-[#051925] pb-[200px]`}>
+=======
+      <div
+        className={`flex h-[100vh] w-full flex-col ${
+          mode === "light" ? "bg-slate-200" : "bg-[#03111a]"
+        }  pb-[200px]`}
+      >
+>>>>>>> origin/master
         <Loader />
       </div>
     );
@@ -55,7 +71,13 @@ const ViewPage = (props) => {
 
   return (
     <div
+<<<<<<< HEAD
       className={`flex h-[6000px] w-full flex-col bg-[#051925] pb-[200px] md:h-[6000px] lg:h-[100%] xl:h-[100%]`}
+=======
+      className={`flex h-[6000px] w-full flex-col ${
+        mode === "light" ? "bg-slate-300" : "bg-[#030d13]"
+      }  pb-[200px] md:h-[6000px] lg:h-[100%] xl:h-[100%]`}
+>>>>>>> origin/master
     >
       <ViewCardUpper data={response} />
       <ViewCardLower data={response} />

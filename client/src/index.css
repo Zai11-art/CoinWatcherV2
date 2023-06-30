@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 :root{
+=======
+:root {
+>>>>>>> origin/master
   background-color: rgb(0, 25, 46);
 }
 .nav-color {
@@ -62,6 +66,13 @@ html {
   text-shadow: 0px 0px 3px #b5eeff;
 }
 
+<<<<<<< HEAD
+=======
+.text-glow-light {
+  text-shadow: 0px 0px 10px #9fd9ff;
+}
+
+>>>>>>> origin/master
 .HeadCard-bg {
   background: rgba(6, 96, 148, 0.55);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -81,6 +92,7 @@ html {
   background-position: left 50%;
 }
 
+<<<<<<< HEAD
 .homePageCard-filter {
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -90,6 +102,8 @@ html {
   );
 }
 
+=======
+>>>>>>> origin/master
 /* SECOND CARD IN HOME PAGE */
 .homePageCardSecond {
   background-image: url(https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
@@ -132,6 +146,19 @@ html {
   );
 }
 
+<<<<<<< HEAD
+=======
+/* light mode */
+.cryptocard-grad-light {
+  background: rgb(13, 23, 32);
+  background: linear-gradient(
+    -100deg,
+    rgb(175, 201, 224) 75%,
+    rgb(199, 231, 255) 100%
+  );
+}
+
+>>>>>>> origin/master
 .newsCardHeader {
   background-image: url(https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
   background-repeat: no-repeat;
@@ -168,6 +195,28 @@ html {
   );
 }
 
+<<<<<<< HEAD
+=======
+.headCard-filter-light {
+  background: rgba(13, 23, 32, 0.2);
+  background: linear-gradient(
+    -100deg,
+    rgba(175, 201, 224, 0.85) 60%,
+    rgba(199, 231, 255, 0.99) 100%
+  );
+}
+
+/* light mode */
+/* .cryptocard-grad-light {
+  background: rgb(13, 23, 32);
+  background: linear-gradient(
+    -100deg,
+    rgb(175, 201, 224) 75%,
+    rgb(199, 231, 255) 100%
+  );
+} */
+
+>>>>>>> origin/master
 .newscard-filter {
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -177,6 +226,18 @@ html {
   );
 }
 
+<<<<<<< HEAD
+=======
+.newscard-filter-light {
+  background: rgb(196, 225, 250);
+  background: linear-gradient(
+    45deg,
+    rgba(175, 201, 224, 0.95) 10%,
+    rgba(199, 231, 255, 0.95) 100%
+  );
+}
+
+>>>>>>> origin/master
 .viewcard-filter {
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -186,6 +247,18 @@ html {
   );
 }
 
+<<<<<<< HEAD
+=======
+.viewcard-filter-light {
+  background: rgb(196, 225, 250);
+  background: linear-gradient(
+    45deg,
+    rgba(188, 211, 233, 0.98) 50%,
+    rgba(199, 231, 255, 0.692) 100%
+  );
+}
+
+>>>>>>> origin/master
 .select-currency {
   vertical-align: top;
 }
@@ -197,6 +270,16 @@ html {
   color: rgb(19, 99, 119);
 }
 
+<<<<<<< HEAD
+=======
+.test {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #162a382f;
+  color: rgb(19, 99, 119);
+}
+
+>>>>>>> origin/master
 /* index meter */
 
 .meter {
@@ -240,10 +323,50 @@ html {
   border: 2px #73deff solid;
   border-bottom: transparent;
   background: rgb(0, 0, 0);
+<<<<<<< HEAD
   background: linear-gradient(rgba(0, 0, 0, 0.356) 1%, rgba(0, 91, 130, 0) 80%);
   box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.76) inset;
   -webkit-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.76) inset;
   -moz-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.76) inset;
+=======
+  background: linear-gradient(rgba(0, 0, 0, 0.356) 0%, rgba(0, 91, 130, 0) 0%);
+  box-shadow: 3px 3px 16px 2px rgba(0, 255, 242, 0.3) inset;
+  -webkit-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.3) inset;
+  -moz-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.3) inset;
+}
+
+.meter-bgMain-light {
+  border-radius: 12rem 12rem 0 0;
+  border: 2px #111213 solid;
+  border-bottom: transparent;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(rgba(0, 0, 0, 0.356) 0%, rgba(0, 91, 130, 0) 0%);
+  box-shadow: 3px 3px 16px 2px rgba(16, 36, 36, 0.5) inset;
+  -webkit-box-shadow: 3px 3px 16px 2px rgba(40, 143, 156, 0.5) inset;
+  -moz-box-shadow: 3px 3px 16px 2px rgba(7, 10, 10, 0.5) inset;
+}
+
+/* follower counter */
+.follower-card-gradient {
+  border-radius: 12rem 12rem 0 0;
+  border: 2px #7db6f8 solid;
+  border-bottom: transparent;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(rgba(0, 0, 0, 0.356) 1%, rgba(0, 91, 130, 0) 80%);
+  box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.3) inset;
+  -webkit-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.3) inset;
+  -moz-box-shadow: 3px 3px 16px 2px rgba(0, 224, 255, 0.3) inset;
+}
+
+.follower-card-gradient-light {
+  border-radius: 12rem 12rem 0 0;
+  border-bottom: transparent;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(rgba(0, 0, 0, 0.356) 0%, rgba(0, 91, 130, 0) 0%);
+  box-shadow: 3px 3px 16px 2px rgba(16, 36, 36, 0.3) inset;
+  -webkit-box-shadow: 3px 3px 16px 2px rgba(40, 143, 156, 0.3) inset;
+  -moz-box-shadow: 3px 3px 16px 2px rgba(7, 10, 10, 0.3) inset;
+>>>>>>> origin/master
 }
 
 .dial {
@@ -273,6 +396,18 @@ html {
   );
 }
 
+<<<<<<< HEAD
+=======
+.chart-light {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    360deg,
+    rgba(223, 220, 220, 0.5) 0%,
+    rgb(136, 182, 204) 100%
+  );
+}
+
+>>>>>>> origin/master
 /* glass morphism */
 .glass {
   background: rgba(255, 255, 255, 0.082);
@@ -295,6 +430,19 @@ html {
   border: transparent */
 }
 
+<<<<<<< HEAD
+=======
+.glass-v2-light {
+  background: rgba(214, 225, 235, 0.897);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.658);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(1px);
+  /* border: 1px solid rgba(255, 255, 255, 0.048);
+  border: 1px solid rgb(196, 196, 196);
+  border: transparent */
+}
+
+>>>>>>> origin/master
 /* PriceBar */
 
 .slideshow-container {
@@ -321,11 +469,27 @@ html {
   background: radial-gradient(#4baeff44 1%, transparent 10%),
     linear-gradient(45deg, transparent 49%, #4baeff2a 49% 40%, transparent 51%),
     linear-gradient(-45deg, transparent 49%, #4baeff3b 49% 40%, transparent 51%);
+<<<<<<< HEAD
   background-size: 3em 3em;
+=======
+  background-size: 4em 4em;
+>>>>>>> origin/master
   background-color: #051925;
   opacity: 1;
 }
 
+<<<<<<< HEAD
+=======
+.learn-banner-light {
+  background: radial-gradient(#56b3ff41 1%, transparent 10%),
+    linear-gradient(45deg, transparent 49%, #67afeb2a 49% 40%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, #67afeb2a 49% 40%, transparent 51%);
+  background-size: 4em 4em;
+  background-color: #cfe8f7;
+  opacity: 1;
+}
+
+>>>>>>> origin/master
 .learn-card-banner {
   background-color: #f7f7e5;
   opacity: 0.8;
@@ -341,6 +505,24 @@ html {
   background-blend-mode: multiply;
 }
 
+<<<<<<< HEAD
+=======
+.learn-card-banner-light {
+  background-color: #e5f0f7;
+  opacity: 0.8;
+  background-image: radial-gradient(circle at center center, #9cbfdc, #1e6391),
+    repeating-radial-gradient(
+      circle at center center,
+      #bce4ff,
+      #3c86a8,
+      10px,
+      transparent 10px,
+      transparent 10px
+    );
+  background-blend-mode: multiply;
+}
+
+>>>>>>> origin/master
 .btc-card-circle-gradient {
   background: rgb(0, 0, 0);
   background: linear-gradient(180deg, rgb(32, 24, 0) 20%, rgb(37, 30, 5) 100%);
@@ -352,6 +534,7 @@ html {
 }
 
 .vignette {
+<<<<<<< HEAD
   box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
   -webkit-box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
   -moz-box-shadow: 3px 3px 122px 12px rgba(0,0,0,1) inset;
@@ -360,6 +543,15 @@ html {
 
 .img-wrapper{
   overflow:hidden;
+=======
+  box-shadow: 3px 3px 122px 12px rgba(0, 0, 0, 1) inset;
+  -webkit-box-shadow: 3px 3px 122px 12px rgba(0, 0, 0, 1) inset;
+  -moz-box-shadow: 3px 3px 122px 12px rgba(0, 0, 0, 1) inset;
+}
+
+.img-wrapper {
+  overflow: hidden;
+>>>>>>> origin/master
 }
 .image.hover-zoom:hover {
   transform: scale(1.25);
@@ -369,11 +561,77 @@ html {
   display: none;
 }
 
+<<<<<<< HEAD
 /* glass card og */
+=======
+/* Notification styling (react-toastify)  */
+.Toastify__toast-container {
+  margin-top: 75px;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--default {
+  background-color: #04121b;
+  height: 50px;
+  margin-top: 10px;
+  color: white;
+  box-shadow: 3px 7px 9px 2px rgba(20, 129, 176, 0.52);
+  -webkit-box-shadow: 3px 7px 9px 2px rgba(20, 129, 176, 0.52);
+  -moz-box-shadow: 3px 7px 9px 2px rgba(20, 129, 176, 0.52);
+}
+
+.Toastify__progress-bar {
+  background-color: #83d2f7;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background-color: #04121b;
+  height: 50px;
+  margin-top: 10px;
+  color: #8df783;
+  box-shadow: 3px 7px 9px 2px rgba(30, 51, 35, 0.52);
+  -webkit-box-shadow: 3px 7px 9px 2px rgba(75, 255, 114, 0.068);
+  -moz-box-shadow: 3px 7px 9px 2px rgba(20, 176, 67, 0.52);
+  font-size: small;
+}
+
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success {
+  background-color: #8df783;
+}
+
+/* light mode */
+.Toastify__toast-theme--light {
+  background-color: #eaeef0;
+  height: 50px;
+  margin-top: 10px;
+  color: #0a5a03;
+  box-shadow: 3px 7px 9px 2px rgba(30, 51, 35, 0.52);
+  -webkit-box-shadow: 3px 7px 9px 2px rgba(14, 29, 17, 0.068);
+  -moz-box-shadow: 3px 7px 9px 2px rgba(0, 0, 0, 0.52);
+  font-size: small;
+}
+
+.Toastify__progress-bar-theme--light {
+  background-color: #8df783;
+}
+
+/* box shadow */
+.box-shadow-inner-light {
+  box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
+  -webkit-box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
+  -moz-box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
+}
+
+.box-shadow-inner {
+  box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
+-webkit-box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
+-moz-box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
+}
+>>>>>>> origin/master
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 
 /* HEX CODES:
  #051925
@@ -382,3 +640,5 @@ html {
  #5591a9
  #9ccddc
  #ced7e0 */
+=======
+>>>>>>> origin/master

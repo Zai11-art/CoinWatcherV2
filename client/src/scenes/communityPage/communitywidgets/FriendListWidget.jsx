@@ -8,6 +8,10 @@ const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
+<<<<<<< HEAD
+=======
+  const mode = useSelector((state) => state.mode);
+>>>>>>> origin/master
 
   // console.log(friends);
 
@@ -33,9 +37,15 @@ const FriendListWidget = ({ userId }) => {
   //   });
   // }
   return (
+<<<<<<< HEAD
     <div className="h-[100%] w-[100%] rounded-t-lg bg-[#062c43] mb-5 mt-6">
       <div className="w-[100%] h-[45px] bg-[#054569] rounded-t-lg px-6 py-3">
         <h1 className="font-semibold text-white">Following</h1>
+=======
+    <div className={`h-[100%] w-[100%] rounded-t-lg ${mode === 'light' ? "bg-slate-200" : "bg-[#062c43] text-white"}  mb-5 mt-6`}>
+      <div className={`w-[100%] h-[45px] ${mode === 'light' ? "newscard-filter-light" : "bg-[#054569]"}  rounded-t-lg px-6 py-3`}>
+        <h1 className="font-bold">Following</h1>
+>>>>>>> origin/master
       </div>
       <div className="px-6 p-2 w-[100%] flex flex-col rounded-b-lg mt-2 ">
         {friends.map((friend) => (
